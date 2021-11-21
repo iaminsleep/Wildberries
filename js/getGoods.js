@@ -1,25 +1,78 @@
 const getGoods = () => {
     const links = document.querySelectorAll('.navigation-link');
 
-    const getData = () => {
+    const renderGoods = (goods) => {
+        const goodsContainer = document.querySelector('.long-goods-list');
+        goodsContainer.innerHTML = "";
+
+        goods.forEach(good => {
+            const goodBlock = document.createElement('div');
+            goodBlock.classList.add('col-lg-3');
+            goodBlock.classList.add('col-sm-6');
+
+            //${} позволяет использовать js переменную внутри обратных кавычек
+            goodBlock.innerHTML = `
+            <div class="goods-card">
+                <!--Проверка, есть ли у товара label, если он есть то никакой класс не добавляется, 
+                если его нету то добавляется класс d-none который скрывает label-->
+                <span class="label ${good.label ? null : 'd-none'}">${good.label}</span>
+                <img src="db/${good.img}" alt="${good.name}" class="goods-image">
+                <h3 class="goods-title">${good.name}</h3>
+                <p class="goods-description">${good.description}</p>
+                <button class="button goods-card-btn add-to-cart" data-id="${good.id}">
+                    <span class="button-price">$${good.price}</span>
+                </button>
+            </div>
+            `
+
+            goodsContainer.append(goodBlock);
+        })
+
+    }
+
+    const getData = (value, category) => {
         //Метод then принимает функцию в качестве аргумента. Response - это ответ от сервера
         fetch('https://willberries-e7829-default-rtdb.europe-west1.firebasedatabase.app/db.json')
             .then((res) => res.json()) //параметр response возвращает объект, а json получает из него данные в читаемом виде
+            //в параметр data попадёт ответ сервера, то есть массив
             .then((data) => {
-                //в параметр data попадёт ответ сервера, то есть массив
-                localStorage.setItem('goods', JSON.stringify(data)); //JSON.stringify превращает объект в читаемую строку
-                console.log(data);
-                const goods = JSON.parse(localStorage.getItem('goods')); //JSON.parse превращает JSON строку в массив
-                console.log(goods);
+                //data.filter похож на функцию forEach, он перебирает массив с данными
+                //тернарный оператор, который заменяет конструкцию if-else. ? - if, : - else.
+                const array = category ? data.filter((item) => item[category] === value) : data; //filter вернёт тот массив данных, callback которых равен true
+
+                localStorage.setItem('goods', JSON.stringify(array)); //JSON.stringify превращает объект в читаемую строку
+
+                //если мы уже находимся на странице goods.html, нас не будет перекидывать туда ещё раз, в ином случае сработает переход
+                if (window.location.pathname !== 'goods.html') {
+                    window.location.href = 'goods.html';
+                }
+                else {
+                    renderGoods();
+                }
             })
     }
 
     links.forEach(link => {
         link.addEventListener('click', (event) => {
             event.preventDefault();
-            getData();
-        });
-    });
+            const linkValue = link.textContent;
+            const category = link.dataset.field;
+            getData(linkValue, category);
+        })
+    })
+
+    const goods = localStorage.getItem('goods'); //JSON.parse превращает JSON строку в массив
+    if(goods && window.location.pathname.includes('goods.html')) {
+        renderGoods(JSON.parse(goods));
+    }
+
+    //Проверка на наличие кнопки viewAll, если она есть, то ищутся все товары
+    if(document.querySelector('.more')) {
+        const viewAllButton = document.querySelector('.more');
+        viewAllButton.onclick = () => {
+            getData('all');
+        }
+    }
 }
 
 getGoods();
