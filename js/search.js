@@ -27,6 +27,9 @@ const initSearchHandler = () => {
             goodsContainer.append(goodBlock);
         })
 
+        if(goodsContainer.innerHTML === '') {
+            goodsContainer.append(`<h3>Товаров пока нет. Ожидайте поставку!</h3>`);
+        }
     }
 
     const getData = (value) => {
