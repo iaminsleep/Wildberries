@@ -1,6 +1,6 @@
 # Willberries
 Проект "Willberries", с функционалом на Javascript
-#Технологии:
+###Технологии:
 - html
 - css
 - javascript
