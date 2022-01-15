@@ -135,12 +135,7 @@ const initCartHandler = () => {
     closeBtn.addEventListener('click', () => {
         cartModal.classList.remove('show');
     });
-    //Закрытие окна корзины при нажатии на поле вокруг окна
-    cartModal.addEventListener('click', (evt) => {
-        if(!evt.target.closest('.modal')) {
-            cartModal.classList.remove('show');
-        }
-    })
+    
     //Обработчик для кнопок
     window.addEventListener('keydown', (evt) => {
         if(evt.keyCode === 27 && cartModal.classList.contains('show')) {

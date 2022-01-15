@@ -32,7 +32,7 @@ const getGoods = () => {
 
     const getData = (value, category) => {
         //Метод then принимает функцию в качестве аргумента. Response - это ответ от сервера
-        fetch('https://willberries-e7829-default-rtdb.europe-west1.firebasedatabase.app/db.json')
+        fetch('http://api.willberries/goods')
             .then((res) => res.json()) //параметр response возвращает объект, а json получает из него данные в читаемом виде
             //в параметр data попадёт ответ сервера, то есть массив
             .then((data) => {

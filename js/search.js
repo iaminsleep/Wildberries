@@ -33,7 +33,7 @@ const initSearchHandler = () => {
     }
 
     const getData = (value) => {
-        fetch('https://willberries-e7829-default-rtdb.europe-west1.firebasedatabase.app/db.json')
+        fetch('http://api.willberries/goods')
             .then((res) => res.json())
             .then((data) => {
                 const array = data.filter(good => {
