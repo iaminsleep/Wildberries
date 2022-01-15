@@ -16,7 +16,7 @@ const getGoods = () => {
                 <!--Проверка, есть ли у товара label, если он есть то никакой класс не добавляется, 
                 если его нету то добавляется класс d-none который скрывает label-->
                 <span class="label ${good.label ? null : 'd-none'}">${good.label}</span>
-                <img src="db/${good.img}" alt="${good.name}" class="goods-image">
+                <img src="http://api.willberries/img/goods/${good.img}" alt="${good.name}" class="goods-image">
                 <h3 class="goods-title">${good.name}</h3>
                 <p class="goods-description">${good.description}</p>
                 <button class="button goods-card-btn add-to-cart" data-id="${good.id}">
