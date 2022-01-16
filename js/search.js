@@ -15,10 +15,12 @@ const initSearchHandler = () => {
             //${} позволяет использовать js переменную внутри обратных кавычек
             goodBlock.innerHTML = `
             <div class="goods-card">
-                <span class="label ${good.label ? null : 'd-none'}">${good.label}</span>
-                <img src="db/${good.img}" alt="${good.name}" class="goods-image">
-                <h3 class="goods-title">${good.name}</h3>
-                <p class="goods-description">${good.description}</p>
+                <a class="goods-link" href="#">
+                    <span class="label ${good.label ? null : 'd-none'}">${good.label}</span>
+                    <img src="http://api.willberries/img/goods/${good.img}" alt="${good.name}" class="goods-image">
+                    <h3 class="goods-title">${good.name}</h3>
+                    <p class="goods-description">${good.description}</p>
+                </a>
                 <button class="button goods-card-btn add-to-cart" data-id="${good.id}">
                     <span class="button-price">$${good.price}</span>
                 </button>
