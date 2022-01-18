@@ -1,0 +1,12 @@
+{
+  "files": {
+    "main.js": "/Willberries/static/js/main.9a6e6c8c.js",
+    "static/media/logo.svg": "/Willberries/static/media/logo.5a962ebf7e5b4033e9527638cd3177dc.svg",
+    "index.html": "/Willberries/index.html",
+    "static/media/cart.svg": "/Willberries/static/media/cart.961c773e1bde2c6424468390cd67feb0.svg",
+    "main.9a6e6c8c.js.map": "/Willberries/static/js/main.9a6e6c8c.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.9a6e6c8c.js"
+  ]
+}
