@@ -21,11 +21,11 @@ const Footer = () => {
 					<nav>
 						<ul className="footer-menu d-sm-flex">
 							<li className="footer-menu-item"><NavLink to="/" className="footer-menu-link">Shop</NavLink></li>
-							<li className="footer-menu-item"><NavLink to="/" className="footer-menu-link">About Us</NavLink></li>
-							<li className="footer-menu-item"><NavLink to="/" className="footer-menu-link">Careers</NavLink></li>
-							<li className="footer-menu-item"><NavLink to="/" className="footer-menu-link">FAQ </NavLink></li>
-							<li className="footer-menu-item"><NavLink to="/" className="footer-menu-link">Blog</NavLink></li>
-							<li className="footer-menu-item"><NavLink to="/" className="footer-menu-link">Contacts</NavLink></li>
+							<li className="footer-menu-item"><NavLink to="/about" className="footer-menu-link">About Us</NavLink></li>
+							<li className="footer-menu-item"><NavLink to="/careers" className="footer-menu-link">Careers</NavLink></li>
+							<li className="footer-menu-item"><NavLink to="/faq" className="footer-menu-link">FAQ </NavLink></li>
+							<li className="footer-menu-item"><NavLink to="/blog" className="footer-menu-link">Blog</NavLink></li>
+							<li className="footer-menu-item"><NavLink to="/contacts" className="footer-menu-link">Contacts</NavLink></li>
 						</ul>
 					</nav>
 				</div>

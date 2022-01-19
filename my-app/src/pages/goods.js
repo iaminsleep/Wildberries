@@ -2,7 +2,7 @@ import React from 'react';
 
 import GoodItem from '../components/goodItem';
 
-function Goods({category, goods}) {
+function Goods({API, category, goods}) {
   return (
     <section className="long-goods d-block">
       <div className="container">
@@ -14,9 +14,9 @@ function Goods({category, goods}) {
         <div className="row long-goods-list">  
           {goods.map(good => 
             <GoodItem 
-              key={good.id} id={good.id}
-              name={good.name} description={good.description}
-              price={good.price} img={good.img} label={good.label}
+              key={good.id} id={good.id} name={good.name} 
+              description={good.description} price={good.price} 
+              img={good.img} label={good.label} API={API}
             />)}
         </div>
       </div>

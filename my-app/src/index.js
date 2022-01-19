@@ -5,6 +5,7 @@ import App from './App';
 import './css/bootstrap-grid.min.css';
 import './css/style.css';
 import './css/swiper-bundle.min.css';
+import './css/cart.css';
 
 ReactDOM.render(
   <React.StrictMode>

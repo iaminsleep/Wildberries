@@ -8,8 +8,10 @@ import CartModal from './components/cartModal.js';
 import Home from './pages/home.js';
 import Goods from './pages/goods.js';
 
-const API = "http://api.willberries/goods";
-const HOST = "https://iaminsleep.github.io/";
+const API = "http://api.willberries/";
+const HOST = "http://localhost:3000/";
+
+const goodsAPI = `${API}/goods`;
 
 class App extends Component {
   constructor(props) {
@@ -25,27 +27,26 @@ class App extends Component {
 
   componentDidMount() {
     this.getData(this.state.value, this.state.category);
-    this.initSearchByCategory();
     this.initSearchHandler();
     this.initEventListeners();
   }
 
   getData(value, category) {
-    fetch(API).then((res) => res.json()).then((data) => {
+    fetch(goodsAPI).then((res) => res.json()).then((data) => {
       const categoryGoods = category ? data.filter((item) => item[category] === value) : data;
       this.setState({goods: categoryGoods});
     });
   }
 
   searchData(itemName = '') {
-    fetch(API).then((res) => res.json()).then((data) => {
+    fetch(goodsAPI).then((res) => res.json()).then((data) => {
         const searchedGoods = itemName !== '' ? data.filter(good => good.name.toLowerCase().includes(itemName.toLowerCase())) : data;
         this.setState({goods: searchedGoods});
       }
     );
   }
 
-  initSearchByCategory() {
+  initSearchHandler() {
     const links = document.querySelectorAll('.navigation-link');
 
     links.forEach(link => {
@@ -58,9 +59,7 @@ class App extends Component {
         }, () => this.getData(this.state.value, this.state.category));
       }
     });
-  }
 
-  initSearchHandler() {
     const input = document.querySelector('.search-block > input');
     const searchBtn = document.querySelector('.search-block > button');
 
@@ -80,7 +79,7 @@ class App extends Component {
           top: 0,
           behavior: 'smooth'
       });
-    })
+    });
   }
 
   render() {
@@ -89,8 +88,8 @@ class App extends Component {
         <Router>
           <Header HOST={HOST}/>
             <Routes>
-              <Route exact path='/' element={<Home category = {this.state.category} goods={this.state.goods} />}/>
-              <Route path='/goods' element={<Goods category = {this.state.value} goods={this.state.goods}/>}/>
+              <Route exact path='/' element={<Home API={API} category = {this.state.category} goods = {this.state.goods} />}/>
+              <Route path='/goods' element={<Goods API={API} category = {this.state.value} goods = {this.state.goods}/>}/>
             </Routes>
           <Footer/>
           <CartModal/>

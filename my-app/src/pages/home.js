@@ -6,7 +6,7 @@ import viewAllArrow from'../img/arrow.svg';
 
 import GoodItem from '../components/goodItem';
 
-function Home({goods}) {
+function Home({API, goods}) {
   const newGoods = goods.filter((good) => good.label === "New");
   const bestsellersGoods = goods.filter((good) => good.label === "Bestseller");
   newGoods.length = 4;
@@ -135,9 +135,9 @@ function Home({goods}) {
         <div className="short-goods row">
           {newGoods.map(good => 
             <GoodItem 
-              key={good.id} id={good.id}
-              name={good.name} description={good.description}
-              price={good.price} img={good.img} label={good.label}
+              key={good.id} id={good.id} name={good.name} 
+              description={good.description} price={good.price} 
+              img={good.img} label={good.label} API={API}
             />)}
         </div>
         <div className="row align-items-center mb-4">
@@ -151,9 +151,9 @@ function Home({goods}) {
         <div className="short-goods row">
           {bestsellersGoods.map(good => 
             <GoodItem 
-              key={good.id} id={good.id}
-              name={good.name} description={good.description}
-              price={good.price} img={good.img} label={good.label}
+              key={good.id} id={good.id} name={good.name} 
+              description={good.description} price={good.price} 
+              img={good.img} label={good.label} API={API}
             />)}
         </div>
       </section>
