@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/Willberries/static/css/main.14a3bb5b.css",
-    "main.js": "/Willberries/static/js/main.358562f9.js",
+    "main.js": "/Willberries/static/js/main.4005efcd.js",
     "static/media/slide-image-1.png": "/Willberries/static/media/slide-image-1.68b83e7c364cbc98f9ee.png",
     "static/media/card-image-2.jpg": "/Willberries/static/media/card-image-2.d1ae2977e53da8622d05.jpg",
     "static/media/card-image-3.png": "/Willberries/static/media/card-image-3.d1013ae7f652eddae0c5.png",
@@ -18,10 +18,10 @@
     "static/media/arrow-prev.svg": "/Willberries/static/media/arrow-prev.bc105f91e1dea50dc11e37d84da7a7cc.svg",
     "static/media/arrow.svg": "/Willberries/static/media/arrow.14813a92cc35603a4d6754cd02dcc16d.svg",
     "main.14a3bb5b.css.map": "/Willberries/static/css/main.14a3bb5b.css.map",
-    "main.358562f9.js.map": "/Willberries/static/js/main.358562f9.js.map"
+    "main.4005efcd.js.map": "/Willberries/static/js/main.4005efcd.js.map"
   },
   "entrypoints": [
     "static/css/main.14a3bb5b.css",
-    "static/js/main.358562f9.js"
+    "static/js/main.4005efcd.js"
   ]
 }
