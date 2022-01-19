@@ -19,25 +19,25 @@ const Footer = () => {
 				<div className="col-xl-7 mb-4 mb-xl-0">
 					<nav>
 						<ul className="footer-menu d-sm-flex">
-							<li className="footer-menu-item"><a href="#" className="footer-menu-link">Shop</a></li>
-							<li className="footer-menu-item"><a href="#" className="footer-menu-link">About Us</a></li>
-							<li className="footer-menu-item"><a href="#" className="footer-menu-link">Careers</a></li>
-							<li className="footer-menu-item"><a href="#" className="footer-menu-link">FAQ </a></li>
-							<li className="footer-menu-item"><a href="#" className="footer-menu-link">Blog</a></li>
-							<li className="footer-menu-item"><a href="#" className="footer-menu-link">Contacts</a></li>
+							<li className="footer-menu-item"><a className="footer-menu-link">Shop</a></li>
+							<li className="footer-menu-item"><a className="footer-menu-link">About Us</a></li>
+							<li className="footer-menu-item"><a className="footer-menu-link">Careers</a></li>
+							<li className="footer-menu-item"><a className="footer-menu-link">FAQ </a></li>
+							<li className="footer-menu-item"><a className="footer-menu-link">Blog</a></li>
+							<li className="footer-menu-item"><a className="footer-menu-link">Contacts</a></li>
 						</ul>
 					</nav>
 				</div>
 				<div className="col-lg-3 d-flex align-items-center">
 					<span className="footer-text">Follow Us</span>
 					<span className="footer-social d-inline-flex align-items-center">
-						<a href="#" className="social-link">
+						<a href="https://facebook.com" className="social-link" target="_blank" rel="noreferrer noopener">
 							<img src={facebookLogo} alt="Facebook"/>
 						</a>
-						<a href="#" className="social-link">
+						<a href="https://twitter.com" className="social-link" target="_blank" rel="noreferrer noopener">
 							<img src={twitterLogo} alt="Twitter"/>
 						</a>
-						<a href="#" className="social-link">
+						<a href="https://instagram.com" className="social-link" target="_blank" rel="noreferrer noopener">
 							<img src={instagramLogo} alt="Instagram"/>
 						</a>
 					</span>
@@ -55,7 +55,7 @@ const Footer = () => {
 					<img className="payment-logo" src={bitcoinLogo} alt="bitcoin logo"/>
 				</div>
 				<div className="col-lg-2 col-sm-1 d-flex justify-content-end">
-					<a href="#" className="scroll-link top-link d-flex align-items-center">
+					<a className="scroll-link top-link d-flex align-items-center">
 						<span className="top-link-text">Top</span>
 						<img src={topArrowIcon} alt="icon: arrow top"/>
 					</a>

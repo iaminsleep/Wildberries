@@ -22,15 +22,15 @@ function CartModal() {
             <tr>
               <th>Good(s)</th>
               <th>Price</th>
-              <th colspan="3">Qty.</th>
-              <th colspan="2">Total</th>
+              <th colSpan="3">Qty.</th>
+              <th colSpan="2">Total</th>
             </tr>
           </thead>
           <tbody className="cart-table__goods"></tbody>
           <tfoot>
             <tr>
-              <th colspan="5">Total:</th>
-              <th className="card-table__total" colspan="2">0$</th>
+              <th colSpan="5">Total:</th>
+              <th className="card-table__total" colSpan="2">0$</th>
             </tr>
           </tfoot>
         </table>

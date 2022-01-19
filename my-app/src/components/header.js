@@ -1,29 +1,17 @@
 import React from 'react';
 
+import { NavLink } from 'react-router-dom';
+
 import companyLogo from '../img/logo.svg';
 import searchIcon from '../img/search.png';
 import cartIcon from '../img/cart.svg';
 
-const links = document.querySelectorAll('.navigation-link');
-
-links.forEach(link => {
-	link.addEventListener('click', (e) => {
-			e.preventDefault();
-			const navBarCategory = link.textContent;
-			const category = link.dataset.field;
-			this.setState({
-				category: linkValue,
-				
-			});
-	})
-});
-
-const Header = () => {
+const Header = ({HOST}) => {
   return(	
   <header className="container header px-4 px-md-0">
 		<div className="row justify-content-between align-items-center">
 			<div className="col-lg-2 col-6">
-				<a href="index.html" className="logo-link">
+				<a href={`${HOST}`} className="logo-link">
 					<img width="128" src={companyLogo} alt="logo: Willberries" className="logo-image"/>
 				</a>
 			</div>
@@ -31,22 +19,22 @@ const Header = () => {
 				<nav>
 					<ul className="navigation d-flex justify-content-around">
 						<li className="navigation-item">
-							<a href="#" className="navigation-link" data-field="gender">Womens</a>
+							<NavLink to={`${HOST}/goods`} className="navigation-link" data-field="gender">Womens</NavLink>
 						</li>
 						<li className="navigation-item">
-							<a href="#" className="navigation-link" data-field="gender">Mens</a>
+							<NavLink to={`${HOST}/goods`} className="navigation-link" data-field="gender">Mens</NavLink>
 						</li>
 						<li className="navigation-item">
-							<a href="#" className="navigation-link" data-field="category">Clothing</a>
+							<NavLink to={`${HOST}/goods`} className="navigation-link" data-field="category">Clothing</NavLink>
 						</li>
 						<li className="navigation-item">
-							<a href="#" className="navigation-link" data-field="category">Accessories</a>
+							<NavLink to={`${HOST}/goods`} className="navigation-link" data-field="category">Accessories</NavLink>
 						</li>
 						<li className="navigation-item">
-							<a href="#" className="navigation-link" data-field="category">Shoes</a>
+							<NavLink to={`${HOST}/goods`} className="navigation-link" data-field="category">Shoes</NavLink>
 						</li>
 						<li className="navigation-item">
-							<a href="#" className="navigation-link">All</a>
+							<NavLink to={`${HOST}/goods`} className="navigation-link">All</NavLink>
 						</li>
 					</ul>
 				</nav>
