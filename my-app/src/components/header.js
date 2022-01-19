@@ -1,7 +1,22 @@
 import React from 'react';
+
 import companyLogo from '../img/logo.svg';
 import searchIcon from '../img/search.png';
 import cartIcon from '../img/cart.svg';
+
+const links = document.querySelectorAll('.navigation-link');
+
+links.forEach(link => {
+	link.addEventListener('click', (e) => {
+			e.preventDefault();
+			const navBarCategory = link.textContent;
+			const category = link.dataset.field;
+			this.setState({
+				category: linkValue,
+				
+			});
+	})
+});
 
 const Header = () => {
   return(	

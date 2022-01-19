@@ -2,6 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 
+import './css/bootstrap-grid.min.css';
+import './css/style.css';
+import './css/swiper-bundle.min.css';
+
 ReactDOM.render(
   <React.StrictMode>
     <App />

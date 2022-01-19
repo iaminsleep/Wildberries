@@ -37,7 +37,7 @@ const getGoods = () => {
             .then((data) => {
                 //data.filter похож на функцию forEach, он перебирает массив с данными
                 //тернарный оператор, который заменяет конструкцию if-else. ? - if, : - else.
-                const array = category ? data.filter((item) => item[category] === value) : data; //filter вернёт тот массив данных, callback которых равен true
+                const array = category ? data.filter((item) => item[value] === value) : data; //filter вернёт тот массив данных, callback которых равен true
 
                 localStorage.setItem('goods', JSON.stringify(array)); //JSON.stringify превращает объект в читаемую строку
 
