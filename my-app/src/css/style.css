@@ -393,6 +393,10 @@ button {
   margin-right: 15px;
 }
 
+.scroll-link:hover {
+  cursor: pointer;
+}
+
 .payment-logo {
   vertical-align: middle;
   margin-right: 25px;

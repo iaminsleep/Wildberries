@@ -4,9 +4,13 @@ import arrowPrev from '../img/arrow-prev.svg';
 import arrowNext from'../img/arrow-next.svg';
 import viewAllArrow from'../img/arrow.svg';
 
-import GoodItem from '../components/goods/goodItem';
+import GoodItem from '../components/goodItem';
 
 function Home({goods}) {
+  const newGoods = goods.filter((good) => good.label === "New");
+  const bestsellersGoods = goods.filter((good) => good.label === "Bestseller");
+  newGoods.length = 4;
+  bestsellersGoods.length = 4;
   return (
     <React.Fragment>
       <section className="slider swiper-container">
@@ -17,8 +21,7 @@ function Home({goods}) {
                 <div className="col-lg-4 col-10 offset-lg-1">
                   <span className="label">Bestseller</span>
                   <h2 className="slide-title">Women's Alpargata Loafer</h2>
-                  <p className="slide-description">At Alpa believe in a better tomorrow, one where humanity
-                    thrives.</p>
+                  <p className="slide-description">At Alpa believe in a better tomorrow, one where humanity thrives.</p>
                   <button className="button add-to-cart" data-id="003">
                     <span className="button-price">$219</span>
                     <span className="button-text">Shop now</span>
@@ -130,24 +133,28 @@ function Home({goods}) {
           </div>
         </div>
         <div className="short-goods row">
-          {goods.map(good => 
+          {newGoods.map(good => 
             <GoodItem 
               key={good.id} id={good.id}
               name={good.name} description={good.description}
               price={good.price} img={good.img} label={good.label}
             />)}
         </div>
-      </section>
-      <section className="long-goods">
-        <div className="container">
-          <div className="row align-items-center mb-4">
-            <div className="col-12">
-              <h2 className="section-title">Category</h2>
-            </div>
+        <div className="row align-items-center mb-4">
+          <div className="col-9">
+            <h2 className="section-title">Bestsellers</h2>
           </div>
-          <div className="row long-goods-list">
-
+          <div className="col-3 d-flex justify-content-end">
+            <button className="more">View All</button>
           </div>
+        </div>
+        <div className="short-goods row">
+          {bestsellersGoods.map(good => 
+            <GoodItem 
+              key={good.id} id={good.id}
+              name={good.name} description={good.description}
+              price={good.price} img={good.img} label={good.label}
+            />)}
         </div>
       </section>
     </React.Fragment> 

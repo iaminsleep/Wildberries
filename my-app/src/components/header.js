@@ -19,22 +19,22 @@ const Header = ({HOST}) => {
 				<nav>
 					<ul className="navigation d-flex justify-content-around">
 						<li className="navigation-item">
-							<NavLink to={`${HOST}/goods`} className="navigation-link" data-field="gender">Womens</NavLink>
+							<NavLink to='/goods' className="navigation-link" data-field="gender">Womens</NavLink>
 						</li>
 						<li className="navigation-item">
-							<NavLink to={`${HOST}/goods`} className="navigation-link" data-field="gender">Mens</NavLink>
+							<NavLink to='/goods' className="navigation-link" data-field="gender">Mens</NavLink>
 						</li>
 						<li className="navigation-item">
-							<NavLink to={`${HOST}/goods`} className="navigation-link" data-field="category">Clothing</NavLink>
+							<NavLink to='/goods' className="navigation-link" data-field="category">Clothing</NavLink>
 						</li>
 						<li className="navigation-item">
-							<NavLink to={`${HOST}/goods`} className="navigation-link" data-field="category">Accessories</NavLink>
+							<NavLink to='/goods' className="navigation-link" data-field="category">Accessories</NavLink>
 						</li>
 						<li className="navigation-item">
-							<NavLink to={`${HOST}/goods`} className="navigation-link" data-field="category">Shoes</NavLink>
+							<NavLink to='/goods' className="navigation-link" data-field="category">Shoes</NavLink>
 						</li>
 						<li className="navigation-item">
-							<NavLink to={`${HOST}/goods`} className="navigation-link">All</NavLink>
+							<NavLink to='/goods' className="navigation-link">All</NavLink>
 						</li>
 					</ul>
 				</nav>

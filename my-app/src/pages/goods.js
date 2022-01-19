@@ -1,6 +1,6 @@
 import React from 'react';
 
-import GoodItem from '../components/goods/goodItem';
+import GoodItem from '../components/goodItem';
 
 function Goods({category, goods}) {
   return (

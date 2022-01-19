@@ -1,4 +1,5 @@
 import React from 'react';
+import {NavLink} from 'react-router-dom';
 
 import facebookLogo from '../img/Facebook.svg';
 import twitterLogo from '../img/Twitter.svg';
@@ -19,12 +20,12 @@ const Footer = () => {
 				<div className="col-xl-7 mb-4 mb-xl-0">
 					<nav>
 						<ul className="footer-menu d-sm-flex">
-							<li className="footer-menu-item"><a className="footer-menu-link">Shop</a></li>
-							<li className="footer-menu-item"><a className="footer-menu-link">About Us</a></li>
-							<li className="footer-menu-item"><a className="footer-menu-link">Careers</a></li>
-							<li className="footer-menu-item"><a className="footer-menu-link">FAQ </a></li>
-							<li className="footer-menu-item"><a className="footer-menu-link">Blog</a></li>
-							<li className="footer-menu-item"><a className="footer-menu-link">Contacts</a></li>
+							<li className="footer-menu-item"><NavLink to="/" className="footer-menu-link">Shop</NavLink></li>
+							<li className="footer-menu-item"><NavLink to="/" className="footer-menu-link">About Us</NavLink></li>
+							<li className="footer-menu-item"><NavLink to="/" className="footer-menu-link">Careers</NavLink></li>
+							<li className="footer-menu-item"><NavLink to="/" className="footer-menu-link">FAQ </NavLink></li>
+							<li className="footer-menu-item"><NavLink to="/" className="footer-menu-link">Blog</NavLink></li>
+							<li className="footer-menu-item"><NavLink to="/" className="footer-menu-link">Contacts</NavLink></li>
 						</ul>
 					</nav>
 				</div>

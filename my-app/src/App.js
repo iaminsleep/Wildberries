@@ -9,8 +9,7 @@ import Home from './pages/home.js';
 import Goods from './pages/goods.js';
 
 const API = "http://api.willberries/goods";
-const HOST = "http://localhost:3000/Willberries/";
-const temporaryThing = '/Willberries';
+const HOST = "https://iaminsleep.github.io/";
 
 class App extends Component {
   constructor(props) {
@@ -25,8 +24,8 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.init();
-    this.initCategoryFilters();
+    this.getData(this.state.value, this.state.category);
+    this.initSearchByCategory();
     this.initSearchHandler();
     this.initEventListeners();
   }
@@ -46,15 +45,7 @@ class App extends Component {
     );
   }
 
-  getDataByLabel(label = "") {
-    fetch(API).then((res) => res.json()).then((data) => {
-        const labeledGoods = label !== '' ? data.filter((good) => good.label === label) : data;
-        this.setState({goods: labeledGoods});
-      }
-    );
-  }
-
-  initCategoryFilters() {
+  initSearchByCategory() {
     const links = document.querySelectorAll('.navigation-link');
 
     links.forEach(link => {
@@ -92,26 +83,14 @@ class App extends Component {
     })
   }
 
-  init() {
-    console.log(window.location.href);
-    if(window.location.href === HOST) {
-      console.log('Home');
-      this.getDataByLabel("New");
-    }
-    if(window.location.href === `${HOST}/goods`) {
-      console.log('Goods');
-      this.getData(this.state.value, this.state.category, this.state.itemName);
-    }
-  }
-
   render() {
     return (
       <React.Fragment>
         <Router>
           <Header HOST={HOST}/>
             <Routes>
-              <Route exact path={`${temporaryThing}`} exact element={<Home category = {this.state.category} goods={this.state.goods} />}/>
-              <Route path={`${temporaryThing}/goods`} element={<Goods category = {this.state.value} goods={this.state.goods}/>}/>
+              <Route exact path='/' element={<Home category = {this.state.category} goods={this.state.goods} />}/>
+              <Route path='/goods' element={<Goods category = {this.state.value} goods={this.state.goods}/>}/>
             </Routes>
           <Footer/>
           <CartModal/>
