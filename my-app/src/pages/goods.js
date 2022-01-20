@@ -1,8 +1,8 @@
 import React from 'react';
 
-import GoodItem from '../components/goodItem';
+import GoodItem from '../components/goods/goodItem';
 
-function Goods({API, category, goods}) {
+function Goods({API, addToCart, category, goods}) {
   return (
     <section className="long-goods d-block">
       <div className="container">
@@ -16,7 +16,7 @@ function Goods({API, category, goods}) {
             <GoodItem 
               key={good.id} id={good.id} name={good.name} 
               description={good.description} price={good.price} 
-              img={good.img} label={good.label} API={API}
+              img={good.img} label={good.label} API={API} addToCart={addToCart}
             />)}
         </div>
       </div>
