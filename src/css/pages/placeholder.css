@@ -1,0 +1,48 @@
+.background {
+  background: #b9a4ff;
+  background-blend-mode: darken;
+  background-size: cover;
+}
+
+.center {
+  text-align: center;
+}
+
+.firstsection {
+  height: 100vh;
+}
+
+.box-main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  max-width: 50%;
+  margin: auto;
+  height: 80%;
+}
+
+.firstHalf {
+  width: 75%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.firstHalf img {
+  display: flex;
+  border-radius: 9050px;
+}
+
+.text-big {
+  font-family: "Piazzolla", serif;
+  font-weight: bold;
+  font-size: 41px;
+  text-align: center;
+}
+
+.text-small {
+  font-family: "Sansita Swashed", cursive;
+  font-size: 18px;
+  text-align: center;
+}

@@ -9,6 +9,12 @@ import CartModal from './components/cart/cartModal.js';
 import Home from './pages/home.js';
 import Goods from './pages/goods.js';
 
+import About from './pages/info/about.js';
+import Blog from './pages/info/blog.js';
+import Careers from './pages/info/careers.js';
+import Faq from './pages/info/faq.js';
+import Contacts from './pages/info/contacts.js';
+
 const API = "http://api.willberries";
 const HOST = "http://localhost:3000/";
 
@@ -65,7 +71,7 @@ class App extends Component {
 
     /* Поиск через поле ввода */
     const input = document.querySelector('.search-block > input');
-    const searchBtn = document.querySelector('.search-block > button');
+    const searchBtn = document.querySelector('.search-block > a');
 
     searchBtn.addEventListener('click', () => {
       this.setState({
@@ -160,15 +166,22 @@ class App extends Component {
                   API={API} 
                   category = {this.state.category} 
                   goods = {this.state.goods}
-                  addToCart={this.addToCart} />
-                }/>
+                  addToCart={this.addToCart} 
+                />}
+              />
               <Route path='/goods' element={
                 <Goods 
                   API={API} 
                   category = {this.state.value} 
                   goods = {this.state.goods}
-                  addToCart={this.addToCart} />
-                }/>
+                  addToCart={this.addToCart} 
+                />}
+              />
+              <Route path='/about' element={<About/>}/>
+              <Route path='/careers' element={<Careers/>}/>
+              <Route path='/faq' element={<Faq/>}/>
+              <Route path='/blog' element={<Blog/>}/>
+              <Route path='/contacts' element={<Contacts/>}/>
             </Routes>
           <Footer/>
           <CartModal 

@@ -43,9 +43,9 @@ const Header = ({HOST}) => {
 				<div className="form-control search-block">
 					<input type="text" className="form-control" placeholder="Search" aria-label="Recipient's username"
 						aria-describedby="button-addon2"/>
-					<button className="btn btn-outline-secondary" type="button" id="button-addon2">
+					<NavLink to="/goods" className="button btn btn-outline-secondary" type="button" id="button-addon2">
 						<img src={searchIcon} alt="search"/>
-					</button>
+					</NavLink>
 				</div>
 			</div>
 			<div className="col-lg-2 col-6 d-flex justify-content-end">

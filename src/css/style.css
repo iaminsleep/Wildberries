@@ -73,6 +73,11 @@ button {
   background-color: #2981ff;
 }
 
+#button-addon2 {
+  border-radius: 0 20px 20px 0;
+  padding: 10px 15px;
+}
+
 #button-addon2:hover {
   background-color: #1c69d7;
 }
@@ -250,6 +255,10 @@ button {
   font-size: 25px;
   line-height: 30px;
   color: #262d33;
+}
+
+.center {
+  text-align: center;
 }
 
 .more {
