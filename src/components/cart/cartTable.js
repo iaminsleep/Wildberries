@@ -2,7 +2,7 @@ import React from 'react';
 
 import CartItem from './cartItem';
 
-function CartTable ({cart, minusCartItem, plusCartItem, deleteCartItem}) {
+function CartTable ({API, cart, minusCartItem, plusCartItem, deleteCartItem}) {
   
   /* Вычисление общей суммы товаров */
   let totalPrice = 0;
@@ -33,7 +33,7 @@ function CartTable ({cart, minusCartItem, plusCartItem, deleteCartItem}) {
       <tbody className="cart-table__goods">
         {cart.map(good => 
           <CartItem 
-            key={good.id} name={good.name} price={good.price}
+            key={good.id} name={good.name} price={good.price} API={API}
             count={good.count} id={good.id} minusCartItem={minusCartItem} 
             plusCartItem={plusCartItem} deleteCartItem={deleteCartItem}
           />

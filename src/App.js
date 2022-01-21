@@ -9,7 +9,7 @@ import CartModal from './components/cart/cartModal.js';
 import Home from './pages/home.js';
 import Goods from './pages/goods.js';
 
-const API = "http://api.willberries/";
+const API = "http://api.willberries";
 const HOST = "http://localhost:3000/";
 
 const goodsAPI = `${API}/goods`;
@@ -33,7 +33,7 @@ class App extends Component {
     this.initEventListeners();
   }
 
-  getData(value, category) {
+  getData = (value, category) => {
     fetch(goodsAPI).then((res) => res.json()).then((data) => {
       const categoryGoods = category ? data.filter((item) => item[category] === value) : data;
       this.setState({goods: categoryGoods});
@@ -128,9 +128,7 @@ class App extends Component {
   initEventListeners() {
     /* Плавная прокрутка наверх при нажатии на кнопку */
     const link = document.querySelector('.scroll-link');
-    link.addEventListener('click', (e) => {
-      e.preventDefault();
-
+    link.addEventListener('click', () => {
       window.scrollTo({
           top: 0,
           behavior: 'smooth'
@@ -158,6 +156,7 @@ class App extends Component {
             <Routes>
               <Route exact path='/' element={
                 <Home 
+                  getData={this.getData}
                   API={API} 
                   category = {this.state.category} 
                   goods = {this.state.goods}
@@ -173,6 +172,7 @@ class App extends Component {
             </Routes>
           <Footer/>
           <CartModal 
+            API={API}
             cart={this.state.cart}
             minusCartItem={this.minusCartItem}  
             plusCartItem={this.plusCartItem} 

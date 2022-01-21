@@ -1,5 +1,5 @@
 import React from 'react';
-import {NavLink} from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 import facebookLogo from '../img/Facebook.svg';
 import twitterLogo from '../img/Twitter.svg';
@@ -52,14 +52,14 @@ const Footer = () => {
 				<div className="col-lg-4 col-sm-9">
 					<img className="payment-logo" src={visaLogo} alt="visa logo"/>
 					<img className="payment-logo" src={masterCardLogo} alt="master card logo"/>
-					<img className="payment-logo" src={paypalLogo} alt="paypal logo "/>
+					<img className="payment-logo" src={paypalLogo} alt="paypal logo"/>
 					<img className="payment-logo" src={bitcoinLogo} alt="bitcoin logo"/>
 				</div>
 				<div className="col-lg-2 col-sm-1 d-flex justify-content-end">
-					<a className="scroll-link top-link d-flex align-items-center">
+					<span className="scroll-link top-link d-flex align-items-center">
 						<span className="top-link-text">Top</span>
 						<img src={topArrowIcon} alt="icon: arrow top"/>
-					</a>
+					</span>
 				</div>
 			</div>
 		</div>

@@ -1,0 +1,48 @@
+@media (max-width: 1200px) {
+  .slide-1 {
+    background-size: cover;
+  }
+
+  .card-3 {
+    background-size: cover;
+  }
+}
+
+@media (max-width: 992px) {
+  .slider-nav {
+    display: none;
+  }
+
+  .modal {
+    min-width: 400px;
+    max-height: 300px;
+    padding: 20px;
+  }
+}
+
+@media (max-width: 576px) {
+  .slide-title {
+    font-size: 36px;
+    line-height: 1.4;
+    margin-bottom: 0;
+  }
+
+  .card {
+    background-position: left top;
+  }
+
+  .card-4 {
+    background-position: right top;
+  }
+
+  .card {
+    padding: 30px;
+    min-height: 300px;
+  }
+
+  .modal {
+    min-width: 300px;
+    max-height: 400px;
+    padding: 20px;
+  }
+}

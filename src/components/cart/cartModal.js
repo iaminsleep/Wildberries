@@ -2,7 +2,7 @@ import React from 'react';
 
 import CartTable from './cartTable';
 
-function CartModal({cart, minusCartItem, plusCartItem, deleteCartItem}) {
+function CartModal({API, cart, minusCartItem, plusCartItem, deleteCartItem}) {
   return (
     <div className="overlay" id="modal-cart">
       <div className="modal">
@@ -11,6 +11,7 @@ function CartModal({cart, minusCartItem, plusCartItem, deleteCartItem}) {
           <button className="modal-close">x</button>
         </header>
         <CartTable 
+          API={API}
           cart={cart} 
           minusCartItem={minusCartItem}  
           plusCartItem={plusCartItem} 
