@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Placeholder from '../placeholder';
+import Placeholder from '../../components/placeholder';
 
 function About() {
   return(

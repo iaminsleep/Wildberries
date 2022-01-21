@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Swiper, { Navigation } from 'swiper';
 
 import Header from './components/header.js';
 import Footer from './components/footer.js';
-
 import CartModal from './components/cart/cartModal.js';
 
 import Home from './pages/home.js';
@@ -37,6 +37,7 @@ class App extends Component {
     this.getData(this.state.value, this.state.category);
     this.initSearchHandler();
     this.initEventListeners();
+    this.initSwiper();
   }
 
   getData = (value, category) => {
@@ -151,6 +152,18 @@ class App extends Component {
     });
     closeBtn.addEventListener('click', () => {
       cartModal.classList.remove('show');
+    });
+  }
+
+  initSwiper() {
+    Swiper.use([Navigation]);
+    new Swiper('.swiper-container', {
+      loop: true,
+      
+      navigation: {
+        nextEl: '.slider-button-next',
+        prevEl: '.slider-button-prev',
+      },
     });
   }
 

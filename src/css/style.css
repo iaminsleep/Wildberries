@@ -121,6 +121,10 @@ button {
   background: #b9e0b4 url("../img/slide-image-1.png") no-repeat top right 30%;
 }
 
+.slide-3 {
+  background: #f0a0a0 url("../img/slide-image-1.png") no-repeat top right 30%;
+}
+
 .label {
   background-color: #3dc47e;
   border-radius: 3px;

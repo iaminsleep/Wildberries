@@ -34,7 +34,7 @@ function Home({API, addToCart, goods, getData}) {
               </div>
             </div>
           </section>
-          <section className="slide slide-1 swiper-slide">
+          <section className="slide slide-2 swiper-slide">
             <div className="container">
               <div className="row">
                 <div className="col-lg-4 col-10 offset-lg-1">
@@ -50,7 +50,7 @@ function Home({API, addToCart, goods, getData}) {
               </div>
             </div>
           </section>
-          <section className="slide slide-1 swiper-slide">
+          <section className="slide slide-3 swiper-slide">
             <div className="container">
               <div className="row">
                 <div className="col-lg-4 col-10 offset-lg-1">
@@ -77,7 +77,7 @@ function Home({API, addToCart, goods, getData}) {
               </div>
               <div className="col-1">
                 <button className="slider-button slider-button-next">
-                  <img src={arrowNext} alt="icon: arrow-prev"/>
+                  <img src={arrowNext} alt="icon: arrow-next"/>
                 </button>
               </div>
             </div>
@@ -133,7 +133,7 @@ function Home({API, addToCart, goods, getData}) {
             <h2 className="section-title">New Arrival</h2>
           </div>
           <div className="col-3 d-flex justify-content-end">
-            <button className="more">View All</button>
+            <NavLink to="/goods" className="more" onClick={() => getData('New', 'label')}>View All</NavLink>
           </div>
         </div>
         <div className="short-goods row">
@@ -149,7 +149,7 @@ function Home({API, addToCart, goods, getData}) {
             <h2 className="section-title">Bestsellers</h2>
           </div>
           <div className="col-3 d-flex justify-content-end">
-            <button className="more">View All</button>
+            <NavLink to="/goods" className="more" onClick={() => getData('Bestseller', 'label')}>View All</NavLink>
           </div>
         </div>
         <div className="short-goods row">
