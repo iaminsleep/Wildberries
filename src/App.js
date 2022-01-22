@@ -8,6 +8,8 @@ import CartModal from './components/cart/cartModal.js';
 
 import Home from './pages/home.js';
 import Goods from './pages/goods.js';
+import Register from './pages/register.js';
+import Login from './pages/login.js';
 
 import About from './pages/info/about.js';
 import Blog from './pages/info/blog.js';
@@ -159,6 +161,7 @@ class App extends Component {
     Swiper.use([Navigation]);
     new Swiper('.swiper-container', {
       loop: true,
+      speed: 500,
       
       navigation: {
         nextEl: '.slider-button-next',
@@ -190,6 +193,8 @@ class App extends Component {
                   addToCart={this.addToCart} 
                 />}
               />
+              <Route path='/register' element={<Register/>}/>
+              <Route path='/login' element={<Login/>}/>
               <Route path='/about' element={<About/>}/>
               <Route path='/careers' element={<Careers/>}/>
               <Route path='/faq' element={<Faq/>}/>

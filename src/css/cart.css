@@ -17,8 +17,7 @@
 
 .modal {
   background-color: #e0e0ff;
-  min-width: 600px;
-  max-height: 400px;
+  width: 1000px;
   padding: 30px;
   overflow: auto;
   position: relative;

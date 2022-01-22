@@ -40,8 +40,7 @@ function Home({API, addToCart, goods, getData}) {
                 <div className="col-lg-4 col-10 offset-lg-1">
                   <span className="label">New</span>
                   <h2 className="slide-title">Text T-Shirt</h2>
-                  <p className="slide-description">Women's pearl basic knit sweater with a round neck. Available
-                    in several colours. Free shipping to stores.</p>
+                  <p className="slide-description">Upgrade your style. Browse through different shirt styles and colors. Search for your new favorite one today!</p>
                   <button className="button add-to-cart" data-id="4" onClick={() => addToCart("4")}>
                     <span className="button-price">$119</span>
                     <span className="button-text">Shop now</span>

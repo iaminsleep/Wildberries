@@ -118,11 +118,12 @@ button {
 }
 
 .slide-2 {
-  background: #b9e0b4 url("../img/slide-image-1.png") no-repeat top right 30%;
+  background: #b9e0b4 url("../img/slide-image-2.png") no-repeat top right 30%;
+  background-size: contain;
 }
 
 .slide-3 {
-  background: #f0a0a0 url("../img/slide-image-1.png") no-repeat top right 30%;
+  background: #f0a0a0 url("../img/slide-image-3.png") no-repeat top right 30%;
 }
 
 .label {

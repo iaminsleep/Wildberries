@@ -4,7 +4,7 @@ function GoodItem({API, addToCart, id, name, description, price, img, label}) {
   return (
     <div className="col-lg-3 col-sm-6">
       <div className="goods-card">
-        <a className="goods-link" href="./goods">
+        <a className="goods-link" href="./about">
             <span className={`label ${label ? "" : 'd-none'}`}>{label}</span>
             <img src={`${API}/img/goods/${img}`} alt={`${name}`} className="goods-image"/>
             <h3 className="goods-title">{name}</h3>

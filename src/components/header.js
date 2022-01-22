@@ -5,6 +5,7 @@ import { NavLink } from 'react-router-dom';
 import companyLogo from '../img/logo.svg';
 import searchIcon from '../img/search.png';
 import cartIcon from '../img/cart.svg';
+import signIn from '../img/sign-in.png';
 
 const Header = ({HOST}) => {
   return(	
@@ -48,7 +49,10 @@ const Header = ({HOST}) => {
 					</NavLink>
 				</div>
 			</div>
-			<div className="col-lg-2 col-6 d-flex justify-content-end">
+			<div className="col-lg-2 col-6 d-flex justify-content-end" style={{alignItems: 'center', gap: '20px'}}>
+				<NavLink to="/register">
+					<img src={signIn} width="20" height="20" alt="icon: sign-in" style={{display: 'flex'}}/>
+				</NavLink>
 				<button className="button button-cart">
 					<img className="button-icon" src={cartIcon} alt="icon: cart"/>
 					<span className="button-text">Cart</span>
