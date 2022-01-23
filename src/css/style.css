@@ -102,7 +102,7 @@ button {
 .long-goods {
   display: none;
   min-height: 100vh;
-  padding-bottom: 40px;
+  padding-bottom: 50px;
 }
 
 .show-goods .long-goods {
@@ -417,4 +417,27 @@ button {
 .payment-logo {
   vertical-align: middle;
   margin-right: 25px;
+}
+
+.empty-goods-wrapper {
+  display: flex;
+  justify-content: center;
+  margin: 25px 0;
+  border: 1px solid #4592ff;
+  border-radius: 50px;
+}
+
+.goods-empty {
+  font-size: 24px;
+  color: #4592ff;
+  padding: 300px;
+}
+
+.goods-empty.small {
+  padding: 100px;
+  color: #3dc47e;
+}
+
+.empty-goods-wrapper.green {
+  border: 1px solid #3dc47e !important;
 }

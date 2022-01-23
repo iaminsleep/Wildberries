@@ -12,12 +12,17 @@ function Goods({API, addToCart, category, goods}) {
           </div>
         </div>
         <div className="row long-goods-list">  
-          {goods.map(good => 
+        {goods.length > 0 ? 
+          goods.map(good => 
             <GoodItem 
               key={good.id} id={good.id} name={good.name} 
               description={good.description} price={good.price} 
               img={good.img} label={good.label} API={API} addToCart={addToCart}
-            />)}
+            />)
+          : <div className="empty-goods-wrapper">
+              <div className="goods-empty">The item you were searching for wasn't found!</div>
+            </div>
+        }      
         </div>
       </div>
     </section>

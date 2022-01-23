@@ -108,9 +108,13 @@
 }
 
 .navlink,
-.navlink:hover,
 navlink:visited {
   text-decoration: none;
   color: #4592ff;
 }
+
+.navlink:hover {
+  color: #a186f8;
+}
+
 /*# sourceMappingURL=auth.css.map */

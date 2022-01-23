@@ -136,12 +136,17 @@ function Home({API, addToCart, goods, getData}) {
           </div>
         </div>
         <div className="short-goods row">
-          {newGoods.map(good => 
-            <GoodItem 
-              key={good.id} id={good.id} name={good.name} 
-              description={good.description} price={good.price} 
-              img={good.img} label={good.label} API={API} addToCart={addToCart}
-            />)}
+          {newGoods.length > 0 ? 
+            newGoods.map(good => 
+              <GoodItem 
+                key={good.id} id={good.id} name={good.name} 
+                description={good.description} price={good.price} 
+                img={good.img} label={good.label} API={API} addToCart={addToCart}
+              />)
+            : <div className="empty-goods-wrapper green">
+                <div className="goods-empty small">Looks like these items have been sold for now. Expect a new delivery!</div>
+              </div>
+          }
         </div>
         <div className="row align-items-center mb-4">
           <div className="col-9">
@@ -152,12 +157,17 @@ function Home({API, addToCart, goods, getData}) {
           </div>
         </div>
         <div className="short-goods row">
-          {bestsellersGoods.map(good => 
-            <GoodItem 
-              key={good.id} id={good.id} name={good.name} 
-              description={good.description} price={good.price} 
-              img={good.img} label={good.label} API={API} addToCart={addToCart}
-            />)}
+          {bestsellersGoods.length > 0 ? 
+            bestsellersGoods.map(good => 
+              <GoodItem 
+                key={good.id} id={good.id} name={good.name} 
+                description={good.description} price={good.price} 
+                img={good.img} label={good.label} API={API} addToCart={addToCart}
+              />)
+            : <div className="empty-goods-wrapper green">
+                <div className="goods-empty small">Looks like these items have been sold for now. Expect a new delivery!</div>
+              </div>
+          }
         </div>
       </section>
     </React.Fragment> 
