@@ -43,9 +43,10 @@ class App extends Component {
   }
 
   getData = (value, category) => {
+    window.scrollTo(0,0);
     fetch(goodsAPI).then((res) => res.json()).then((data) => {
       const categoryGoods = category ? data.filter((item) => item[category] === value) : data;
-      this.setState({goods: categoryGoods});
+      this.setState({goods: categoryGoods, value: value, category: category});
     });
   }
 

@@ -8,8 +8,8 @@ const CartItem = ({API, img, name, price, count, id, minusCartItem, plusCartItem
 
   return (
     <tr>
-      <td><img src={`${API}/img/goods/${img}`} alt={`${name}`}/></td>
-      <td>{name}</td>
+      <td className="w-10"><img src={`${API}/img/goods/${img}`} alt={`${name}`}/></td>
+      <td className="w-100">{name}</td>
       <td>${price}</td>
       <td><button className="cart-btn-minus" onClick={() => minusCartItem(id)}>-</button></td>
       <td>{count}</td>

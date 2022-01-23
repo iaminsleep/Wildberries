@@ -1,16 +1,17 @@
-### Интернет-магазин Willberries
+# Интернет-магазин Willberries
 
 RESTful приложение "Willberries". Фронтенд реализован на React JS, а API для сайта написан на PHP.
 Ссылка на проект с API: https://github.com/iaminsleep/Willberries-API.
 
-# Технологии:
+### Технологии:
 
 - reactjs
 - css
+- scss
 - javascript
 - rest api
 
-# Библиотеки:
+### Библиотеки:
 
 - Bootstrap v5
 - Swiper Slider JS

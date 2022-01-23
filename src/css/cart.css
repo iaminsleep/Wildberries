@@ -8,7 +8,7 @@
   left: 0;
   right: 0;
   z-index: 999;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: #00000060;
 }
 
 .overlay.show {
@@ -16,7 +16,8 @@
 }
 
 .modal {
-  background-color: #e0e0ff;
+  border-radius: 20px;
+  background-color: #ffffff;
   width: 1000px;
   padding: 30px;
   overflow: auto;
@@ -44,8 +45,9 @@
 
 .modal-form {
   display: flex;
-  justify-content: space-between;
   flex-wrap: wrap;
+  align-items: center;
+  padding-bottom: 20px;
 }
 
 .modal-input {
@@ -54,19 +56,48 @@
   padding: 10px;
   border-radius: 20px;
   border-style: none;
-  margin-bottom: 30px;
+  width: 200px;
+  background-color: #dbdbdb;
 }
 
 .cart-table {
-  border-collapse: collapse;
-  min-width: 540px;
+  border-collapse: separate;
+  min-width: 850px;
   margin-bottom: 15px;
+  border-spacing: 0 40px;
+}
+
+thead th {
+  font-size: 18px;
+  color: #939699;
+}
+
+.total {
+  font-size: 21px;
+  font-weight: bold;
+  margin-left: 228px;
+  padding-left: 10px;
+}
+
+.cart-wrapper {
+  display: flex;
+  justify-content: center;
+  margin: 25px 0;
+  border: 1px solid #b9a4ff;
+  border-radius: 10px;
+  overflow: auto;
+  max-height: 500px;
+}
+
+#cart-empty {
+  font-size: 24px;
+  color: #b9a4ff;
+  padding: 50px;
 }
 
 .cart-table th,
 .cart-table td {
-  text-align: left;
-  border: 1px solid black;
+  text-align: center;
 }
 
 .cart-buy {
@@ -81,28 +112,17 @@
   max-width: 160px;
 }
 
-.col-price {
-  width: 100px;
+.w-10 {
+  width: 10%;
+  padding-left: 20px;
 }
 
-.col-minus {
-  width: 15px;
+.w-100 {
+  max-width: 150px;
 }
 
-.col-qty {
-  width: 15px;
-}
-
-.col-plus {
-  width: 15px;
-}
-
-.col-total-price {
-  width: 120px;
-}
-
-.col-delete {
-  width: 5px;
+.align-right {
+  text-align: right !important;
 }
 
 .form-control {

@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-import '../css/pages/auth/auth.css';
+import '../css/pages/auth.css';
 
 function Register() {
   return(

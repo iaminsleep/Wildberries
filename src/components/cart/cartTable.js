@@ -3,18 +3,11 @@ import React from 'react';
 import CartItem from './cartItem';
 
 function CartTable ({API, cart, minusCartItem, plusCartItem, deleteCartItem}) {
-  
-  /* Вычисление общей суммы товаров */
-  let totalPrice = 0;
-  cart.forEach(good => {
-    const totalItemPrice = +good.price * +good.count;
-    totalPrice += totalItemPrice;
-  })
-
   return (
     <table className="cart-table">
       <colgroup>
-        <col className="col-goods" />
+        <col className="col-image" />
+        <col className="col-name" />
         <col className="col-price" />
         <col className="col-minus" />
         <col className="col-qty" />
@@ -24,11 +17,11 @@ function CartTable ({API, cart, minusCartItem, plusCartItem, deleteCartItem}) {
       </colgroup>
       <thead>
         <tr>
-          <th>Image</th>
-          <th>Name</th>
+          <th></th>
+          <th>Product</th>
           <th>Price</th>
           <th colSpan="3">Qty.</th>
-          <th colSpan="2">Total</th>
+          <th colSpan="1">Total</th>
         </tr>
       </thead>
       <tbody className="cart-table__goods">
@@ -40,12 +33,6 @@ function CartTable ({API, cart, minusCartItem, plusCartItem, deleteCartItem}) {
           />
         )}
       </tbody>
-      <tfoot>
-        <tr>
-          <th colSpan="5">Total:</th>
-          <th className="card-table__total" colSpan="2">${totalPrice}</th>
-        </tr>
-      </tfoot>
     </table>
   )
 }

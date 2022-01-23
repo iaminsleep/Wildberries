@@ -101,6 +101,8 @@ button {
 
 .long-goods {
   display: none;
+  min-height: 100vh;
+  padding-bottom: 40px;
 }
 
 .show-goods .long-goods {
