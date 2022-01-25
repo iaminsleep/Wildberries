@@ -7,7 +7,10 @@ import searchIcon from '../img/search.png';
 import cartIcon from '../img/cart.svg';
 import signIn from '../img/sign-in.png';
 
-const Header = ({HOST}) => {
+const Header = ({HOST, cart}) => {
+	if(cart.length > 0) {
+		document.querySelector('.button-cart').classList.add('pseudo');
+	}
   return(	
   <header className="container header px-4 px-md-0">
 		<div className="row justify-content-between align-items-center">
@@ -53,7 +56,7 @@ const Header = ({HOST}) => {
 				<NavLink to="/register">
 					<img src={signIn} width="20" height="20" alt="icon: sign-in" style={{display: 'flex'}}/>
 				</NavLink>
-				<button className="button button-cart">
+				<button className="button button-cart" data-count={cart.length}>
 					<img className="button-icon" src={cartIcon} alt="icon: cart"/>
 					<span className="button-text">Cart</span>
 					<span className="button-text cart-count"></span>

@@ -19,7 +19,7 @@
   border-radius: 20px;
   background-color: #ffffff;
   width: 1000px;
-  padding: 30px;
+  padding: 50px;
   overflow: auto;
   position: relative;
 }
@@ -32,6 +32,7 @@
 .modal-title {
   margin-top: 0;
   margin-bottom: 15px;
+  font-size: 28px;
 }
 
 .modal-close {
@@ -47,7 +48,6 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  padding-bottom: 20px;
 }
 
 .modal-input {
@@ -75,8 +75,7 @@ thead th {
 .total {
   font-size: 21px;
   font-weight: bold;
-  margin-left: 228px;
-  padding-left: 10px;
+  margin-left: 200px;
 }
 
 .cart-wrapper {
@@ -184,4 +183,21 @@ thead th {
     border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
+}
+
+.pseudo {
+  position: relative;
+}
+
+.pseudo:before {
+  content: attr(data-count);
+  position: absolute;
+  background: #e02434;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  top: 0;
+  right: 1px;
+  text-align: center;
+  font-size: 12px;
 }

@@ -46,6 +46,7 @@ button {
   cursor: pointer;
   overflow: hidden;
   outline: none;
+  overflow: inherit;
 }
 
 .button {
@@ -215,6 +216,19 @@ button {
 
 .goods-card-btn .button-price {
   margin: 0;
+}
+
+.cart-icon {
+  display: none;
+  padding-left: 21px;
+}
+
+.visible-icon {
+  display: inherit;
+}
+
+.d-none {
+  display: none;
 }
 
 .card-title {

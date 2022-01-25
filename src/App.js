@@ -51,6 +51,7 @@ class App extends Component {
   }
 
   searchData(itemName = '') {
+    window.scrollTo(0,0);
     fetch(goodsAPI).then((res) => res.json()).then((data) => {
         const searchedGoods = itemName !== '' ? data.filter(good => good.name.toLowerCase().includes(itemName.toLowerCase())) : data;
         this.setState({goods: searchedGoods});
@@ -84,7 +85,7 @@ class App extends Component {
     });
   }
 
-  addToCart = id => {
+  addToCart = (evt, id) => {
     const goods = this.state.goods;
     const cart = this.state.cart;
 
@@ -102,6 +103,24 @@ class App extends Component {
       clickedGood.count = 1;
       cart.push(clickedGood);
     }
+
+    const cartModal =  document.querySelector('#modal-cart');
+    const addToCartBtn = evt.target.closest('button');
+
+    addToCartBtn.style.backgroundColor = '#7a55e7';
+    addToCartBtn.querySelector('img').classList.add('visible-icon');
+    addToCartBtn.querySelector('span').classList.add('d-none');
+
+    addToCartBtn.addEventListener('click', () => {
+      cartModal.classList.add('show');
+      cart.map(good => {
+        if(good.id === clickedGood.id && good.count !== 0) {
+            good.count--;
+        }
+        return good;
+      })
+    })
+
     this.setState({cart: cart});
   }
 
@@ -119,7 +138,7 @@ class App extends Component {
   minusCartItem = id => {
     const cart = this.state.cart;
     const newCart = cart.map(good => {
-    if(good.id === id && good.count > 0) {
+    if(good.id === id && good.count > 1) {
         good.count--;
     }
       return good;
@@ -156,6 +175,14 @@ class App extends Component {
     closeBtn.addEventListener('click', () => {
       cartModal.classList.remove('show');
     });
+
+    /* Поиск */
+
+    window.addEventListener('keydown', (evt) => {
+        if(evt.key === 'Escape' && cartModal.classList.contains('show')) {
+            cartModal.classList.remove('show');
+        }
+    })
   }
 
   initSwiper() {
@@ -171,11 +198,33 @@ class App extends Component {
     });
   }
 
+  sendForm = () => {
+    const cartModal = document.querySelector('#modal-cart');
+    const cart = this.state.cart;
+    
+    const nameField = document.querySelector('.modal-input[name="nameCustomer"]');
+    const phoneField = document.querySelector('.modal-input[name="phoneCustomer"]');
+
+    fetch('https://jsonplaceholder.typicode.com/posts', {
+        method: 'POST',
+        body: JSON.stringify({
+            cart: cart,
+            name: nameField.value,
+            phone: phoneField.value,
+        }),
+    }).then(() => {
+        cartModal.classList.remove('show');
+        nameField.value = '';
+        phoneField.value = '';
+        localStorage.removeItem('cart');
+    })
+  }
+
   render() {
     return (
       <React.Fragment>
         <Router>
-          <Header HOST={HOST}/>
+          <Header HOST={HOST} cart={this.state.cart}/>
             <Routes>
               <Route exact path='/' element={
                 <Home 
