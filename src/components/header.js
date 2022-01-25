@@ -53,9 +53,9 @@ const Header = ({HOST, cart}) => {
 				</div>
 			</div>
 			<div className="col-lg-2 col-6 d-flex justify-content-end" style={{alignItems: 'center', gap: '20px'}}>
-				<NavLink to="/register">
+				<a href="/register">
 					<img src={signIn} width="20" height="20" alt="icon: sign-in" style={{display: 'flex'}}/>
-				</NavLink>
+				</a>
 				<button className="button button-cart" data-count={cart.length}>
 					<img className="button-icon" src={cartIcon} alt="icon: cart"/>
 					<span className="button-text">Cart</span>

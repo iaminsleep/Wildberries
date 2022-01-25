@@ -11,7 +11,6 @@ RESTful приложение "Willberries". Фронтенд реализова�
 
 - reactjs
 - css
-- scss
 - javascript
 - rest api
 

@@ -56,10 +56,10 @@
 }
 
 .form span {
-  display: block;
   background: #f9a5a5;
   padding: 2px 5px;
   color: #666;
+  display: none;
 }
 
 .form input[type="submit"] {
@@ -119,6 +119,10 @@ navlink:visited {
 
 .navlink:hover {
   color: #a186f8;
+}
+
+.alert-visible {
+  display: block !important;
 }
 
 /*# sourceMappingURL=auth.css.map */
