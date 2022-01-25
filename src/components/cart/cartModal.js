@@ -44,7 +44,7 @@ function CartModal({API, cart, minusCartItem, plusCartItem, deleteCartItem}) {
               placeholder="Phone"
               name="phoneCustomer"
             />
-            <div className="total">Total: ${totalPrice}</div>
+            <div className="total">Total:&nbsp;&nbsp;&nbsp;${totalPrice}</div>
             <button className="button cart-buy" type="submit">
               <span className="button-text">Checkout</span>
             </button>

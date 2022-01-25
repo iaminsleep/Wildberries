@@ -74,6 +74,10 @@ button {
   background-color: #2981ff;
 }
 
+.button:active {
+  background-color: #116beb;
+}
+
 #button-addon2 {
   border-radius: 0 20px 20px 0;
   padding: 10px 15px;
@@ -369,6 +373,8 @@ button {
 
 .button-four {
   margin-top: auto;
+  display: flex;
+  justify-content: center;
 }
 
 .footer-menu {

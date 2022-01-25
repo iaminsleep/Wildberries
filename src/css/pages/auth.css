@@ -82,6 +82,10 @@
   text-shadow: 0 1px 3px #b9a4ff;
 }
 
+.form input[type="submit"]:active {
+  background: #8f79d4;
+}
+
 .form label {
   position: absolute;
   left: 8px;

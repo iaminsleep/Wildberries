@@ -108,8 +108,18 @@ class App extends Component {
     const addToCartBtn = evt.target.closest('button');
 
     addToCartBtn.style.backgroundColor = '#7a55e7';
+    addToCartBtn.style.height = '40px';
     addToCartBtn.querySelector('img').classList.add('visible-icon');
     addToCartBtn.querySelector('span').classList.add('d-none');
+
+    const buttonText = addToCartBtn.querySelector('.button-text')
+
+    if(buttonText) {
+      buttonText.classList.add('d-none');
+      addToCartBtn.style.width = '144px';
+      addToCartBtn.style.height = '40px';
+      addToCartBtn.querySelector('img').style.paddingLeft = '0';
+    }
 
     addToCartBtn.addEventListener('click', () => {
       cartModal.classList.add('show');
@@ -177,11 +187,14 @@ class App extends Component {
     });
 
     /* Поиск */
-
     window.addEventListener('keydown', (evt) => {
-        if(evt.key === 'Escape' && cartModal.classList.contains('show')) {
-            cartModal.classList.remove('show');
-        }
+      if(evt.key === 'Escape' && cartModal.classList.contains('show')) {
+        cartModal.classList.remove('show');
+      }
+
+      if(evt.key === 'Enter') {
+        document.querySelector('#button-addon2').click();
+      }
     })
   }
 
@@ -206,17 +219,17 @@ class App extends Component {
     const phoneField = document.querySelector('.modal-input[name="phoneCustomer"]');
 
     fetch('https://jsonplaceholder.typicode.com/posts', {
-        method: 'POST',
-        body: JSON.stringify({
-            cart: cart,
-            name: nameField.value,
-            phone: phoneField.value,
+      method: 'POST',
+      body: JSON.stringify({
+          cart: cart,
+          name: nameField.value,
+          phone: phoneField.value,
         }),
     }).then(() => {
-        cartModal.classList.remove('show');
-        nameField.value = '';
-        phoneField.value = '';
-        localStorage.removeItem('cart');
+      cartModal.classList.remove('show');
+      nameField.value = '';
+      phoneField.value = '';
+      localStorage.removeItem('cart');
     })
   }
 
