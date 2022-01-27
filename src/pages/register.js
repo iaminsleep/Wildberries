@@ -12,8 +12,13 @@ function Register() {
             <a href="/login" className="navlink"> Sign In</a>
           </p>
           <p>
-            <label htmlFor="Email" className="floatLabel">Email</label>
-            <input id="email" name="Email" type="text" required autoComplete="off"/>
+            <label htmlFor="email" className="floatLabel">Email</label>
+            <input id="email" name="email" type="text" required autoComplete="off"/>
+            <span className="alert-danger">Alert message</span>
+          </p>
+          <p>
+            <label htmlFor="phone" className="floatLabel">Phone</label>
+            <input id="phone" name="phone" type="text" required autoComplete="off"/>
             <span className="alert-danger">Alert message</span>
           </p>
           <p>

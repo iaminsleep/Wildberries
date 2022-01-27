@@ -135,36 +135,6 @@ class App extends Component {
     this.setState({cart: cart});
   }
 
-  plusCartItem = id => {
-    const cart = this.state.cart;
-    const newCart = cart.map(good => {
-    if(good.id === id && good.count > 0) {
-        good.count++;
-    }
-      return good;
-    })
-    this.setState({cart: newCart});
-  }
-
-  minusCartItem = id => {
-    const cart = this.state.cart;
-    const newCart = cart.map(good => {
-    if(good.id === id && good.count > 1) {
-        good.count--;
-    }
-      return good;
-    })
-    this.setState({cart: newCart});
-  }
-
-  deleteCartItem = id => {
-    const cart = this.state.cart;
-    const newCart = cart.filter(good => {
-      return good.id !== id;
-    })
-    this.setState({cart: newCart});
-  }
-
   initEventListeners() {
     /* Плавная прокрутка наверх при нажатии на кнопку */
     const link = document.querySelector('.scroll-link');
@@ -212,33 +182,11 @@ class App extends Component {
     });
   }
 
-  sendForm = () => {
-    const cartModal = document.querySelector('#modal-cart');
-    const cart = this.state.cart;
-    
-    const nameField = document.querySelector('.modal-input[name="nameCustomer"]');
-    const phoneField = document.querySelector('.modal-input[name="phoneCustomer"]');
-
-    fetch('https://jsonplaceholder.typicode.com/posts', {
-      method: 'POST',
-      body: JSON.stringify({
-          cart: cart,
-          name: nameField.value,
-          phone: phoneField.value,
-        }),
-    }).then(() => {
-      cartModal.classList.remove('show');
-      nameField.value = '';
-      phoneField.value = '';
-      localStorage.removeItem('cart');
-    })
-  }
-
   initAuthFormValidation() {
     if(window.location.pathname === '/register' || window.location.pathname === '/login') {
       const form = document.querySelector('.form[method="post"]');
 
-      const emailInput = form.querySelector('input[name="Email"]');
+      const emailInput = form.querySelector('input[name="email"]');
       const passwordInput = form.querySelector('#password');
       const passwordConfirm = form.querySelector('#confirm_password');
       const submitButton = form.querySelector('input[type="submit"]');
@@ -267,7 +215,7 @@ class App extends Component {
 
       emailInput.oninput = function() {
         const alertFeedback = emailInput.nextElementSibling;
-        if(emailInput.value == '') {
+        if(emailInput.value === '') {
           if(alertFeedback.classList.contains('alert-visible')) {
             alertFeedback.classList.remove('alert-visible');
           }
@@ -284,7 +232,7 @@ class App extends Component {
 
       passwordInput.oninput = function () {
         const alertFeedback = passwordInput.nextElementSibling;
-        if(passwordInput.value == '') {
+        if(passwordInput.value === '') {
           if(alertFeedback.classList.contains('alert-visible')) {
             alertFeedback.classList.remove('alert-visible');
           }
@@ -302,7 +250,7 @@ class App extends Component {
       if(passwordConfirm) {
         passwordConfirm.oninput = function () {
           const alertFeedback = passwordConfirm.nextElementSibling;
-          if(passwordConfirm.value == '') {
+          if(passwordConfirm.value === '') {
             if(alertFeedback.classList.contains('alert-visible')) {
               alertFeedback.classList.remove('alert-visible');
             }
@@ -361,9 +309,6 @@ class App extends Component {
           <CartModal 
             API={API}
             cart={this.state.cart}
-            minusCartItem={this.minusCartItem}  
-            plusCartItem={this.plusCartItem} 
-            deleteCartItem={this.deleteCartItem}
           />
         </Router>
       </React.Fragment>
