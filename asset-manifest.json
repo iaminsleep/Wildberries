@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/Willberries/static/css/main.f2011a78.css",
-    "main.js": "/Willberries/static/js/main.80202465.js",
+    "main.css": "/Willberries/static/css/main.cc10e32f.css",
+    "main.js": "/Willberries/static/js/main.fbda7f12.js",
     "static/media/slide-image-1.png": "/Willberries/static/media/slide-image-1.68b83e7c364cbc98f9ee.png",
     "static/media/slide-image-3.png": "/Willberries/static/media/slide-image-3.3998b44723b8117d02e0.png",
     "static/media/card-image-2.jpg": "/Willberries/static/media/card-image-2.d1ae2977e53da8622d05.jpg",
@@ -20,11 +20,11 @@
     "static/media/arrow-next.svg": "/Willberries/static/media/arrow-next.6404d7cd932517f6acda2c94b5d3c702.svg",
     "static/media/arrow-prev.svg": "/Willberries/static/media/arrow-prev.bc105f91e1dea50dc11e37d84da7a7cc.svg",
     "static/media/arrow.svg": "/Willberries/static/media/arrow.14813a92cc35603a4d6754cd02dcc16d.svg",
-    "main.f2011a78.css.map": "/Willberries/static/css/main.f2011a78.css.map",
-    "main.80202465.js.map": "/Willberries/static/js/main.80202465.js.map"
+    "main.cc10e32f.css.map": "/Willberries/static/css/main.cc10e32f.css.map",
+    "main.fbda7f12.js.map": "/Willberries/static/js/main.fbda7f12.js.map"
   },
   "entrypoints": [
-    "static/css/main.f2011a78.css",
-    "static/js/main.80202465.js"
+    "static/css/main.cc10e32f.css",
+    "static/js/main.fbda7f12.js"
   ]
 }
