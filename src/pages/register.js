@@ -2,11 +2,40 @@ import React from "react";
 
 import '../css/pages/auth.css';
 
-function Register() {
+function Register({API}) {
+
+  const registerUser = async function(e) {
+    e.preventDefault();
+
+    let email = document.querySelector('#email').value;
+    let password = document.querySelector('#password').value;
+    let confirmPassword = document.querySelector('#confirm_password').value;
+
+    const formData = new FormData();
+    formData.append('email', email);
+    formData.append('password', password);
+    formData.append('confirm_password', confirmPassword);
+
+    try {
+      await fetch(`${API}/users`, {
+      method: 'POST',
+      body: formData,
+      }).then(() => {
+        email = '';
+        password = '';
+        confirmPassword = '';
+        document.location.href = '/login';
+      })
+    }
+    catch(err) {
+      alert('Возникла ошибка при попытке регистрации!');
+    }
+  }
+
   return(
     <div className="body">
       <div className="div">
-        <form action="#" method="post" className="form">
+        <form action="#" method="post" className="form" onSubmit={(e) => registerUser(e)}>
           <h2>Sign Up</h2>
           <p className="text">Already have an account?
             <a href="/login" className="navlink"> Sign In</a>
@@ -14,11 +43,6 @@ function Register() {
           <p>
             <label htmlFor="email" className="floatLabel">Email</label>
             <input id="email" name="email" type="text" required autoComplete="off"/>
-            <span className="alert-danger">Alert message</span>
-          </p>
-          <p>
-            <label htmlFor="phone" className="floatLabel">Phone</label>
-            <input id="phone" name="phone" type="text" required autoComplete="off"/>
             <span className="alert-danger">Alert message</span>
           </p>
           <p>

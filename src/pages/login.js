@@ -12,8 +12,8 @@ function Login() {
             <a href="/register" className="navlink"> Click to register</a>
           </p>
           <p>
-            <label htmlFor="Email" className="floatLabel">Email or Phone</label>
-            <input id="Email" name="Email" type="text" required autoComplete="off"/>
+            <label htmlFor="email" className="floatLabel">Email</label>
+            <input id="email" name="email" type="text" required autoComplete="off"/>
             <span className="alert-danger">Alert message</span>
           </p>
           <p>

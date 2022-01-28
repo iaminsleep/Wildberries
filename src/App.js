@@ -181,7 +181,7 @@ class App extends Component {
       },
     });
   }
-
+  
   initAuthFormValidation() {
     if(window.location.pathname === '/register' || window.location.pathname === '/login') {
       const form = document.querySelector('.form[method="post"]');
@@ -297,7 +297,7 @@ class App extends Component {
                   addToCart={this.addToCart} 
                 />}
               />
-              <Route path='/register' element={<Register/>}/>
+              <Route path='/register' element={<Register API={API}/>}/>
               <Route path='/login' element={<Login/>}/>
               <Route path='/about' element={<About/>}/>
               <Route path='/careers' element={<Careers/>}/>
