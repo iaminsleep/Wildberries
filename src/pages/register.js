@@ -1,11 +1,18 @@
 import React from "react";
 
 import '../css/pages/auth.css';
+import '../css/pages/alert.css';
 
-function Register({API}) {
+function Register({App, API}) {
+  let error = App.state.error;
+
+  const closeAlert = () => {
+    App.setState({error: ''});
+  }
 
   const registerUser = async function(e) {
     e.preventDefault();
+    let status;
 
     let email = document.querySelector('#email').value;
     let password = document.querySelector('#password').value;
@@ -20,20 +27,35 @@ function Register({API}) {
       await fetch(`${API}/users`, {
       method: 'POST',
       body: formData,
-      }).then(() => {
-        email = '';
-        password = '';
-        confirmPassword = '';
-        document.location.href = '/login';
+      }).then((res) => {
+        status = res.status;
+        return res.text();
+      }).then(data => {
+        if(status === 201) {
+          email = '';
+          password = '';
+          confirmPassword = '';
+          document.location.href = '/login';
+        }   
+        else {
+          error = data;
+          return App.setState({error: error});
+        }
       })
     }
-    catch(err) {
-      alert('Возникла ошибка при попытке регистрации!');
+    catch {
+      alert("Something went wrong. Try again!");
     }
   }
 
   return(
     <div className="body">
+      {error !== '' ? 
+        <div className="alert danger-alert">
+          <h3>{error}</h3>
+          <button className="close-a" onClick={closeAlert}>&times;</button>
+        </div> : ''
+      }
       <div className="div">
         <form action="#" method="post" className="form" onSubmit={(e) => registerUser(e)}>
           <h2>Sign Up</h2>

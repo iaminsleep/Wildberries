@@ -1,0 +1,42 @@
+.alert {
+  width: 50%;
+  margin: 20px auto;
+  padding: 10px;
+  position: relative;
+  border-radius: 5px;
+  box-shadow: 0 0 15px 5px #ccc;
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+
+.alert h3 {
+  font-size: 18px;
+  margin-left: 20px;
+  color: white;
+}
+
+.close-a {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  opacity: 0.5;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 50%;
+  right: 15px;
+  top: 25px;
+  text-align: center;
+  font-size: 1.6em;
+  cursor: pointer;
+}
+
+.danger-alert {
+  background-color: #f7a7a3;
+  border-left: 10px solid #fc645c;
+}
+
+.danger-alert .close-a {
+  border-color: #fc645c;
+  color: #fc645c;
+}

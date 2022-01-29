@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import axios from 'axios';
 
 import CartTable from './cartTable';
@@ -77,7 +77,7 @@ function CartModal({API, cart, minusCartItem, plusCartItem, deleteCartItem}) {
         }
       </div>
     </div>
-    );
-  }
+  );
+}
 
 export default CartModal;

@@ -32,6 +32,7 @@ class App extends Component {
       category: '',
       itemName: '',
       cart: [],
+      error: '',
     }
   }
 
@@ -297,7 +298,7 @@ class App extends Component {
                   addToCart={this.addToCart} 
                 />}
               />
-              <Route path='/register' element={<Register API={API}/>}/>
+              <Route path='/register' element={<Register App={this} API={API}/>}/>
               <Route path='/login' element={<Login/>}/>
               <Route path='/about' element={<About/>}/>
               <Route path='/careers' element={<Careers/>}/>
