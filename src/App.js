@@ -33,6 +33,8 @@ class App extends Component {
       itemName: '',
       cart: [],
       error: '',
+      warning: '',
+      success: '',
     }
   }
 

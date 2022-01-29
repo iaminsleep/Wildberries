@@ -4,7 +4,7 @@
   padding: 10px;
   position: relative;
   border-radius: 5px;
-  box-shadow: 0 0 15px 5px #ccc;
+  box-shadow: 0 0 10px 5px #0404045e;
   position: absolute;
   left: 0;
   right: 0;
@@ -13,7 +13,6 @@
 .alert h3 {
   font-size: 18px;
   margin-left: 20px;
-  color: white;
 }
 
 .close-a {
@@ -32,11 +31,96 @@
 }
 
 .danger-alert {
-  background-color: #f7a7a3;
+  background-color: #f78d88;
   border-left: 10px solid #fc645c;
 }
 
 .danger-alert .close-a {
-  border-color: #fc645c;
-  color: #fc645c;
+  border-color: #ff0d00;
+  color: #ff0d00;
+}
+
+.danger-alert h3 {
+  color: #804141;
+}
+
+.success-alert {
+  background-color: #a8f0c6;
+  border-left: 10px solid #55f798;
+}
+
+.success-alert .close-a {
+  border-color: #55f798;
+  color: #55f798;
+}
+
+.sucess-alert h3 {
+  color: #1b583fd1;
+}
+
+.warning-alert {
+  background-color: #ffd48a;
+  border-left: 10px solid #ffc258;
+}
+
+.warning-alert .close-a {
+  border-color: #ffc258;
+  color: #ffc258;
+}
+
+.warning-alert h3 {
+  color: #80560d;
+}
+
+.fade-in {
+  animation: fadeIn ease 0.5s;
+  -webkit-animation: fadeIn ease 0.5s;
+  -moz-animation: fadeIn ease 0.5s;
+  -o-animation: fadeIn ease 0.5s;
+  -ms-animation: fadeIn ease 0.5s;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-moz-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-o-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-ms-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }

@@ -1,41 +1,40 @@
 import React from "react";
 
 import '../css/pages/auth.css';
-import '../css/pages/alert.css';
+
+import Alert from '../components/alert';
 
 function Register({App, API}) {
   let error = App.state.error;
-
-  const closeAlert = () => {
-    App.setState({error: ''});
-  }
+  let warning = App.state.warning;
 
   const registerUser = async function(e) {
     e.preventDefault();
+    App.setState({error: '', warning: '', success: ''});
     let status;
 
-    let email = document.querySelector('#email').value;
-    let password = document.querySelector('#password').value;
-    let confirmPassword = document.querySelector('#confirm_password').value;
+    let email = document.querySelector('#email');
+    let password = document.querySelector('#password');
+    let confirmPassword = document.querySelector('#confirm_password');
 
     const formData = new FormData();
-    formData.append('email', email);
-    formData.append('password', password);
-    formData.append('confirm_password', confirmPassword);
+    formData.append('email', email.value);
+    formData.append('password', password.value);
+    formData.append('confirm_password', confirmPassword.value);
 
     try {
       await fetch(`${API}/users`, {
-      method: 'POST',
-      body: formData,
+        method: 'POST',
+        body: formData,
       }).then((res) => {
         status = res.status;
         return res.text();
       }).then(data => {
         if(status === 201) {
-          email = '';
-          password = '';
-          confirmPassword = '';
           document.location.href = '/login';
+          email.value = '';
+          password.value = '';
+          confirmPassword.value = '';
         }   
         else {
           error = data;
@@ -44,18 +43,15 @@ function Register({App, API}) {
       })
     }
     catch {
-      alert("Something went wrong. Try again!");
+      warning = "Something went wrong. Try again!";
+      return App.setState({warning: warning});
     }
   }
 
   return(
     <div className="body">
-      {error !== '' ? 
-        <div className="alert danger-alert">
-          <h3>{error}</h3>
-          <button className="close-a" onClick={closeAlert}>&times;</button>
-        </div> : ''
-      }
+      {error !== '' ? <Alert message={error} App={App} type={'error'}/> : ''}
+      {warning !== '' ? <Alert message={warning} App={App} type={'warning'}/> : ''}
       <div className="div">
         <form action="#" method="post" className="form" onSubmit={(e) => registerUser(e)}>
           <h2>Sign Up</h2>
