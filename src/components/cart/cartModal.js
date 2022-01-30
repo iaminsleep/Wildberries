@@ -4,8 +4,8 @@ import CartTable from './cartTable';
 
 import {closeModal} from '../functions';
 
-function CartModal({API, cart, minusCartItem, plusCartItem, deleteCartItem}) {
-    
+function CartModal({App, API, cart}) {
+  
   /* Вычисление общей суммы товаров */
   let totalPrice = 0;
   cart.forEach(good => {
@@ -46,14 +46,8 @@ function CartModal({API, cart, minusCartItem, plusCartItem, deleteCartItem}) {
         </header>
         <div className="cart-wrapper">
           {cart.length > 0 ? 
-            <CartTable 
-              API={API}
-              cart={cart} 
-              minusCartItem={minusCartItem}  
-              plusCartItem={plusCartItem} 
-              deleteCartItem={deleteCartItem}
-            /> :
-            <div id="cart-empty">There is nothing in the cart yet.</div>
+            <CartTable App={App} API={API} cart={cart} /> 
+            : <div id="cart-empty">There is nothing in the cart yet.</div>
           }
         </div>
         {cart.length > 0 ?

@@ -182,6 +182,7 @@ class App extends Component {
             </Routes>
           <Footer/>
           <CartModal 
+            App={this}
             API={API}
             cart={this.state.cart}
           />

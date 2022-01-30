@@ -83,6 +83,6 @@ export const showModal = () => {
   document.querySelector('#modal-cart').classList.add('show');
 }
 
-export const closeModal = (modal) => {
+export const closeModal = () => {
   document.querySelector('#modal-cart').classList.remove('show');
 }
