@@ -6,7 +6,6 @@ function Alert({message, App, type}) {
 
   if(type === 'error') {
     alertClass = 'danger-alert';
-    document.querySelector('#email').value = '';
   }
   else if(type === 'success') {
     alertClass = 'success-alert';

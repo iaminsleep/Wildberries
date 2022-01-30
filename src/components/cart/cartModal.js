@@ -2,6 +2,8 @@ import React from 'react';
 
 import CartTable from './cartTable';
 
+import {closeModal} from '../functions';
+
 function CartModal({API, cart, minusCartItem, plusCartItem, deleteCartItem}) {
     
   /* Вычисление общей суммы товаров */
@@ -40,7 +42,7 @@ function CartModal({API, cart, minusCartItem, plusCartItem, deleteCartItem}) {
       <div className="modal">
         <header className="modal-header">
           <h2 className="modal-title">Cart</h2>
-          <button className="modal-close">x</button>
+          <button className="modal-close" onClick={closeModal}>x</button>
         </header>
         <div className="cart-wrapper">
           {cart.length > 0 ? 

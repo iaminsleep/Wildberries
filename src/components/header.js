@@ -2,6 +2,8 @@ import React from 'react';
 
 import { NavLink } from 'react-router-dom';
 
+import {keyEvents, showModal} from '../components/functions';
+
 import companyLogo from '../img/logo.svg';
 import searchIcon from '../img/search.png';
 import cartIcon from '../img/cart.svg';
@@ -11,6 +13,9 @@ const Header = ({HOST, cart}) => {
 	if(cart.length > 0) {
 		document.querySelector('.button-cart').classList.add('pseudo');
 	}
+
+  window.addEventListener('keydown', (e) => keyEvents(e));
+
   return(	
   <header className="container header px-4 px-md-0">
 		<div className="row justify-content-between align-items-center">
@@ -56,7 +61,7 @@ const Header = ({HOST, cart}) => {
 				<a href="/register">
 					<img src={signIn} width="20" height="20" alt="icon: sign-in" style={{display: 'flex'}}/>
 				</a>
-				<button className="button button-cart" data-count={cart.length}>
+				<button className="button button-cart" data-count={cart.length} onClick={showModal}>
 					<img className="button-icon" src={cartIcon} alt="icon: cart"/>
 					<span className="button-text">Cart</span>
 					<span className="button-text cart-count"></span>

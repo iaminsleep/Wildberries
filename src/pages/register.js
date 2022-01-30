@@ -4,23 +4,21 @@ import '../css/pages/auth.css';
 
 import Alert from '../components/alert';
 
+import {validateInput} from '../components/functions';
+import {validateForm} from '../components/functions';
+
 function Register({App, API}) {
+  let isFormValid = false;
   let error = App.state.error;
   let warning = App.state.warning;
 
   const registerUser = async function(e) {
-    e.preventDefault();
-    App.setState({error: '', warning: '', success: ''});
+    validateForm(e, isFormValid, App);
+    
+    const form = document.querySelector('.form[method="post"]');
+    const formData = new FormData(form);
+
     let status;
-
-    let email = document.querySelector('#email');
-    let password = document.querySelector('#password');
-    let confirmPassword = document.querySelector('#confirm_password');
-
-    const formData = new FormData();
-    formData.append('email', email.value);
-    formData.append('password', password.value);
-    formData.append('confirm_password', confirmPassword.value);
 
     try {
       await fetch(`${API}/users`, {
@@ -30,11 +28,9 @@ function Register({App, API}) {
         status = res.status;
         return res.text();
       }).then(data => {
+        form.reset();
         if(status === 201) {
           document.location.href = '/login';
-          email.value = '';
-          password.value = '';
-          confirmPassword.value = '';
         }   
         else {
           error = data;
@@ -60,17 +56,38 @@ function Register({App, API}) {
           </p>
           <p>
             <label htmlFor="email" className="floatLabel">Email</label>
-            <input id="email" name="email" type="text" required autoComplete="off"/>
+            <input 
+              id="email" 
+              name="email" 
+              type="text" 
+              onInput={(e) => validateInput(e.target, isFormValid)} 
+              required 
+              autoComplete="off"
+            />
             <span className="alert-danger">Alert message</span>
           </p>
           <p>
             <label htmlFor="password" className="floatLabel">Password</label>
-            <input id="password" name="password" type="password" required autoComplete="off"/>
+            <input 
+              id="password" 
+              name="password" 
+              type="password" 
+              onInput={(e) => validateInput(e.target, isFormValid)} 
+              required 
+              autoComplete="off"
+            />
             <span className="alert-danger">Alert message</span>
           </p>
           <p>
             <label htmlFor="confirm_password" className="floatLabel">Confirm Password</label>
-            <input id="confirm_password" name="confirm_password" type="password" required autoComplete="off"/>
+            <input 
+              id="confirm_password" 
+              name="confirm_password" 
+              onInput={(e) => validateInput(e.target, isFormValid)} 
+              type="password" 
+              required 
+              autoComplete="off"
+            />
             <span className="alert-danger">Alert message</span>
           </p>
           <p>

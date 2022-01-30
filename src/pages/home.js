@@ -15,7 +15,7 @@ function Home({API, addToCart, goods, getData}) {
 
   newGoods.length = 4;
   bestsellersGoods.length = 4;
-  
+
   return (
     <React.Fragment>
       <section className="slider swiper-container">
