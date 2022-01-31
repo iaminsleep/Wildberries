@@ -1,6 +1,5 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import {smoothScroll} from '../components/functions';
 
 import facebookLogo from '../img/Facebook.svg';
 import twitterLogo from '../img/Twitter.svg';
@@ -14,6 +13,13 @@ import bitcoinLogo from '../img/bitcoin.png';
 import topArrowIcon from '../img/top.svg';
 
 const Footer = () => {
+
+	const smoothScroll = () => {
+  window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+  });
+}
   return(
     <footer className="footer">
 		<div className="container">

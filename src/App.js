@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-
 import Header from './components/header.js';
 import Footer from './components/footer.js';
 import CartModal from './components/cart/cartModal.js';
@@ -40,7 +39,6 @@ class App extends Component {
 
   componentDidMount() {
     this.getData(this.state.value, this.state.category);
-    this.initEventListeners();
   }
 
   getData = (value, category) => {
@@ -60,37 +58,11 @@ class App extends Component {
     );
   }
 
-  initEventListeners() {
-    /* Search by category */
-    const links = document.querySelectorAll('.navigation-link');
-
-    links.forEach(link => {
-      link.onclick = () => {
-        const linkValue = link.textContent;
-        const category = link.dataset.field;
-        this.setState({
-          value: linkValue,
-          category: category,
-        }, () => this.getData(this.state.value, this.state.category));
-      }
-    });
-
-    /* Search by input field */
-    const input = document.querySelector('.search-block > input');
-    const searchBtn = document.querySelector('.search-block > a');
-
-    searchBtn.addEventListener('click', () => {
-      this.setState({
-        itemName: input.value,
-      }, () => this.searchData(input.value))
-    });
-  }
-
   render() {
     return (
       <React.Fragment>
         <Router>
-          <Header HOST={HOST} cart={this.state.cart}/>
+          <Header HOST={HOST} cart={this.state.cart} App={this}/>
             <Routes>
               <Route exact path='/' element={
                 <Home 

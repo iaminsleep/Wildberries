@@ -2,19 +2,48 @@ import React from 'react';
 
 import { NavLink } from 'react-router-dom';
 
-import {keyEvents, showModal} from '../components/functions';
+import {showModal} from '../components/functions';
 
 import companyLogo from '../img/logo.svg';
 import searchIcon from '../img/search.png';
 import cartIcon from '../img/cart.svg';
 import signIn from '../img/sign-in.png';
 
-const Header = ({HOST, cart}) => {
+const Header = ({HOST, cart, App}) => {
 	if(cart.length > 0) {
 		document.querySelector('.button-cart').classList.add('pseudo');
 	}
 
-  window.addEventListener('keydown', (e) => keyEvents(e));
+	const keyEvents = (evt) => {
+		const cartModal = document.querySelector('#modal-cart');
+		if(evt.key === 'Escape' && cartModal.classList.contains('show')) {
+			cartModal.classList.remove('show');
+		}
+
+		if(evt.key === 'Enter') {
+			document.querySelector('#button-addon2').click();
+		}
+	}
+
+	const setCategory = (link) => {
+		 /* Search by category */
+		const linkValue = link.textContent;
+		const category = link.dataset.field;
+		App.setState({
+			value: linkValue,
+			category: category,
+		}, () => App.getData(App.state.value, App.state.category));
+	}
+
+	const search = () => {
+		/* Search by input field */
+		const input = document.querySelector('.search-block > input');
+		App.setState({
+			itemName: input.value,
+		}, () => App.searchData(input.value))
+	}
+
+  window.addEventListener('keydown', (evt) => keyEvents(evt));
 
   return(	
   <header className="container header px-4 px-md-0">
@@ -28,22 +57,22 @@ const Header = ({HOST, cart}) => {
 				<nav>
 					<ul className="navigation d-flex justify-content-around">
 						<li className="navigation-item">
-							<NavLink to='/goods' className="navigation-link" data-field="gender">Womens</NavLink>
+							<NavLink to='/goods' className="navigation-link" data-field="gender" onClick={(evt) => setCategory(evt.target)}>Womens</NavLink>
 						</li>
 						<li className="navigation-item">
-							<NavLink to='/goods' className="navigation-link" data-field="gender">Mens</NavLink>
+							<NavLink to='/goods' className="navigation-link" data-field="gender" onClick={(evt) => setCategory(evt.target)}>Mens</NavLink>
 						</li>
 						<li className="navigation-item">
-							<NavLink to='/goods' className="navigation-link" data-field="category">Clothing</NavLink>
+							<NavLink to='/goods' className="navigation-link" data-field="category" onClick={(evt) => setCategory(evt.target)}>Clothing</NavLink>
 						</li>
 						<li className="navigation-item">
-							<NavLink to='/goods' className="navigation-link" data-field="category">Accessories</NavLink>
+							<NavLink to='/goods' className="navigation-link" data-field="category" onClick={(evt) => setCategory(evt.target)}>Accessories</NavLink>
 						</li>
 						<li className="navigation-item">
-							<NavLink to='/goods' className="navigation-link" data-field="category">Shoes</NavLink>
+							<NavLink to='/goods' className="navigation-link" data-field="category" onClick={(evt) => setCategory(evt.target)}>Shoes</NavLink>
 						</li>
 						<li className="navigation-item">
-							<NavLink to='/goods' className="navigation-link">All</NavLink>
+							<NavLink to='/goods' className="navigation-link" onClick={(evt) => setCategory(evt.target)}>All</NavLink>
 						</li>
 					</ul>
 				</nav>
@@ -52,7 +81,7 @@ const Header = ({HOST, cart}) => {
 				<div className="form-control search-block">
 					<input type="text" className="form-control" placeholder="Search" aria-label="Recipient's username"
 						aria-describedby="button-addon2"/>
-					<NavLink to="/goods" className="button btn btn-outline-secondary" type="button" id="button-addon2">
+					<NavLink to="/goods" className="button btn btn-outline-secondary" type="button" id="button-addon2" onClick={search}>
 						<img src={searchIcon} alt="search"/>
 					</NavLink>
 				</div>

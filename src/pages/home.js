@@ -11,15 +11,17 @@ import cart from '../img/cart.svg';
 
 import GoodItem from '../components/goods/goodItem';
 
-Swiper.use([Navigation]);
-new Swiper('.swiper-container', {
-  loop: true,
-  speed: 500,
-  
-  navigation: {
-    nextEl: '.slider-button-next',
-    prevEl: '.slider-button-prev',
-  },
+document.addEventListener('DOMContentLoaded', () => {
+  Swiper.use([Navigation]);
+  new Swiper('.swiper-container', {
+    loop: true,
+    speed: 500,
+    
+    navigation: {
+      nextEl: '.slider-button-next',
+      prevEl: '.slider-button-prev',
+    },
+  });
 });
 
 function Home({API, goods, getData, App}) {

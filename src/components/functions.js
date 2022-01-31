@@ -1,4 +1,4 @@
-export const validateInput = (input, isValid) => {
+export const validateInput = (input, isFormValid) => {
   const form = document.querySelector('.form[method="post"]');
   const emailInput = form.querySelector('#email');
   const passwordInput = form.querySelector('#password');
@@ -12,9 +12,9 @@ export const validateInput = (input, isValid) => {
     const emailTemplate = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
     if(input.value.match(emailTemplate)) {
-      isValid = true;
+      isFormValid = true;
     } else {
-      isValid = false;
+      isFormValid = false;
       message = "Incorrect email address!";
     }
   }
@@ -22,23 +22,23 @@ export const validateInput = (input, isValid) => {
   else if(input === passwordInput) {
     const passwordTemplate = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
     if (input.value.match(passwordTemplate)) {
-      isValid = true;
+      isFormValid = true;
     } else {
-      isValid = false;
+      isFormValid = false;
       message = "The password must be from 6 to 20 characters, contain at least one digit, one uppercase and one lowercase letter";
     }
   }
 
   else if(input === confirmPasswordInput) {
     if(input.value !== passwordInput.value) {
-      isValid = false;
+      isFormValid = false;
       message = "Passwords don't match!";
     } else {
-      isValid = true;
+      isFormValid = true;
     }
   }
 
-  if(!isValid) {
+  if(!isFormValid) {
     alertFeedback.classList.add('alert-visible');
     submitButton.disabled = true;
     alertFeedback.textContent = message;
@@ -48,30 +48,12 @@ export const validateInput = (input, isValid) => {
   }
 }
 
-export const validateForm = (e, isValid, App) => {  
+export const validateForm = (e, isFormValid, App) => {  
   e.preventDefault();   
-  if(isValid === false) {
+  if(isFormValid === false) {
     return false;
   }
   App.setState({error: '', warning: '', success: ''});
-}
-
-export const smoothScroll = () => {
-  window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-  });
-}
-
-export const keyEvents = (evt) => {
-  const cartModal = document.querySelector('#modal-cart');
-  if(evt.key === 'Escape' && cartModal.classList.contains('show')) {
-    cartModal.classList.remove('show');
-  }
-
-  if(evt.key === 'Enter') {
-    document.querySelector('#button-addon2').click();
-  }
 }
 
 export const showModal = () => {
