@@ -2,7 +2,7 @@ import React from 'react';
 
 import GoodItem from '../components/goods/goodItem';
 
-function Goods({API, addToCart, category, goods}) {
+function Goods({API, App, category, goods}) {
   return (
     <section className="long-goods d-block">
       <div className="container">
@@ -17,7 +17,7 @@ function Goods({API, addToCart, category, goods}) {
             <GoodItem 
               key={good.id} id={good.id} name={good.name} 
               description={good.description} price={good.price} 
-              img={good.img} label={good.label} API={API} addToCart={addToCart}
+              img={good.img} label={good.label} API={API} App={App}
             />)
           : <div className="empty-goods-wrapper">
               <div className="goods-empty">The item you were searching for wasn't found!</div>

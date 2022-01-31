@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Swiper, { Navigation } from 'swiper';
+
 
 import Header from './components/header.js';
 import Footer from './components/footer.js';
@@ -41,7 +41,6 @@ class App extends Component {
   componentDidMount() {
     this.getData(this.state.value, this.state.category);
     this.initEventListeners();
-    this.initSwiper();
   }
 
   getData = (value, category) => {
@@ -87,68 +86,6 @@ class App extends Component {
     });
   }
 
-  addToCart = (evt, id) => {
-    const goods = this.state.goods;
-    const cart = this.state.cart;
-
-    const clickedGood = goods.find(good => good.id === id); //метод find работает так же как и filter и forEach.
-
-    if(cart.some(good => good.id === clickedGood.id)) {
-      cart.map(good => {
-        if(good.id === clickedGood.id) {
-            good.count++;
-        }
-        return good;
-      })
-    }
-    else {
-      clickedGood.count = 1;
-      cart.push(clickedGood);
-    }
-
-    const cartModal =  document.querySelector('#modal-cart');
-    const addToCartBtn = evt.target.closest('button');
-
-    addToCartBtn.style.backgroundColor = '#7a55e7';
-    addToCartBtn.style.height = '40px';
-    addToCartBtn.querySelector('img').classList.add('visible-icon');
-    addToCartBtn.querySelector('span').classList.add('d-none');
-
-    const buttonText = addToCartBtn.querySelector('.button-text')
-
-    if(buttonText) {
-      buttonText.classList.add('d-none');
-      addToCartBtn.style.width = '144px';
-      addToCartBtn.style.height = '40px';
-      addToCartBtn.querySelector('img').style.paddingLeft = '0';
-    }
-
-    addToCartBtn.addEventListener('click', () => {
-      cartModal.classList.add('show');
-      cart.map(good => {
-        if(good.id === clickedGood.id && good.count !== 0) {
-            good.count--;
-        }
-        return good;
-      })
-    })
-
-    this.setState({cart: cart});
-  }
-
-  initSwiper() {
-    Swiper.use([Navigation]);
-    new Swiper('.swiper-container', {
-      loop: true,
-      speed: 500,
-      
-      navigation: {
-        nextEl: '.slider-button-next',
-        prevEl: '.slider-button-prev',
-      },
-    });
-  }
-
   render() {
     return (
       <React.Fragment>
@@ -157,21 +94,16 @@ class App extends Component {
             <Routes>
               <Route exact path='/' element={
                 <Home 
-                  getData={this.getData}
-                  API={API} 
+                  getData={this.getData} API={API} 
                   category = {this.state.category} 
-                  goods = {this.state.goods}
-                  addToCart={this.addToCart} 
+                  goods = {this.state.goods} App={this}
                 />}
               />
               <Route path='/goods' element={
                 <Goods 
-                  API={API} 
-                  category = {this.state.value} 
-                  goods = {this.state.goods}
-                  addToCart={this.addToCart} 
-                />}
-              />
+                  API={API} category = {this.state.value} 
+                  goods = {this.state.goods} App={this}/>}
+                />
               <Route path='/register' element={<Register App={this} API={API}/>}/>
               <Route path='/login' element={<Login/>}/>
               <Route path='/about' element={<About/>}/>
@@ -181,11 +113,7 @@ class App extends Component {
               <Route path='/contacts' element={<Contacts/>}/>
             </Routes>
           <Footer/>
-          <CartModal 
-            App={this}
-            API={API}
-            cart={this.state.cart}
-          />
+          <CartModal App={this} API={API} cart={this.state.cart}/>
         </Router>
       </React.Fragment>
     );

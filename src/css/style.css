@@ -235,6 +235,27 @@ button {
   display: none;
 }
 
+.purple-button {
+  background-color: #8366da !important;
+  height: 40px;
+}
+
+.purple-button:hover {
+  background-color: #7a55e7 !important;
+}
+
+.purple-button:active {
+  background-color: #6c44e2 !important;
+}
+
+.w-144 {
+  width: 144px;
+}
+
+.pl-0 {
+  padding-left: 0;
+}
+
 .card-title {
   color: #262d33;
   font-size: 25px;

@@ -13,8 +13,7 @@ export const validateInput = (input, isValid) => {
 
     if(input.value.match(emailTemplate)) {
       isValid = true;
-    }
-    else {
+    } else {
       isValid = false;
       message = "Incorrect email address!";
     }
@@ -24,8 +23,7 @@ export const validateInput = (input, isValid) => {
     const passwordTemplate = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
     if (input.value.match(passwordTemplate)) {
       isValid = true;
-    }
-    else {
+    } else {
       isValid = false;
       message = "The password must be from 6 to 20 characters, contain at least one digit, one uppercase and one lowercase letter";
     }
@@ -35,8 +33,7 @@ export const validateInput = (input, isValid) => {
     if(input.value !== passwordInput.value) {
       isValid = false;
       message = "Passwords don't match!";
-    }
-    else {
+    } else {
       isValid = true;
     }
   }
@@ -45,9 +42,7 @@ export const validateInput = (input, isValid) => {
     alertFeedback.classList.add('alert-visible');
     submitButton.disabled = true;
     alertFeedback.textContent = message;
-  }
-
-  else {
+  } else {
     alertFeedback.classList.remove('alert-visible');
     submitButton.disabled = false;
   }
@@ -85,4 +80,41 @@ export const showModal = () => {
 
 export const closeModal = () => {
   document.querySelector('#modal-cart').classList.remove('show');
+}
+
+export const addToCart = (evt, id, App) => {
+  const goods = App.state.goods;
+  const cart = App.state.cart;
+
+  const clickedGood = goods.find(good => good.id === id);
+
+  if(cart.some(good => good.id === clickedGood.id)) {
+    cart.map(good => {
+      if(good.id === clickedGood.id) {
+          good.count = 1;
+      }
+      return good;
+    })
+  } else {
+    clickedGood.count = 1;
+    cart.push(clickedGood);
+  }
+
+  const addToCartBtn = evt.target.closest('button');
+  const icon = addToCartBtn.querySelector('img');
+  const buttonText = addToCartBtn.querySelector('.button-text');
+
+  addToCartBtn.classList.add('purple-button');
+  icon.classList.add('visible-icon');
+  addToCartBtn.querySelector('span').classList.add('d-none');
+
+  if(buttonText) {
+    buttonText.classList.add('d-none');
+    addToCartBtn.classList.add('w-144');
+    icon.classList.add('pl-0');
+  }
+
+  addToCartBtn.addEventListener('click', showModal)
+
+  App.setState({cart: cart});
 }
