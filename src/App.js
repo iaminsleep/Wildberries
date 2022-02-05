@@ -41,17 +41,24 @@ class App extends Component {
     this.getData(this.state.value, this.state.category);
   }
 
-  getData = (value, category) => {
+  componentDidUpdate(prevProps, prevState) {
+  if (prevState.itemName !== this.state.itemName) {
+    this.searchData(this.state.itemName);
+  }
+}
+
+  getData = async (value, category) => {
     window.scrollTo(0,0);
-    fetch(goodsAPI).then((res) => res.json()).then((data) => {
+    this.setState({itemName: ''})
+    await fetch(goodsAPI).then((res) => res.json()).then((data) => {
       const categoryGoods = category ? data.filter((item) => item[category] === value) : data;
       this.setState({goods: categoryGoods, value: value, category: category});
     });
   }
 
-  searchData(itemName = '') {
+  searchData = async (itemName = '') => {
     window.scrollTo(0,0);
-    fetch(goodsAPI).then((res) => res.json()).then((data) => {
+    await fetch(goodsAPI).then((res) => res.json()).then((data) => {
         const searchedGoods = itemName !== '' ? data.filter(good => good.name.toLowerCase().includes(itemName.toLowerCase())) : data;
         this.setState({goods: searchedGoods});
       }
