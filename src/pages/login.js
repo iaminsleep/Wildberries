@@ -2,15 +2,53 @@ import React from "react";
 
 import '../css/pages/auth.css';
 
+import Alert from '../components/alert';
+
 import {validateForm} from '../components/functions';
 import {validateInput} from '../components/functions';
 
-function Login() {
-  const loginUser = (e) => {
-    validateForm(e);
+function Login({App, API}) {
+  let isFormValid = false;
+  let error = App.state.error;
+  let warning = App.state.warning;
+
+  const loginUser = async function(e) {
+    validateForm(e, isFormValid, App);
+
+    const form = document.querySelector('.form[method="post"]');
+    const formData = new FormData(form);
+
+    let status;
+
+    try {
+      await fetch(`${API}/users`, {
+        method: 'POST',
+        body: formData,
+        credentials: 'include', /* allows you to receive cookies */
+      }).then((res) => {
+        status = res.status;
+        return res.text();
+      }).then(data => {
+        form.reset();
+        if(status === 200) {
+          document.location.href = '/';
+        }   
+        else {
+          error = data;
+          return App.setState({error: error});
+        }
+      })
+    }
+    catch {
+      warning = "Something went wrong. Try again!";
+      return App.setState({warning: warning});
+    }
   }
+
   return(
     <div className="body">
+      {error !== '' ? <Alert message={error} App={App} type={'error'}/> : ''}
+      {warning !== '' ? <Alert message={warning} App={App} type={'warning'}/> : ''}
       <div className="div">
         <form action="#" method="post" className="form" onSubmit={(e) => loginUser(e)}>
           <h2>Sign In</h2>
@@ -23,7 +61,7 @@ function Login() {
               id="email" 
               name="email" 
               type="text"
-              onInput={(e) => validateInput(e.target)} 
+              onInput={(e) => validateInput(e.target, isFormValid)} 
               required autoComplete="off"
             />
             <span className="alert-danger">Alert message</span>
@@ -34,12 +72,13 @@ function Login() {
               id="password" 
               name="password" 
               type="password" 
-              onInput={(e) => validateInput(e.target)} 
+              onInput={(e) => validateInput(e.target, isFormValid)} 
               required 
               autoComplete="off"
             />
             <span className="alert-danger">Alert message</span>
           </p>
+          <input type="hidden" value="login" name="req"/>
           <p>
             <input type="submit" value="Sign In Account" id="submit"/>
           </p>

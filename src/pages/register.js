@@ -90,6 +90,7 @@ function Register({App, API}) {
             />
             <span className="alert-danger">Alert message</span>
           </p>
+          <input type="hidden" value="register" name="req"/>
           <p>
             <input type="submit" value="Create My Account" id="submit"/>
           </p>

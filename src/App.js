@@ -84,7 +84,7 @@ class App extends Component {
                   goods = {this.state.goods} App={this}/>}
                 />
               <Route path='/register' element={<Register App={this} API={API}/>}/>
-              <Route path='/login' element={<Login/>}/>
+              <Route path='/login' element={<Login App={this} API={API}/>}/>
               <Route path='/about' element={<About/>}/>
               <Route path='/careers' element={<Careers/>}/>
               <Route path='/faq' element={<Faq/>}/>
