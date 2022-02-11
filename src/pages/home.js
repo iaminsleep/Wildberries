@@ -10,6 +10,7 @@ import viewAllArrow from'../img/arrow.svg';
 import cart from '../img/cart.svg';
 
 import GoodItem from '../components/goods/goodItem';
+import Alert from '../components/alert';
 
 document.addEventListener('DOMContentLoaded', () => {
   Swiper.use([Navigation]);
@@ -25,6 +26,8 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function Home({API, goods, getData, App}) {
+  let error = App.state.error;
+  let warning = App.state.warning;
 
   const newGoods = goods.filter((good) => good.label === "New");
   const bestsellersGoods = goods.filter((good) => good.label === "Bestseller");
@@ -34,6 +37,8 @@ function Home({API, goods, getData, App}) {
 
   return (
     <React.Fragment>
+      {error !== '' ? <Alert message={error} App={App} type={'error'}/> : ''}
+      {warning !== '' ? <Alert message={warning} App={App} type={'warning'}/> : ''}
       <section className="slider swiper-container">
         <div className="swiper-wrapper">
           <section className="slide slide-1 swiper-slide">

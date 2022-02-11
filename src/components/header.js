@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 
 import { NavLink } from 'react-router-dom';
 
@@ -9,7 +10,9 @@ import searchIcon from '../img/search.png';
 import cartIcon from '../img/cart.svg';
 import signIn from '../img/sign-in.png';
 
-const Header = ({HOST, cart, App}) => {
+const Header = ({HOST, cart, App, API}) => {
+	let error = App.state.error;
+  let warning = App.state.warning;
 
 	if(cart.length > 0) {
 		document.querySelector('.button-cart').classList.add('pseudo');
@@ -41,6 +44,24 @@ const Header = ({HOST, cart, App}) => {
       itemName: input.value,
     });
 	}
+
+	const logout = async function() {
+    let status;
+    try {
+      await axios.post(`${API}/users`, {
+				withCredentials: true, 
+				validateStatus: function() {return true},
+			}).then((res) => {
+        status = res.status; error = res.data.message;
+        if(status === 204) document.location.href = '/';
+				return App.setState({error: error});
+      }).catch(() => {return App.setState({error: error});});
+    } 
+		catch {
+      warning = "Something went wrong. Try again!";
+      return App.setState({warning: warning});
+    }
+  }
 
   window.addEventListener('keydown', (evt) => keyEvents(evt));
 
@@ -89,6 +110,7 @@ const Header = ({HOST, cart, App}) => {
 				<a href="/register">
 					<img src={signIn} width="20" height="20" alt="icon: sign-in" style={{display: 'flex'}}/>
 				</a>
+				<button onClick={logout} style={{background: 'purple'}}>Bebra</button>
 				<button className="button button-cart" data-count={cart.length} onClick={showModal}>
 					<img className="button-icon" src={cartIcon} alt="icon: cart"/>
 					<span className="button-text">Cart</span>

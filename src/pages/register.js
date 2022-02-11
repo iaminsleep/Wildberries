@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 
 import '../css/pages/auth.css';
 
@@ -21,24 +22,16 @@ function Register({App, API}) {
     let status;
 
     try {
-      await fetch(`${API}/users`, {
-        method: 'POST',
-        body: formData,
-      }).then((res) => {
-        status = res.status;
-        return res.text();
-      }).then(data => {
+      await axios.post(`${API}/users`, formData, 
+      {validateStatus: function() {return true}})
+      .then((res) => {
+        status = res.status; 
+        error = res.data.message;
         form.reset();
-        if(status === 201) {
-          document.location.href = '/login';
-        }   
-        else {
-          error = data;
-          return App.setState({error: error});
-        }
-      })
-    }
-    catch {
+        if(status === 201) document.location.href = '/login';
+        return App.setState({error: error});
+      }).catch(() => {return App.setState({error: error});});
+    } catch {
       warning = "Something went wrong. Try again!";
       return App.setState({warning: warning});
     }

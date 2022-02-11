@@ -16,7 +16,7 @@ import Careers from './pages/info/careers.js';
 import Faq from './pages/info/faq.js';
 import Contacts from './pages/info/contacts.js';
 
-const API = "http://api.willberries";
+const API = "http://api.willberries.com";
 const HOST = "http://localhost:3000/";
 
 const goodsAPI = `${API}/goods`;
@@ -69,7 +69,7 @@ class App extends Component {
     return (
       <React.Fragment>
         <Router>
-          <Header HOST={HOST} cart={this.state.cart} App={this}/>
+          <Header HOST={HOST} cart={this.state.cart} App={this} API={API}/>
             <Routes>
               <Route exact path='/' element={
                 <Home 

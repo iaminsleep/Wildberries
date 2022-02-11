@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 
 import '../css/pages/auth.css';
 
@@ -21,25 +22,16 @@ function Login({App, API}) {
     let status;
 
     try {
-      await fetch(`${API}/users`, {
-        method: 'POST',
-        body: formData,
-        credentials: 'include', /* allows you to receive cookies */
+      await axios.post(`${API}/users`, formData, {
+        withCredentials: true, 
+        validateStatus: function() {return true},
       }).then((res) => {
-        status = res.status;
-        return res.text();
-      }).then(data => {
+        status = res.status; error = res.data.message;
         form.reset();
-        if(status === 200) {
-          document.location.href = '/';
-        }   
-        else {
-          error = data;
-          return App.setState({error: error});
-        }
-      })
-    }
-    catch {
+        if(status === 200) document.location.href = '/';
+        return App.setState({error: error});
+      }).catch(() => {return App.setState({error: error});});
+    } catch {
       warning = "Something went wrong. Try again!";
       return App.setState({warning: warning});
     }
