@@ -16,8 +16,8 @@ import Careers from './pages/info/careers.js';
 import Faq from './pages/info/faq.js';
 import Contacts from './pages/info/contacts.js';
 
-const API = "http://api.willberries.com";
-const HOST = "http://localhost:3000/";
+const API = "https://willberries-api.herokuapp.com/";
+const HOST = "https://willberries.herokuapp.com/";
 
 const goodsAPI = `${API}/goods`;
 
@@ -42,10 +42,10 @@ class App extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-  if (prevState.itemName !== this.state.itemName) {
-    this.searchData(this.state.itemName);
+    if (prevState.itemName !== this.state.itemName) {
+      this.searchData(this.state.itemName);
+    }
   }
-}
 
   getData = async (value, category) => {
     window.scrollTo(0,0);

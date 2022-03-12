@@ -53,7 +53,7 @@ const Header = ({HOST, cart, App, API}) => {
 				validateStatus: function() {return true},
 			}).then((res) => {
         status = res.status; error = res.data.message;
-        if(status === 204) document.location.href = '/';
+        if(status === 200) document.location.href = '/';
 				return App.setState({error: error});
       }).catch(() => {return App.setState({error: error});});
     } 

@@ -26,9 +26,10 @@ function Login({App, API}) {
         withCredentials: true, 
         validateStatus: function() {return true},
       }).then((res) => {
+        console.log(res);
         status = res.status; error = res.data.message;
         form.reset();
-        if(status === 200) document.location.href = '/';
+        if(status === 201) document.location.href = '/';
         return App.setState({error: error});
       }).catch(() => {return App.setState({error: error});});
     } catch {
