@@ -16,8 +16,8 @@ import Careers from './pages/info/careers.js';
 import Faq from './pages/info/faq.js';
 import Contacts from './pages/info/contacts.js';
 
-const API = "https://willberries-api.herokuapp.com/";
-const HOST = "https://willberries.herokuapp.com/";
+const API = "https://willberries-api.herokuapp.com";
+const HOST = "https://willberries.herokuapp.com";
 
 const goodsAPI = `${API}/goods`;
 
