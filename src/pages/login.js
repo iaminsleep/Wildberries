@@ -31,7 +31,7 @@ function Login({App, API}) {
         form.reset();
         if(status === 200) document.location.href = '/';
         return App.setState({error: error});
-      }).catch(() => {return App.setState({error: error});});
+      }).catch((err) => {return App.setState({error: err});});
     } catch {
       warning = "Something went wrong. Try again!";
       return App.setState({warning: warning});
