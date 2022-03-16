@@ -17,12 +17,12 @@ import Faq from './pages/info/faq.js';
 import Contacts from './pages/info/contacts.js';
 
 // Production
-const API = "https://willberries-api.herokuapp.com";
-const HOST = "https://willberries.herokuapp.com";
+// const API = "https://willberries-api.herokuapp.com";
+// const HOST = "https://willberries.herokuapp.com";
 
 // Development
-// const API = "http://willberries-api.com";
-// const HOST = "http://localhost:3000";
+const API = "http://localhost:3000/api";
+const HOST = "http://localhost:3000";
 
 const goodsAPI = `${API}/goods`;
 
