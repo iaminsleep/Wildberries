@@ -1,7 +1,11 @@
 {
-  "name": "willberries",
+  "name": "frontend",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "16.13.0",
+    "npm": "8.5.1"
+  },
   "homepage": "http://iaminsleep.github.io/Willberries",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.1",
