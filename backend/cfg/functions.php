@@ -1,6 +1,7 @@
 <?php
 
 require_once 'config.php';
+use \Firebase\JWT\JWT;
 
 function sendReply($responseCode, $dataRes) {
   http_response_code($responseCode);
@@ -138,6 +139,18 @@ function deleteGood($db, $goodId) {
 /************************ USERS ********************/
 /************************ USERS ********************/
 
+function isAuth() {
+  $headers = apache_request_headers();
+  return isset($headers['Authorization']);
+}
+
+function getUserData() {
+  $headers = apache_request_headers();
+  $jwt = $headers['Authorization'];
+  $secret_key = "authkey456";
+  $decoded_data = JWT::decode($jwt, $secret_key, array('HS512'));
+}
+
 function getUsers() {
   $mysqli = DataBase::getInstance();
 
@@ -236,10 +249,32 @@ function login($postData) {
     } 
 
     else {
-      setcookie('PHPSESSID', session_id(), time() + (86400 * 30), '/', $_SERVER['HTTP_HOST'], true, false);
+      $secret_key = 'authkey456';
+      $iat = time();
+      $exp = $iat + 60 * 60;
+      $user_data = [
+        "id" => $data["id"],
+        "email" => $data["email"],
+      ];
+
+      $payload_info = array(
+        'iss' => 'http://willberries-api.com/',
+        'aud' => 'http://localhost:3000/',
+        // 'iss' => 'https://willberries-api.herokuapp.com/',
+        // 'aud' => 'https://willberries.herokuapp.com/',
+        'iat' => $iat,
+        'exp' => $exp,
+        'data' => $user_data,
+      );
+      
+      $jwt = JWT::encode($payload, $secret_key, 'HS512');
+      header('Authorization: Bearer '.$jwt);
+
       $res = [
         "status" => true,
         "user_id" => $data["id"],
+        "token" => $jwt,
+        "expires" => $exp,
       ];   
       sendReply(200, $res);
     }
@@ -255,20 +290,35 @@ function login($postData) {
 }
 
 function logout() {
-  if(!isset($_COOKIE["PHPSESSID"])) {
-    $res = [
-      "status" => false,
-      "message" => 'You are not logged in',
-    ];
-    sendReply(403, $res);
+  if(isAuth()) {
+    try {
+      header_remove('Authorization');
+
+      $res = [
+        "status" => true,
+        "message" => "You have been logged out",
+      ];
+      
+      sendReply(200, $res);
+    }
+    catch(Exception $ex) {
+      $res = [
+        "status" => false,
+        "message" => $ex->getMessage(),
+      ];
+      sendReply(500, $res); // error 500 - internal server error
+    }
   }
   else {
-    http_response_code(200);
-    var_dump($_COOKIE["PHPSESSID"]);
-    unset($_COOKIE["PHPSESSID"]);
-    session_destroy();
-    die;
+    $res = [
+      "status" => false,
+      "message" => "You are not logged in!",
+    ];
+      
+    sendReply(401, $res);
   }
+
+  die;
 }
 
 /************************ ORDERS ********************/
@@ -277,7 +327,6 @@ function logout() {
 /************************ ORDERS ********************/
 
 function placeOrder($db, $data) {
-
   $personName = $data["name"];
   $email = $data["email"];
   $phone = $data["phone"];

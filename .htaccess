@@ -6,11 +6,11 @@ RewriteCond %{REQUEST_URI} !\&
 RewriteCond %{REQUEST_URI} !\=
 RewriteCond %{REQUEST_URI} !\.
 RewriteCond %{REQUEST_URI} ![^\/]$
-RewriteRule ^(.*)\/$ /api/$1 [R=301,L]
+RewriteRule ^(.*)\/$ backend/$1 [R=301,L]
 
 #Теперь любой запрос становится символом q, что позволяет отследить его значение в условиях
 RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^(.+)$ /api/index.php?q=$1 [L,QSA]
+RewriteRule ^(.+)$ backend/index.php?q=$1 [L,QSA]
 
 #Запрещаем выполнение вредоносных скриптов
 Options +FollowSymLinks
@@ -18,7 +18,7 @@ RewriteEngine On
 RewriteCond %{QUERY_STRING} (\<|%3C).*script.*(\>|%3E) [NC,OR]
 RewriteCond %{QUERY_STRING} GLOBALS(=|\[|\%[0-9A-Z]{0,2}) [OR]
 RewriteCond %{QUERY_STRING} _REQUEST(=|\[|\%[0-9A-Z]{0,2})
-RewriteRule ^(.*)$ /api/index.php [F,L]
+RewriteRule ^(.*)$ backend/index.php [F,L]
 
 #Защита от DOS атак
 LimitRequestBody 10240000
