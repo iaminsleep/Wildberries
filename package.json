@@ -1,12 +1,12 @@
 {
-  "name": "frontend",
+  "name": "willberries",
   "version": "0.1.0",
   "private": true,
   "engines": {
     "node": "16.13.0",
     "npm": "8.5.1"
   },
-  "homepage": "http://iaminsleep.github.io/Willberries/frontend",
+  "homepage": "http://iaminsleep.github.io/Willberries/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
@@ -23,7 +23,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "cd frontend && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
