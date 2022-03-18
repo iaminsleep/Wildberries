@@ -21,7 +21,7 @@ import Contacts from './pages/info/contacts.js';
 // const HOST = "https://willberries.herokuapp.com";
 
 // Development
-const API = "http://willberries-api.com";
+const API = "http://localhost:3000/api";
 const HOST = "http://localhost:3000";
 
 const goodsAPI = `${API}/goods`;

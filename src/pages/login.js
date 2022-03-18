@@ -29,7 +29,7 @@ function Login({App, API}) {
         console.log(res);
         status = res.status; error = res.data.message;
         form.reset();
-        if(status === 201) document.location.href = '/';
+        if(status === 200) document.location.href = '/';
         return App.setState({error: error});
       }).catch((err) => {return App.setState({error: err});});
     } catch {
