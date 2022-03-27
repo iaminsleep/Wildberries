@@ -8,7 +8,7 @@ import Alert from '../components/alert';
 import {validateForm} from '../components/functions';
 import {validateInput} from '../components/functions';
 
-function Login({App, API}) {
+function Login({App, API, setCookie}) {
   let isFormValid = false;
   let error = App.state.error;
   let warning = App.state.warning;
@@ -26,8 +26,9 @@ function Login({App, API}) {
         withCredentials: true, 
         validateStatus: function() {return true},
       }).then((res) => {
-        console.log(res);
-        status = res.status; error = res.data.message;
+        status = res.status; 
+        error = res.data.message;
+        setCookie('accessToken', res.data.token);
         form.reset();
         if(status === 200) document.location.href = '/';
         return App.setState({error: error});

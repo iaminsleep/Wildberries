@@ -3,6 +3,7 @@ import React from 'react';
 import {NavLink} from 'react-router-dom';
 import Swiper, { Navigation } from 'swiper';
 import {addToCart} from '../components/functions';
+import { useSelector } from 'react-redux';
 
 import arrowPrev from '../img/arrow-prev.svg';
 import arrowNext from'../img/arrow-next.svg';
@@ -25,9 +26,10 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-function Home({API, goods, getData, App}) {
-  let error = App.state.error;
-  let warning = App.state.warning;
+function Home({API, getData, App}) {
+  const goods = useSelector(state => state.goods);
+  // let error = App.state.error;
+  // let warning = App.state.warning;
 
   const newGoods = goods.filter((good) => good.label === "New");
   const bestsellersGoods = goods.filter((good) => good.label === "Bestseller");
@@ -37,8 +39,8 @@ function Home({API, goods, getData, App}) {
 
   return (
     <React.Fragment>
-      {error !== '' ? <Alert message={error} App={App} type={'error'}/> : ''}
-      {warning !== '' ? <Alert message={warning} App={App} type={'warning'}/> : ''}
+      {/* {error !== '' ? <Alert message={error} App={App} type={'error'}/> : ''}
+      {warning !== '' ? <Alert message={warning} App={App} type={'warning'}/> : ''} */}
       <section className="slider swiper-container">
         <div className="swiper-wrapper">
           <section className="slide slide-1 swiper-slide">
@@ -48,7 +50,7 @@ function Home({API, goods, getData, App}) {
                   <span className="label">Bestseller</span>
                   <h2 className="slide-title">Women's Alpargata Loafer</h2>
                   <p className="slide-description">At Alpa believe in a better tomorrow, one where humanity thrives.</p>
-                  <button className="button add-to-cart" data-id="3" onClick={(evt) => addToCart(evt, "3", App)}>
+                  <button className="button add-to-cart" data-id="3" onClick={(evt) => addToCart(evt, 3)}>
                     <span className="button-price">$219</span>
                     <img src={cart} className="cart-icon" alt="cart"/>
                     <span className="button-text">Shop now</span>
@@ -64,7 +66,7 @@ function Home({API, goods, getData, App}) {
                   <span className="label">New</span>
                   <h2 className="slide-title">Text T-Shirt</h2>
                   <p className="slide-description">Upgrade your style. Browse through different shirt styles and colors. Search for your new favorite one today!</p>
-                  <button className="button add-to-cart" data-id="4" onClick={(evt) => addToCart(evt, "4", App)}>
+                  <button className="button add-to-cart" data-id="4" onClick={(evt) => addToCart(evt, 4)}>
                     <span className="button-price">$119</span>
                     <img src={cart} className="cart-icon" alt="cart"/>
                     <span className="button-text">Shop now</span>
@@ -81,7 +83,7 @@ function Home({API, goods, getData, App}) {
                   <h2 className="slide-title">Sweater Choker Neck</h2>
                   <p className="slide-description">Women's pearl basic knit sweater with a round neck. Available
                     in several colours. Free shipping to stores.</p>
-                  <button className="button add-to-cart" data-id="5" onClick={(evt) => addToCart(evt, "5", App)}>
+                  <button className="button add-to-cart" data-id="5" onClick={(evt) => addToCart(evt, 5)}>
                     <span className="button-price">$319</span>
                     <img src={cart} className="cart-icon" alt="cart"/>
                     <span className="button-text">Shop now</span>
@@ -135,7 +137,7 @@ function Home({API, goods, getData, App}) {
               <span className="label">Bestseller</span>
               <h3 className="card-title large">Poplin Top {'\n'}With Sleeve Bow</h3>
               <p className="card-text large">Poplin top with roll neckline, long sleeves</p>
-              <button className="button add-to-cart" data-id="2" onClick={(evt) => addToCart(evt, "2", App)}>
+              <button className="button add-to-cart" data-id="2" onClick={(evt) => addToCart(evt, 2)}>
                 <span className="button-price">$129</span>
                 <img src={cart} className="cart-icon" alt="cart"/>
                 <span className="button-text">Shop now</span>
@@ -146,7 +148,7 @@ function Home({API, goods, getData, App}) {
             <div className="card card-4">
               <h3 className="card-title text-light mw-160">Printed Shirt with a Bow</h3>
               <p className="card-text text-light">Pink/Sky Blue/Yellow</p>
-              <button className="button add-to-cart button-four" data-id="9" onClick={(evt) => addToCart(evt, "9", App)}>
+              <button className="button add-to-cart button-four" data-id="9" onClick={(evt) => addToCart(evt, 9)}>
                 <span className="button-price">$119</span>
                 <img src={cart} className="cart-icon" alt="cart"/>
                 <span className="button-text">Shop now</span>

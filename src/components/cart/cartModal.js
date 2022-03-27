@@ -8,10 +8,10 @@ function CartModal({App, API, cart}) {
   
   /* Вычисление общей суммы товаров */
   let totalPrice = 0;
-  cart.forEach(good => {
-    const totalItemPrice = +good.price * +good.count;
-    totalPrice += totalItemPrice;
-  })
+  // cart.forEach(good => {
+  //   const totalItemPrice = +good.price * +good.count;
+  //   totalPrice += totalItemPrice;
+  // })
 
   const submitOrder = function() {
     const cartModal = document.querySelector('#modal-cart');
@@ -45,12 +45,12 @@ function CartModal({App, API, cart}) {
           <button className="modal-close" onClick={closeModal}>x</button>
         </header>
         <div className="cart-wrapper">
-          {cart.length > 0 ? 
+          {/* {cart.length > 0 ? 
             <CartTable App={App} API={API} cart={cart} /> 
             : <div id="cart-empty">There is nothing in the cart yet.</div>
-          }
+          } */}
         </div>
-        {cart.length > 0 ?
+        {/* {cart.length > 0 ?
           <form className="modal-form" action="" onSubmit={submitOrder}>
             <input
               className="modal-input"
@@ -69,7 +69,7 @@ function CartModal({App, API, cart}) {
               <span className="button-text">Checkout</span>
             </button>
           </form> : ''
-        }
+        } */}
       </div>
     </div>
   );

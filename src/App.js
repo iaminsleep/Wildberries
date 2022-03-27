@@ -1,5 +1,11 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Cookies from 'universal-cookie';
+import axios from 'axios';
+import { useSelector, useDispatch } from 'react-redux';
+
+import setGoods from './.store/actions/setGoods';
+import setLoggedInStatus from './.store/actions/setLoggedInStatus';
 
 import Header from './components/header.js';
 import Footer from './components/footer.js';
@@ -16,92 +22,103 @@ import Careers from './pages/info/careers.js';
 import Faq from './pages/info/faq.js';
 import Contacts from './pages/info/contacts.js';
 
-// Production
-// const API = "https://willberries-api.herokuapp.com";
-// const HOST = "https://willberries.herokuapp.com";
+function App() {
+  // Production
+  // const API = "https://willberries-api.herokuapp.com";
+  // const HOST = "https://willberries.herokuapp.com";
 
-// Development
-const API = "http://localhost:3000/api";
-const HOST = "http://localhost:3000";
+  // Development
+  const API = "http://willberries-api.com";
+  const HOST = "http://localhost:3000";
 
-const goodsAPI = `${API}/goods`;
+  const cookies = new Cookies();
+  const dispatch = useDispatch();
 
-class App extends Component {
-  constructor(props) {
-    super(props);
+  const [defaultGoods, setDefaultGoods] = useState();
+  const goods = useSelector(state => state.goods);
 
-    this.state = {
-      goods: [],
-      value: '',
-      category: '',
-      itemName: '',
-      cart: [],
-      error: '',
-      warning: '',
-      success: '',
+  useEffect(() => {
+    getData();
+    checkAuth();
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const getData = async (categoryId, genderId) => {
+    let data;
+    let filteredGoods;
+
+    if(goods.length === 0) {
+      await axios.get(`${API}/goods`).then((response) => {
+        data = response.data;
+        setDefaultGoods(data);
+      });
+    } else {
+      data = defaultGoods;
     }
-  }
 
-  componentDidMount() {
-    this.getData(this.state.value, this.state.category);
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.itemName !== this.state.itemName) {
-      this.searchData(this.state.itemName);
+    if(genderId) {
+      filteredGoods = data.filter((item) => item['gender_id'] === genderId);
+    } else if(categoryId) {
+      filteredGoods = data.filter((item) => item.category_id === categoryId);
+    } else {
+      filteredGoods = data;
     }
+
+    dispatch(setGoods(filteredGoods));
+  };
+
+  const searchData = (itemName) => {
+    const data = defaultGoods;
+    const searchedGoods = itemName !== '' ? data.filter(good => good.name.toLowerCase().includes(itemName.toLowerCase())) : data;
+    dispatch(setGoods(searchedGoods));
   }
 
-  getData = async (value, category) => {
-    window.scrollTo(0,0);
-    this.setState({itemName: ''})
-    await fetch(goodsAPI).then((res) => res.json()).then((data) => {
-      const categoryGoods = category ? data.filter((item) => item[category] === value) : data;
-      this.setState({goods: categoryGoods, value: value, category: category});
-    });
+  const getCookie = (name) => {
+    return cookies.get(name);
   }
 
-  searchData = async (itemName = '') => {
-    window.scrollTo(0,0);
-    await fetch(goodsAPI).then((res) => res.json()).then((data) => {
-        const searchedGoods = itemName !== '' ? data.filter(good => good.name.toLowerCase().includes(itemName.toLowerCase())) : data;
-        this.setState({goods: searchedGoods});
-      }
-    );
+  const setCookie = (name, value, options = {}) => {
+    cookies.set(name, value, Object.assign({
+      path: '/',
+      maxAge: 864000,
+      // secure: true,
+    }, options)); //Object.assign merges two objects: default object and the optional one.
   }
 
-  render() {
-    return (
-      <React.Fragment>
-        <Router>
-          <Header HOST={HOST} cart={this.state.cart} App={this} API={API}/>
-            <Routes>
-              <Route exact path='/' element={
-                <Home 
-                  getData={this.getData} API={API} 
-                  category = {this.state.category} 
-                  goods = {this.state.goods} App={this}
-                />}
-              />
-              <Route path='/goods' element={
-                <Goods 
-                  API={API} category = {this.state.value} 
-                  goods = {this.state.goods} App={this}/>}
-                />
-              <Route path='/register' element={<Register App={this} API={API}/>}/>
-              <Route path='/login' element={<Login App={this} API={API}/>}/>
-              <Route path='/about' element={<About/>}/>
-              <Route path='/careers' element={<Careers/>}/>
-              <Route path='/faq' element={<Faq/>}/>
-              <Route path='/blog' element={<Blog/>}/>
-              <Route path='/contacts' element={<Contacts/>}/>
-            </Routes>
-          <Footer/>
-          <CartModal App={this} API={API} cart={this.state.cart}/>
-        </Router>
-      </React.Fragment>
-    );
-  } 
+  const removeCookie = (name) => {
+    cookies.remove(name, { path: '/' });
+  }
+
+  const checkAuth = () => {
+    let loggedStatus;
+    const cookieValue = getCookie('accessToken');
+    if(cookieValue && cookieValue !== '') loggedStatus = true;
+    else loggedStatus = false;
+    dispatch(setLoggedInStatus(loggedStatus));
+  }
+
+  return (
+    <React.Fragment>
+      <Router>
+        <Header HOST={HOST} API={API} getCookie={getCookie} 
+          removeCookie={removeCookie} getData={getData}
+          searchData={searchData}
+        />
+          <Routes>
+            <Route exact path='/' element={<Home getData={getData} API={API}/>}/>
+            <Route path='/goods' element={<Goods API={API}/>}/>
+            <Route path='/register' element={<Register API={API}/>}/>
+            <Route path='/login' element={<Login API={API} setCookie={setCookie}/>}/>
+            <Route path='/about' element={<About/>}/>
+            <Route path='/careers' element={<Careers/>}/>
+            <Route path='/faq' element={<Faq/>}/>
+            <Route path='/blog' element={<Blog/>}/>
+            <Route path='/contacts' element={<Contacts/>}/>
+          </Routes>
+        <Footer/>
+        <CartModal API={API}/>
+      </Router>
+    </React.Fragment>
+  );
 }
 
 export default App;
