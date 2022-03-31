@@ -1,9 +1,8 @@
-import React from 'react';
-
-import {NavLink} from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { NavLink } from 'react-router-dom';
 import Swiper, { Navigation } from 'swiper';
-import {addToCart} from '../components/functions';
-import { useSelector } from 'react-redux';
+
+import { addToCart } from '../components/functions';
 
 import arrowPrev from '../img/arrow-prev.svg';
 import arrowNext from'../img/arrow-next.svg';
@@ -11,36 +10,33 @@ import viewAllArrow from'../img/arrow.svg';
 import cart from '../img/cart.svg';
 
 import GoodItem from '../components/goods/goodItem';
-import Alert from '../components/alert';
 
-document.addEventListener('DOMContentLoaded', () => {
+function Home({API, getData, defaultGoods}) {
   Swiper.use([Navigation]);
-  new Swiper('.swiper-container', {
-    loop: true,
-    speed: 500,
-    
-    navigation: {
-      nextEl: '.slider-button-next',
-      prevEl: '.slider-button-prev',
-    },
-  });
-});
+  
+  useEffect(() => {
+    const initSwiper = () => {
+      new Swiper('.swiper-container', {
+        loop: true,
+        speed: 500,
+        
+        navigation: {
+          nextEl: '.slider-button-next',
+          prevEl: '.slider-button-prev',
+        },
+      });
+    }
+    initSwiper();
+  }, [])
 
-function Home({API, getData, App}) {
-  const goods = useSelector(state => state.goods);
-  // let error = App.state.error;
-  // let warning = App.state.warning;
-
-  const newGoods = goods.filter((good) => good.label === "New");
-  const bestsellersGoods = goods.filter((good) => good.label === "Bestseller");
+  const newGoods = defaultGoods.filter((good) => good.label === "New");
+  const bestsellersGoods = defaultGoods.filter((good) => good.label === "Bestseller");
 
   newGoods.length = 4;
   bestsellersGoods.length = 4;
 
   return (
     <React.Fragment>
-      {/* {error !== '' ? <Alert message={error} App={App} type={'error'}/> : ''}
-      {warning !== '' ? <Alert message={warning} App={App} type={'warning'}/> : ''} */}
       <section className="slider swiper-container">
         <div className="swiper-wrapper">
           <section className="slide slide-1 swiper-slide">
@@ -81,7 +77,7 @@ function Home({API, getData, App}) {
                 <div className="col-lg-4 col-10 offset-lg-1">
                   <span className="label">Bestseller</span>
                   <h2 className="slide-title">Sweater Choker Neck</h2>
-                  <p className="slide-description">Women's pearl basic knit sweater with a round neck. Available
+                  <p className="slide-description">Women's pearl basic knit sweater with a round neck. Available
                     in several colours. Free shipping to stores.</p>
                   <button className="button add-to-cart" data-id="5" onClick={(evt) => addToCart(evt, 5)}>
                     <span className="button-price">$319</span>
@@ -116,7 +112,7 @@ function Home({API, getData, App}) {
             <div className="card card-1 mb-4">
               <h3 className="card-title">Fashion Month Ready in Capital Shop</h3>
               <p className="card-text">Bags & Acsessories & Lingerie & Sportswear & Beauty & Swimwear</p>
-              <NavLink to="/goods" className="button" onClick={() => getData('Accessories', 'category')}>
+              <NavLink to="/goods" className="button" onClick={() => getData(2, 'category', 'Acsessories')}>
                 <span className="button-text">View all</span>
                 <img src={viewAllArrow} alt="icon: arrow" className="button-icon"/>
               </NavLink>
@@ -126,7 +122,7 @@ function Home({API, getData, App}) {
             <div className="card card-2 mb-4">
               <h3 className="card-title text-light">Catch the Sun: Spring Break Styles From $5.99</h3>
               <p className="card-text text-light">Sweaters & Hoodies & Puffer Jackets & Coats and Jackets & Knit</p>
-              <NavLink to="/goods" className="button" onClick={() => getData('Clothing', 'category')}>
+              <NavLink to="/goods" className="button" onClick={() => getData(1, 'category', 'Clothing')}>
                 <span className="button-text">View all</span>
                 <img src={viewAllArrow} alt="icon: arrow" className="button-icon"/>
               </NavLink>
@@ -161,7 +157,7 @@ function Home({API, getData, App}) {
             <h2 className="section-title">New Arrival</h2>
           </div>
           <div className="col-3 d-flex justify-content-end">
-            <NavLink to="/goods" className="more" onClick={() => getData('New', 'label')}>View All</NavLink>
+            <NavLink to="/goods" className="more" onClick={() => getData(0, 'New')}>View All</NavLink>
           </div>
         </div>
         <div className="short-goods row">
@@ -170,7 +166,7 @@ function Home({API, getData, App}) {
               <GoodItem 
                 key={good.id} id={good.id} name={good.name} 
                 description={good.description} price={good.price} 
-                img={good.img} label={good.label} API={API} App={App}
+                img={good.img} label={good.label} API={API}
               />)
             : <div className="empty-goods-wrapper green">
                 <div className="goods-empty small">Looks like these items have been sold for now. Expect a new delivery!</div>
@@ -182,7 +178,7 @@ function Home({API, getData, App}) {
             <h2 className="section-title">Bestsellers</h2>
           </div>
           <div className="col-3 d-flex justify-content-end">
-            <NavLink to="/goods" className="more" onClick={() => getData('Bestseller', 'label')}>View All</NavLink>
+            <NavLink to="/goods" className="more" onClick={() => getData(0, 'Bestseller')}>View All</NavLink>
           </div>
         </div>
         <div className="short-goods row">
@@ -191,7 +187,7 @@ function Home({API, getData, App}) {
               <GoodItem 
                 key={good.id} id={good.id} name={good.name} 
                 description={good.description} price={good.price} 
-                img={good.img} label={good.label} API={API} App={App}
+                img={good.img} label={good.label} API={API}
               />)
             : <div className="empty-goods-wrapper green">
                 <div className="goods-empty small">Looks like these items have been sold for now. Expect a new delivery!</div>

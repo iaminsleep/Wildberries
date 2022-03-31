@@ -1,84 +1,87 @@
-import React from "react";
+import React, { useState } from "react";
+import { NavLink, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import axios from "axios";
+
+import { setError, setWarning, setSuccess } from '../.store/actions/setMessages';
 
 import '../css/pages/auth.css';
 
-import Alert from '../components/alert';
+function Login({API, setCookie, createFormData, checkAuth}) {
 
-import {validateForm} from '../components/functions';
-import {validateInput} from '../components/functions';
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-function Login({App, API, setCookie}) {
-  let isFormValid = false;
-  let error = App.state.error;
-  let warning = App.state.warning;
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const loginUser = async function(e) {
-    validateForm(e, isFormValid, App);
+    e.preventDefault();
+    if(email === '' || password === '' || email.length < 5 || !email.indexOf('@')) {
+      return false;
+    }
+    else {
+      dispatch(setError('')); dispatch(setWarning('')); dispatch(setSuccess(''));
+    }
 
-    const form = document.querySelector('.form[method="post"]');
-    const formData = new FormData(form);
-
-    let status;
+    const formObject = {
+      email: email,
+      password: password,
+    }
+    const formData = createFormData(formObject);
 
     try {
       await axios.post(`${API}/users`, formData, {
         withCredentials: true, 
-        validateStatus: function() {return true},
+        validateStatus: function() { return true },
       }).then((res) => {
-        status = res.status; 
-        error = res.data.message;
-        setCookie('accessToken', res.data.token);
-        form.reset();
-        if(status === 200) document.location.href = '/';
-        return App.setState({error: error});
-      }).catch((err) => {return App.setState({error: err});});
+        let status = res.status; 
+        let error = res.data.message;
+        setEmail(''); setPassword('');
+        if(status === 200) {
+          setCookie('accessToken', res.data.token);
+          navigate('/'); checkAuth();
+          const successMsg = "You've been successfully logged in.";
+          return dispatch(setSuccess(successMsg));
+        }
+        else return dispatch(setError(error));
+      }).catch((err) => {
+        dispatch(setError('Internal Server ' + err));
+      });
     } catch {
-      warning = "Something went wrong. Try again!";
-      return App.setState({warning: warning});
+      const warning = "Something went wrong. Try again!";
+      return dispatch(setWarning(warning));
     }
   }
 
   return(
-    <div className="body">
-      {error !== '' ? <Alert message={error} App={App} type={'error'}/> : ''}
-      {warning !== '' ? <Alert message={warning} App={App} type={'warning'}/> : ''}
-      <div className="div">
-        <form action="#" method="post" className="form" onSubmit={(e) => loginUser(e)}>
-          <h2>Sign In</h2>
-          <p className="text">First time visiting our site?
-            <a href="/register" className="navlink"> Click to register</a>
-          </p>
-          <p>
-            <label htmlFor="email" className="floatLabel">Email</label>
-            <input
-              id="email" 
-              name="email" 
-              type="text"
-              onInput={(e) => validateInput(e.target, isFormValid)} 
-              required autoComplete="off"
-            />
-            <span className="alert-danger">Alert message</span>
-          </p>
-          <p>
-            <label htmlFor="password" className="floatLabel">Password</label>
-            <input 
-              id="password" 
-              name="password" 
-              type="password" 
-              onInput={(e) => validateInput(e.target, isFormValid)} 
-              required 
-              autoComplete="off"
-            />
-            <span className="alert-danger">Alert message</span>
-          </p>
-          <input type="hidden" value="login" name="req"/>
-          <p>
-            <input type="submit" value="Sign In Account" id="submit"/>
-          </p>
-        </form>
+    <React.Fragment>
+      <div className="body">
+        <div className="div">
+          <form action="#" method="post" className="form" onSubmit={(e) => loginUser(e)}>
+            <h2>Sign In</h2>
+            <p className="text">First time visiting our site?
+              <NavLink to="/register" className="navlink"> Click to register</NavLink>
+            </p>
+            <p>
+              <label htmlFor="email" className="floatLabel">Email</label>
+              <input id="email" name="email" type="text" value={email}
+                onChange={(e) => setEmail(e.target.value)} required autoComplete="off"
+              />
+            </p>
+            <p>
+              <label htmlFor="password" className="floatLabel">Password</label>
+              <input id="password" name="password" type="password" value={password}
+                onChange={(e) => setPassword(e.target.value)} required autoComplete="off"
+              />
+            </p>
+            <p>
+              <input type="submit" value="Sign In Account" id="submit"/>
+            </p>
+          </form>
+        </div>
       </div>
-    </div>
+    </React.Fragment>
   );
 }
 

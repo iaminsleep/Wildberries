@@ -482,3 +482,18 @@ button {
 .empty-goods-wrapper.green {
   border: 1px solid #3dc47e !important;
 }
+
+.align-center {
+  align-items: center !important;
+}
+
+.ml-auto {
+  margin-left: auto;
+}
+
+.acc-management-btns {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  gap: 15px;
+}

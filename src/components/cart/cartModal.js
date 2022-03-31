@@ -1,22 +1,22 @@
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+
+import setModalVisibility from '../../.store/actions/setModalVisibility';
 
 import CartTable from './cartTable';
 
-import {closeModal} from '../functions';
+function CartModal({API}) {
+  const cart = useSelector(state => state.cart);
+  const dispatch = useDispatch();
 
-function CartModal({App, API, cart}) {
-  
-  /* Вычисление общей суммы товаров */
   let totalPrice = 0;
-  // cart.forEach(good => {
-  //   const totalItemPrice = +good.price * +good.count;
-  //   totalPrice += totalItemPrice;
-  // })
+  cart.forEach(good => {
+    const totalItemPrice = +good.price * +good.count;
+    totalPrice += totalItemPrice;
+  })
 
   const submitOrder = function() {
     const cartModal = document.querySelector('#modal-cart');
-    const cart = this.state.cart;
-    
     const nameField = document.querySelector('.modal-input[name="nameCustomer"]');
     const phoneField = document.querySelector('.modal-input[name="phoneCustomer"]');
     const emailField = document.querySelector('.modal-input[name="emailCustomer"]');
@@ -38,19 +38,19 @@ function CartModal({App, API, cart}) {
   }
 
   return (
-    <div className="overlay" id="modal-cart">
+    <div className="overlay show" id="modal-cart">
       <div className="modal">
         <header className="modal-header">
           <h2 className="modal-title">Cart</h2>
-          <button className="modal-close" onClick={closeModal}>x</button>
+          <button className="modal-close" onClick={() => dispatch(setModalVisibility(false))}>x</button>
         </header>
         <div className="cart-wrapper">
-          {/* {cart.length > 0 ? 
-            <CartTable App={App} API={API} cart={cart} /> 
+          {cart.length > 0 ? 
+            <CartTable API={API} cart={cart} /> 
             : <div id="cart-empty">There is nothing in the cart yet.</div>
-          } */}
+          }
         </div>
-        {/* {cart.length > 0 ?
+        {cart.length > 0 ?
           <form className="modal-form" action="" onSubmit={submitOrder}>
             <input
               className="modal-input"
@@ -69,7 +69,7 @@ function CartModal({App, API, cart}) {
               <span className="button-text">Checkout</span>
             </button>
           </form> : ''
-        } */}
+        }
       </div>
     </div>
   );

@@ -1,18 +1,21 @@
 .alert {
   width: 50%;
-  margin: 20px auto;
   padding: 10px;
-  position: relative;
+  position: absolute;
   border-radius: 5px;
   box-shadow: 0 0 10px 5px #0404045e;
-  position: absolute;
+  z-index: 2;
   left: 0;
   right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 35px;
 }
 
 .alert h3 {
   font-size: 18px;
   margin-left: 20px;
+  color: #000000a6;
 }
 
 .close-a {
@@ -28,6 +31,8 @@
   text-align: center;
   font-size: 1.6em;
   cursor: pointer;
+  align-items: center;
+  display: flex;
 }
 
 .danger-alert {
@@ -45,13 +50,13 @@
 }
 
 .success-alert {
-  background-color: #a8f0c6;
+  background-color: #93ffc0;
   border-left: 10px solid #55f798;
 }
 
 .success-alert .close-a {
-  border-color: #55f798;
-  color: #55f798;
+  border-color: #00d558;
+  color: #00db5b;
 }
 
 .sucess-alert h3 {

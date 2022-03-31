@@ -1,7 +1,13 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+
+import { setError, setWarning, setSuccess } from '../.store/actions/setMessages';
+
 import '../css/pages/alert.css';
 
-function Alert({message, App, type}) {
+function Alert({message, type}) {
+  const dispatch = useDispatch();
+  
   let alertClass;
 
   if(type === 'error') {
@@ -15,7 +21,9 @@ function Alert({message, App, type}) {
   }
 
   const closeAlert = () => {
-    App.setState({error: '', warning: '', success: ''});
+    dispatch(setError(''));
+    dispatch(setWarning(''));
+    dispatch(setSuccess(''));
   }
 
   return(
