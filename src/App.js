@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Navigate, BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
@@ -20,10 +20,7 @@ import Contacts from './pages/info/contacts.js';
 
 function App() {
   /* Links */
-
-  // Production API link
   // const API = "https://willberries-api.herokuapp.com";
-  // Development API link
   const API = "http://willberries-api";
 
   /* React Hooks */
@@ -33,6 +30,7 @@ function App() {
   /* Redux Store */
   const goods = useSelector(state => state.goods);
   const isModalVisible = useSelector(state => state.isModalVisible);
+  const isLoggedIn = useSelector(state => state.isLoggedIn);
   const dispatch = useDispatch();
 
   /* React Cookies */
@@ -134,10 +132,13 @@ function App() {
             <Route exact path='/' element={<Home getData={getData} 
               API={API} defaultGoods={defaultGoods}/>}/>
             <Route path='/goods' element={<Goods API={API} category={category}/>}/>
-            <Route path='/register' element={<Register API={API} 
-              createFormData={createFormData}/>}/>
-            <Route path='/login' element={<Login API={API} setCookie={setCookie} 
-              createFormData={createFormData} checkAuth={checkAuth}/>}/>
+            <Route path='/register' element={isLoggedIn 
+              ? <Navigate to='/'/>
+              : <Register API={API} createFormData={createFormData}/>}/>
+            <Route path='/login' element={isLoggedIn 
+              ? <Navigate to='/'/>
+              : <Login API={API} setCookie={setCookie} createFormData={createFormData} 
+                checkAuth={checkAuth}/>}/>
             <Route path='/about' element={<About/>}/>
             <Route path='/careers' element={<Careers/>}/>
             <Route path='/faq' element={<Faq/>}/>
