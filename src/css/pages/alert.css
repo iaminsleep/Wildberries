@@ -1,7 +1,7 @@
 .alert {
   width: 50%;
   padding: 10px;
-  position: absolute;
+  position: fixed;
   border-radius: 5px;
   box-shadow: 0 0 10px 5px #0404045e;
   z-index: 2;
@@ -78,11 +78,11 @@
 }
 
 .fade-in {
-  animation: fadeIn ease 0.5s;
-  -webkit-animation: fadeIn ease 0.5s;
-  -moz-animation: fadeIn ease 0.5s;
-  -o-animation: fadeIn ease 0.5s;
-  -ms-animation: fadeIn ease 0.5s;
+  animation: fadeIn ease 0.4s;
+  -webkit-animation: fadeIn ease 0.4s;
+  -moz-animation: fadeIn ease 0.4s;
+  -o-animation: fadeIn ease 0.4s;
+  -ms-animation: fadeIn ease 0.4s;
 }
 
 @keyframes fadeIn {
@@ -140,45 +140,78 @@
 
 @keyframes fadeOut {
   0% {
+    left: 0;
     opacity: 1;
   }
-  100% {
+  50% {
+    
     opacity: 0;
+  }
+  100% {
+    left: 100%;
   }
 }
 
 @-moz-keyframes fadeOut {
   0% {
+    left: 0;
     opacity: 1;
   }
-  100% {
+  
+  50% {
+  
     opacity: 0;
+  }
+  
+  100% {
+    left: 100%;
   }
 }
 
 @-webkit-keyframes fadeOut {
   0% {
+    left: 0;
     opacity: 1;
   }
-  100% {
+  
+  50% {
+  
     opacity: 0;
+  }
+  
+  100% {
+    left: 100%;
   }
 }
 
 @-o-keyframes fadeOut {
   0% {
+    left: 0;
     opacity: 1;
   }
-  100% {
+  
+  50% {
+  
     opacity: 0;
+  }
+  
+  100% {
+    left: 100%;
   }
 }
 
 @-ms-keyframes fadeOut {
   0% {
+    left: 0;
     opacity: 1;
   }
-  100% {
+  
+  50% {
+  
     opacity: 0;
+  }
+  
+  100% {
+    left: 100%;
   }
 }

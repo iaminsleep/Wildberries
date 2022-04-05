@@ -2,7 +2,7 @@ import React from 'react';
 
 import CartItem from './cartItem';
 
-function CartTable ({App, API, cart}) {
+function CartTable ({API, cartItems}) {
   return (
     <table className="cart-table">
       <colgroup>
@@ -25,10 +25,10 @@ function CartTable ({App, API, cart}) {
         </tr>
       </thead>
       <tbody className="cart-table__goods">
-        {cart.map(good => 
+        {cartItems.map(cartItem => 
           <CartItem 
-            App={App} key={good.id} img={good.img} name={good.name} 
-            price={good.price} API={API} count={good.count} id={good.id}
+            key={cartItem.id} img={cartItem.img} name={cartItem.name} 
+            price={cartItem.price} API={API} count={cartItem.quantity} id={cartItem.id}
           />
         )}
       </tbody>

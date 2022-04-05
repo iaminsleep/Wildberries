@@ -2,8 +2,6 @@ import React, { useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import Swiper, { Navigation } from 'swiper';
 
-import { addToCart } from '../components/functions';
-
 import arrowPrev from '../img/arrow-prev.svg';
 import arrowNext from'../img/arrow-next.svg';
 import viewAllArrow from'../img/arrow.svg';
@@ -11,7 +9,7 @@ import cart from '../img/cart.svg';
 
 import GoodItem from '../components/goods/goodItem';
 
-function Home({API, getData, defaultGoods}) {
+function Home({API, getData, defaultGoods, addToCart}) {
   Swiper.use([Navigation]);
   
   useEffect(() => {
@@ -46,7 +44,7 @@ function Home({API, getData, defaultGoods}) {
                   <span className="label">Bestseller</span>
                   <h2 className="slide-title">Women's Alpargata Loafer</h2>
                   <p className="slide-description">At Alpa believe in a better tomorrow, one where humanity thrives.</p>
-                  <button className="button add-to-cart" data-id="3" onClick={(evt) => addToCart(evt, 3)}>
+                  <button className="button add-to-cart" data-id="3" onClick={() => addToCart(3)}>
                     <span className="button-price">$219</span>
                     <img src={cart} className="cart-icon" alt="cart"/>
                     <span className="button-text">Shop now</span>
@@ -62,7 +60,7 @@ function Home({API, getData, defaultGoods}) {
                   <span className="label">New</span>
                   <h2 className="slide-title">Text T-Shirt</h2>
                   <p className="slide-description">Upgrade your style. Browse through different shirt styles and colors. Search for your new favorite one today!</p>
-                  <button className="button add-to-cart" data-id="4" onClick={(evt) => addToCart(evt, 4)}>
+                  <button className="button add-to-cart" data-id="4" onClick={() => addToCart(4)}>
                     <span className="button-price">$119</span>
                     <img src={cart} className="cart-icon" alt="cart"/>
                     <span className="button-text">Shop now</span>
@@ -79,7 +77,7 @@ function Home({API, getData, defaultGoods}) {
                   <h2 className="slide-title">Sweater Choker Neck</h2>
                   <p className="slide-description">Women's pearl basic knit sweater with a round neck. Available
                     in several colours. Free shipping to stores.</p>
-                  <button className="button add-to-cart" data-id="5" onClick={(evt) => addToCart(evt, 5)}>
+                  <button className="button add-to-cart" data-id="5" onClick={() => addToCart(5)}>
                     <span className="button-price">$319</span>
                     <img src={cart} className="cart-icon" alt="cart"/>
                     <span className="button-text">Shop now</span>
@@ -133,7 +131,7 @@ function Home({API, getData, defaultGoods}) {
               <span className="label">Bestseller</span>
               <h3 className="card-title large">Poplin Top {'\n'}With Sleeve Bow</h3>
               <p className="card-text large">Poplin top with roll neckline, long sleeves</p>
-              <button className="button add-to-cart" data-id="2" onClick={(evt) => addToCart(evt, 2)}>
+              <button className="button add-to-cart" data-id="2" onClick={() => addToCart(2)}>
                 <span className="button-price">$129</span>
                 <img src={cart} className="cart-icon" alt="cart"/>
                 <span className="button-text">Shop now</span>
@@ -144,7 +142,7 @@ function Home({API, getData, defaultGoods}) {
             <div className="card card-4">
               <h3 className="card-title text-light mw-160">Printed Shirt with a Bow</h3>
               <p className="card-text text-light">Pink/Sky Blue/Yellow</p>
-              <button className="button add-to-cart button-four" data-id="9" onClick={(evt) => addToCart(evt, 9)}>
+              <button className="button add-to-cart button-four" data-id="9" onClick={() => addToCart(9)}>
                 <span className="button-price">$119</span>
                 <img src={cart} className="cart-icon" alt="cart"/>
                 <span className="button-text">Shop now</span>

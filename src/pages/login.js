@@ -35,8 +35,7 @@ function Login({API, setCookie, createFormData, checkAuth}) {
         withCredentials: true, 
         validateStatus: function() { return true },
       }).then((res) => {
-        let status = res.status; 
-        let error = res.data.message;
+        let status = res.status;
         setEmail(''); setPassword('');
         if(status === 200) {
           setCookie('accessToken', res.data.token);
@@ -44,7 +43,7 @@ function Login({API, setCookie, createFormData, checkAuth}) {
           const successMsg = "You've been successfully logged in.";
           return dispatch(setSuccess(successMsg));
         }
-        else return dispatch(setError(error));
+        else return dispatch(setError(res.data.message));
       }).catch((err) => {
         dispatch(setError('Internal Server ' + err));
       });

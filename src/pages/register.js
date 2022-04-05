@@ -91,15 +91,13 @@ function Register({API, createFormData}) {
       { validateStatus: function() { return true; } })
       .then((res) => {
         let status = res.status; 
-        let error = res.data.message;
         setEmail(''); setPassword(''); setConfirmPassword('');
         if(status === 201) {
           navigate('/login');
           const successMsg = 'Congratulations! You can log in now.';
           return dispatch(setSuccess(successMsg));
         }
-        else 
-          return dispatch(setError(error));
+        else return dispatch(setError(res.data.message));
       }).catch((err) => {
         return dispatch(setError('Internal Server ' + err));
       });

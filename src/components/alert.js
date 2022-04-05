@@ -27,7 +27,7 @@ function Alert({message, type}) {
       closeAlert(true);
     }, 4000);
     return () => clearTimeout(closeTimer);
-  }, [wasAlertLoaded]);
+  }, [wasAlertLoaded]); // eslint-disable-line react-hooks/exhaustive-deps
 
   if(type === 'error') {
     alertClass = 'danger-alert';

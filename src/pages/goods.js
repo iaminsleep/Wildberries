@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import ScrollToTop from '../components/ScrollToTop';
 import GoodItem from '../components/goods/goodItem';
 
-function Goods({API, category}) {
+function Goods({API, category, addToCart}) {
   const goods = useSelector(state => state.goods);
   return (
     <React.Fragment>
@@ -22,7 +22,7 @@ function Goods({API, category}) {
               <GoodItem 
                 key={good.id} id={good.id} name={good.name} 
                 description={good.description} price={good.price} 
-                img={good.img} label={good.label} API={API}
+                img={good.img} label={good.label} API={API} addToCart={addToCart}
               />)
             : <div className="empty-goods-wrapper">
                 <div className="goods-empty">The item you were searching for wasn't found!</div>

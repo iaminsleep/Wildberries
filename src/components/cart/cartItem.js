@@ -1,39 +1,39 @@
 import React from 'react';
 
-const CartItem = ({App, API, img, name, price, count, id}) => {
+const CartItem = ({API, img, name, price, count, id}) => {
   
   let totalPrice = 0;
   const totalItemPrice = +price * +count;
   totalPrice += totalItemPrice;
   
   const plusCartItem = id => {
-    const cart = App.state.cart;
-    const newCart = cart.map(good => {
-    if(good.id === id && good.count > 0) {
-        good.count++;
-    }
-      return good;
-    })
-    App.setState({cart: newCart});
+    // const cart = App.state.cart;
+    // const newCart = cart.map(good => {
+    // if(good.id === id && good.count > 0) {
+    //     good.count++;
+    // }
+    //   return good;
+    // })
+    // App.setState({cart: newCart});
   }
 
   const minusCartItem = id => {
-    const cart = App.state.cart;
-    const newCart = cart.map(good => {
-    if(good.id === id && good.count > 1) {
-        good.count--;
-    }
-      return good;
-    })
-    App.setState({cart: newCart});
+    // const cart = App.state.cart;
+    // const newCart = cart.map(good => {
+    // if(good.id === id && good.count > 1) {
+    //     good.count--;
+    // }
+    //   return good;
+    // })
+    // App.setState({cart: newCart});
   }
 
   const deleteCartItem = id => {
-    const cart = App.state.cart;
-    const newCart = cart.filter(good => {
-      return good.id !== id;
-    })
-    App.setState({cart: newCart});
+    // const cart = App.state.cart;
+    // const newCart = cart.filter(good => {
+    //   return good.id !== id;
+    // })
+    // App.setState({cart: newCart});
   }
 
   return (

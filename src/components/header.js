@@ -5,6 +5,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 
 import { setError, setSuccess, setWarning } from '../.store/actions/setMessages';
 import setModalVisibility from '../.store/actions/setModalVisibility';
+import setCartItems from '../.store/actions/setCartItems';
 
 import Alert from '../components/alert';
 import companyLogo from '../img/logo.svg';
@@ -26,7 +27,7 @@ const Header = ({API, getData, searchData, getCookie, removeCookie, checkAuth}) 
 
 	const [categories, setCategories] = useState([]);
 	const [genders, setGender] = useState([]);
-	const [areCategoriesLoaded, setCategoriesLoaded] = useState(false);
+	const [areFiltersLoaded, setFiltersLoaded] = useState(false);
 	const [inputValue, setInputValue] = useState('');
 
 	const cartLength = cart.length;
@@ -42,10 +43,12 @@ const Header = ({API, getData, searchData, getCookie, removeCookie, checkAuth}) 
 				setGender(response.data);
 			});
 		};
-		getCategories();
-		getGenders();
-		setCategoriesLoaded(true);
-	}, [API, areCategoriesLoaded])
+		if(!areFiltersLoaded) {
+			getCategories();
+			getGenders();
+			setFiltersLoaded(true);
+		}
+	}, [API, areFiltersLoaded]);
 
 	const logout = async() => {
 		const accessToken = getCookie('accessToken');
@@ -63,13 +66,13 @@ const Header = ({API, getData, searchData, getCookie, removeCookie, checkAuth}) 
 					if(status === 200) {
 						removeCookie('accessToken');
 						navigate('/'); checkAuth();
-						return dispatch(setSuccess(res.data.message));
+						dispatch(setSuccess(res.data.message));
+						return dispatch(setCartItems([]));
 					}
 					return dispatch(setError(res.data.message));
 				}).catch((err) => {
 					return dispatch(setError('Internal Server ' + err));
-				}
-			);
+				});
     	} 
 		catch {
 			const warningMsg = "Something went wrong. Try again!";

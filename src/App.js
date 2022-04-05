@@ -4,9 +4,13 @@ import Cookies from 'universal-cookie';
 import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
 
+import { setError, setSuccess, setWarning } from './.store/actions/setMessages';
+
 import setGoods from './.store/actions/setGoods';
 import setLoggedInStatus from './.store/actions/setLoggedInStatus';
 import setModalVisibility from './.store/actions/setModalVisibility';
+import setUserInfo from './.store/actions/setUserInfo';
+import setCartItems from './.store/actions/setCartItems';
 
 import Header from './components/header.js'; 
 import Footer from './components/footer.js';
@@ -26,20 +30,29 @@ function App() {
   /* React Hooks */
   const [defaultGoods, setDefaultGoods] = useState([]);
   const [category, setCategory] = useState('');
+  const [isLoaded, setLoaded] = useState(false);
 
   /* Redux Store */
   const goods = useSelector(state => state.goods);
+  const cartItems = useSelector(state => state.cart);
   const isModalVisible = useSelector(state => state.isModalVisible);
   const isLoggedIn = useSelector(state => state.isLoggedIn);
+
   const dispatch = useDispatch();
 
   /* React Cookies */
   const cookies = new Cookies();
 
   useEffect(() => {
-    getData();
+    if(!isLoaded) {
+      getData();
+      if(isLoggedIn) {
+        getCartData();
+      }
+      setLoaded(true);
+    }
     checkAuth();
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [isLoaded, isLoggedIn]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const getData = async (id, type, categoryName) => {
     let data;
@@ -74,6 +87,24 @@ function App() {
     }
     
     dispatch(setGoods(filteredGoods));
+  };
+
+  const getCartData = async() => {
+    const accessToken = getCookie('accessToken');
+    await axios.get(`${API}/cart_items`, { 
+      headers: {
+        'Authorization': 'Bearer ' + accessToken
+      }
+    }).then((response) => {
+      let status = response.status;
+      if(status === 200) {
+        dispatch(setCartItems(response.data));
+      }
+      else {
+        removeCookie('accessToken');
+        checkAuth();
+      }    
+    });
   };
 
   const searchData = (itemName) => {
@@ -115,6 +146,47 @@ function App() {
     return formData;
   }
 
+  const addToCart = (id) => {
+    const clickedGood = goods.find(good => good.id === id);
+    const clickedGoodId = clickedGood.id;
+    if(cartItems.some(good => good.product_id === clickedGoodId)) {
+      return dispatch(setWarning('This item was already added to cart.'));
+    } 
+    else {
+      clickedGood.quantity = 1;
+      clickedGood.product_id = clickedGoodId;
+      cartItems.push(clickedGood);
+      if(isLoggedIn) {
+        const accessToken = getCookie('accessToken');
+        const formObject = {
+          name: clickedGood.name, quantity: clickedGood.quantity,
+          price: clickedGood.price, img: clickedGood.img,
+          product_id: clickedGoodId,
+        };
+        const formData = createFormData(formObject);
+        try {
+          axios.post(`${API}/cart_items`, formData, {
+            headers: { 'Authorization': 'Bearer ' + accessToken }
+          }, { validateStatus: function() { return true; } })
+          .then((res) => {
+            let status = res.status;
+            if(status === 201) {
+              return dispatch(setSuccess('The item was added to cart.'));
+            } else return dispatch(setError(res.data.message));
+          }).catch((err) => { 
+            return dispatch(setError('Internal Server ' + err)); 
+          });
+        } 
+        catch {
+          return dispatch(setWarning("Something went wrong. Try again!"));
+        }
+      }
+      else {
+        return dispatch(setSuccess('The item was added to cart.'));
+      }
+    }
+  }
+
   const handleKeyEvents = (evt) => {
     if(evt.key === 'Escape' && isModalVisible) {
       dispatch(setModalVisibility(false));
@@ -126,19 +198,20 @@ function App() {
   return (
     <React.Fragment>
       <Router>
-        <Header API={API} getCookie={getCookie} getData={getData} 
+        <Header API={API} getCookie={getCookie} getData={getData}
           removeCookie={removeCookie} searchData={searchData} checkAuth={checkAuth}/>
           <Routes>
             <Route exact path='/' element={<Home getData={getData} 
               API={API} defaultGoods={defaultGoods}/>}/>
-            <Route path='/goods' element={<Goods API={API} category={category}/>}/>
+            <Route path='/goods' element={<Goods API={API} category={category}
+              addToCart={addToCart}/>}/>
             <Route path='/register' element={isLoggedIn 
               ? <Navigate to='/'/>
               : <Register API={API} createFormData={createFormData}/>}/>
             <Route path='/login' element={isLoggedIn 
               ? <Navigate to='/'/>
               : <Login API={API} setCookie={setCookie} createFormData={createFormData} 
-                checkAuth={checkAuth}/>}/>
+                  checkAuth={checkAuth}/>}/>
             <Route path='/about' element={<About/>}/>
             <Route path='/careers' element={<Careers/>}/>
             <Route path='/faq' element={<Faq/>}/>
