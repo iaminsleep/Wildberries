@@ -94,16 +94,14 @@ function Register({API, createFormData}) {
         setEmail(''); setPassword(''); setConfirmPassword('');
         if(status === 201) {
           navigate('/login');
-          const successMsg = 'Congratulations! You can log in now.';
-          return dispatch(setSuccess(successMsg));
+          return dispatch(setSuccess('Congratulations! You can log in now.'));
         }
         else return dispatch(setError(res.data.message));
       }).catch((err) => {
         return dispatch(setError('Internal Server ' + err));
       });
     } catch {
-      const warning = "Something went wrong. Try again!";
-      return dispatch(setWarning(warning));
+      return dispatch(setWarning("Something went wrong. Try again!"));
     }
   }
 

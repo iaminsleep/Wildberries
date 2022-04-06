@@ -1,19 +1,28 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import setModalVisibility from '../../.store/actions/setModalVisibility';
 
 import CartTable from './cartTable';
 
-function CartModal({API}) {
+function CartModal({API, getCookie, createFormData}) {
   const cart = useSelector(state => state.cart);
+  const accessToken = getCookie('accessToken');
   const dispatch = useDispatch();
 
-  let totalPrice = 0;
-  cart.forEach(good => {
-    const totalItemPrice = +good.price * +good.quantity;
-    totalPrice += totalItemPrice;
-  })
+  const [totalPrice, setTotalPrice] = useState(0);
+
+  useEffect(() => {
+    const countTotalCost = () => {
+      let totalPrice = 0;
+      cart.forEach(good => {
+        let totalGoodPrice = +good.price * +good.quantity;
+        totalPrice += totalGoodPrice;
+        setTotalPrice(totalPrice);
+      })
+    }
+    countTotalCost();
+  }, [cart]);
 
   const submitOrder = function() {
     // const cartModal = document.querySelector('#modal-cart');
@@ -46,7 +55,8 @@ function CartModal({API}) {
         </header>
         <div className="cart-wrapper">
           {cart.length > 0 ? 
-            <CartTable API={API} cartItems={cart} /> 
+            <CartTable API={API} cartItems={cart} 
+            accessToken={accessToken} createFormData={createFormData}/> 
             : <div id="cart-empty">There is nothing in the cart yet.</div>
           }
         </div>

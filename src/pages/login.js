@@ -19,8 +19,7 @@ function Login({API, setCookie, createFormData, checkAuth}) {
     e.preventDefault();
     if(email === '' || password === '' || email.length < 5 || !email.indexOf('@')) {
       return false;
-    }
-    else {
+    } else {
       dispatch(setError('')); dispatch(setWarning('')); dispatch(setSuccess(''));
     }
 
@@ -40,16 +39,14 @@ function Login({API, setCookie, createFormData, checkAuth}) {
         if(status === 200) {
           setCookie('accessToken', res.data.token);
           navigate('/'); checkAuth();
-          const successMsg = "You've been successfully logged in.";
-          return dispatch(setSuccess(successMsg));
+          return dispatch(setSuccess("You've been successfully logged in."));
         }
         else return dispatch(setError(res.data.message));
       }).catch((err) => {
         dispatch(setError('Internal Server ' + err));
       });
     } catch {
-      const warning = "Something went wrong. Try again!";
-      return dispatch(setWarning(warning));
+      return dispatch(setWarning("Something went wrong. Try again!"));
     }
   }
 

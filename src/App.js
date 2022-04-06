@@ -44,28 +44,41 @@ function App() {
   const cookies = new Cookies();
 
   useEffect(() => {
+    const getCartData = async() => {
+      const accessToken = getCookie('accessToken');
+      if(!accessToken) return false;
+      else {
+        await axios.get(`${API}/cart_items`, { 
+          headers: { 'Authorization': 'Bearer ' + accessToken }
+        }).then((response) => {
+          let status = response.status;
+          if(status === 200) {
+            dispatch(setCartItems(response.data));
+          }
+          else {
+            removeCookie('accessToken');
+            checkAuth();
+          }    
+        });
+      }
+    };
+    checkAuth();
     if(!isLoaded) {
       getData();
-      if(isLoggedIn) {
-        getCartData();
-      }
+      getCartData();
       setLoaded(true);
     }
-    checkAuth();
   }, [isLoaded, isLoggedIn]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const getData = async (id, type, categoryName) => {
-    let data;
-    let filteredGoods;
+    let data; let filteredGoods;
 
     if(goods.length === 0) {
       await axios.get(`${API}/goods`).then((response) => {
         data = response.data;
         setDefaultGoods(data);
       });
-    } else {
-      data = defaultGoods;
-    }
+    } else data = defaultGoods;
 
     if(type) {
       if(type === 'gender') {
@@ -87,24 +100,6 @@ function App() {
     }
     
     dispatch(setGoods(filteredGoods));
-  };
-
-  const getCartData = async() => {
-    const accessToken = getCookie('accessToken');
-    await axios.get(`${API}/cart_items`, { 
-      headers: {
-        'Authorization': 'Bearer ' + accessToken
-      }
-    }).then((response) => {
-      let status = response.status;
-      if(status === 200) {
-        dispatch(setCartItems(response.data));
-      }
-      else {
-        removeCookie('accessToken');
-        checkAuth();
-      }    
-    });
   };
 
   const searchData = (itemName) => {
@@ -161,7 +156,7 @@ function App() {
         const formObject = {
           name: clickedGood.name, quantity: clickedGood.quantity,
           price: clickedGood.price, img: clickedGood.img,
-          product_id: clickedGoodId,
+          product_id: clickedGoodId, req: 'add'
         };
         const formData = createFormData(formObject);
         try {
@@ -182,7 +177,7 @@ function App() {
         }
       }
       else {
-        return dispatch(setSuccess('The item was added to cart.'));
+        return dispatch(setSuccess('The item was added to cart. Log-in to save it.'));
       }
     }
   }
@@ -202,7 +197,7 @@ function App() {
           removeCookie={removeCookie} searchData={searchData} checkAuth={checkAuth}/>
           <Routes>
             <Route exact path='/' element={<Home getData={getData} 
-              API={API} defaultGoods={defaultGoods}/>}/>
+              API={API} defaultGoods={defaultGoods} addToCart={addToCart}/>}/>
             <Route path='/goods' element={<Goods API={API} category={category}
               addToCart={addToCart}/>}/>
             <Route path='/register' element={isLoggedIn 
@@ -219,7 +214,8 @@ function App() {
             <Route path='/contacts' element={<Contacts/>}/>
           </Routes>
         <Footer/>
-        { isModalVisible ? <CartModal API={API}/> : '' }
+        { isModalVisible ? <CartModal API={API} getCookie={getCookie} 
+        createFormData={createFormData}/> : '' }
       </Router>
     </React.Fragment>
   );

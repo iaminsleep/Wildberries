@@ -2,7 +2,7 @@ import React from 'react';
 
 import CartItem from './cartItem';
 
-function CartTable ({API, cartItems}) {
+function CartTable ({API, cartItems, accessToken, createFormData}) {
   return (
     <table className="cart-table">
       <colgroup>
@@ -28,7 +28,8 @@ function CartTable ({API, cartItems}) {
         {cartItems.map(cartItem => 
           <CartItem 
             key={cartItem.id} img={cartItem.img} name={cartItem.name} 
-            price={cartItem.price} API={API} count={cartItem.quantity} id={cartItem.id}
+            price={cartItem.price} API={API} quantity={cartItem.quantity} id={cartItem.id}
+            createFormData={createFormData} accessToken={accessToken}
           />
         )}
       </tbody>

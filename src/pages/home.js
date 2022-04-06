@@ -110,7 +110,7 @@ function Home({API, getData, defaultGoods, addToCart}) {
             <div className="card card-1 mb-4">
               <h3 className="card-title">Fashion Month Ready in Capital Shop</h3>
               <p className="card-text">Bags & Acsessories & Lingerie & Sportswear & Beauty & Swimwear</p>
-              <NavLink to="/goods" className="button" onClick={() => getData(2, 'category', 'Acsessories')}>
+              <NavLink to="/goods" className="button" onClick={() => getData(2, 'category', 'Accessories')}>
                 <span className="button-text">View all</span>
                 <img src={viewAllArrow} alt="icon: arrow" className="button-icon"/>
               </NavLink>
