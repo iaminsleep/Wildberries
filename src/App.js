@@ -18,13 +18,12 @@ import CartModal from './components/cart/cartModal.js';
 
 import Home from './pages/home.js'; import Goods from './pages/goods.js';
 import Register from './pages/register.js'; import Login from './pages/login.js';
-import About from './pages/info/about.js'; import Blog from './pages/info/blog.js';
-import Careers from './pages/info/careers.js'; import Faq from './pages/info/faq.js';
-import Contacts from './pages/info/contacts.js';
+import Account from './pages/account.js'; import About from './pages/info/about.js'; 
+import Blog from './pages/info/blog.js'; import Careers from './pages/info/careers.js'; 
+import Faq from './pages/info/faq.js'; import Contacts from './pages/info/contacts.js';
 
 function App() {
   /* Links */
-  // const API = "https://willberries-api.herokuapp.com";
   const API = "http://willberries-api";
 
   /* React Hooks */
@@ -44,24 +43,6 @@ function App() {
   const cookies = new Cookies();
 
   useEffect(() => {
-    const getCartData = async() => {
-      const accessToken = getCookie('accessToken');
-      if(!accessToken) return false;
-      else {
-        await axios.get(`${API}/cart_items`, { 
-          headers: { 'Authorization': 'Bearer ' + accessToken }
-        }).then((response) => {
-          let status = response.status;
-          if(status === 200) {
-            dispatch(setCartItems(response.data));
-          }
-          else {
-            removeCookie('accessToken');
-            checkAuth();
-          }    
-        });
-      }
-    };
     checkAuth();
     if(!isLoaded) {
       getData();
@@ -102,6 +83,25 @@ function App() {
     dispatch(setGoods(filteredGoods));
   };
 
+  const getCartData = async() => {
+    const accessToken = getCookie('accessToken');
+    if(!accessToken) return false;
+    else {
+      await axios.get(`${API}/cart_items`, { 
+        headers: { 'Authorization': 'Bearer ' + accessToken }
+      }).then((response) => {
+        let status = response.status;
+        if(status === 200) {
+          dispatch(setCartItems(response.data));
+        }
+        else if(status === 401) {
+          removeCookie('accessToken');
+          checkAuth();
+        }    
+      });
+    }
+  };
+
   const searchData = (itemName) => {
     const data = defaultGoods;
     const searchedGoods = itemName !== '' 
@@ -118,9 +118,7 @@ function App() {
     cookies.set(name, value, Object.assign({
       path: '/',
       maxAge: 864000,
-      // secure: true,
-    }, options)); /* Object.assign merges two objects: 
-    default object and the optional one. */
+    }, options));
   }
 
   const removeCookie = (name) => {
@@ -166,7 +164,8 @@ function App() {
           .then((res) => {
             let status = res.status;
             if(status === 201) {
-              return dispatch(setSuccess('The item was added to cart.'));
+              dispatch(setSuccess('The item was added to cart.'));
+              return getCartData();
             } else return dispatch(setError(res.data.message));
           }).catch((err) => { 
             return dispatch(setError('Internal Server ' + err)); 
@@ -202,11 +201,15 @@ function App() {
               addToCart={addToCart}/>}/>
             <Route path='/register' element={isLoggedIn 
               ? <Navigate to='/'/>
-              : <Register API={API} createFormData={createFormData}/>}/>
+              : <Register API={API} createFormData={createFormData}/>}
+            />
             <Route path='/login' element={isLoggedIn 
               ? <Navigate to='/'/>
               : <Login API={API} setCookie={setCookie} createFormData={createFormData} 
-                  checkAuth={checkAuth}/>}/>
+                  checkAuth={checkAuth}/>}
+            />
+            <Route path='/account' element={<Account API={API}/>}
+            />
             <Route path='/about' element={<About/>}/>
             <Route path='/careers' element={<Careers/>}/>
             <Route path='/faq' element={<Faq/>}/>

@@ -203,7 +203,6 @@ button {
 }
 
 .card-4 {
-  display: flex;
   flex-direction: column;
   align-items: flex-start;
   padding-top: 35px;

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import Swiper, { Navigation } from 'swiper';
 
@@ -27,6 +27,13 @@ function Home({API, getData, defaultGoods, addToCart}) {
     initSwiper();
   }, [])
 
+  /* Crutches */
+  const [isAdded1, setAdded1] = useState(false);
+  const [isAdded2, setAdded2] = useState(false);
+  const [isAdded3, setAdded3] = useState(false);
+  const [isAdded4, setAdded4] = useState(false);
+  const [isAdded5, setAdded5] = useState(false);
+
   const newGoods = defaultGoods.filter((good) => good.label === "New");
   const bestsellersGoods = defaultGoods.filter((good) => good.label === "Bestseller");
 
@@ -44,10 +51,11 @@ function Home({API, getData, defaultGoods, addToCart}) {
                   <span className="label">Bestseller</span>
                   <h2 className="slide-title">Women's Alpargata Loafer</h2>
                   <p className="slide-description">At Alpa believe in a better tomorrow, one where humanity thrives.</p>
-                  <button className="button add-to-cart" data-id="3" onClick={() => addToCart(3)}>
-                    <span className="button-price">$219</span>
-                    <img src={cart} className="cart-icon" alt="cart"/>
-                    <span className="button-text">Shop now</span>
+                  <button className={"button add-to-cart" + (isAdded1 ? " purple-button w-144" : "")}
+                    onClick={() => { addToCart(3); setAdded1(true) }}>
+                    <span className={"button-price" + (isAdded1 ? " d-none" : "")}>$219</span>
+                    <img src={cart} className={"cart-icon" + (isAdded1 ? " visible-icon pl-0" : "")} alt="cart"/>
+                    <span className={"button-text" + (isAdded1 ? " d-none" : "")}>Shop now</span>
                   </button>
                 </div>
               </div>
@@ -60,10 +68,11 @@ function Home({API, getData, defaultGoods, addToCart}) {
                   <span className="label">New</span>
                   <h2 className="slide-title">Text T-Shirt</h2>
                   <p className="slide-description">Upgrade your style. Browse through different shirt styles and colors. Search for your new favorite one today!</p>
-                  <button className="button add-to-cart" data-id="4" onClick={() => addToCart(4)}>
-                    <span className="button-price">$119</span>
-                    <img src={cart} className="cart-icon" alt="cart"/>
-                    <span className="button-text">Shop now</span>
+                  <button className={"button add-to-cart" + (isAdded2 ? " purple-button w-144" : "")}
+                    onClick={() => { addToCart(4); setAdded2(true) }}>
+                    <span className={"button-price" + (isAdded2 ? " d-none" : "")}>$119</span>
+                    <img src={cart} className={"cart-icon" + (isAdded2 ? " visible-icon pl-0" : "")} alt="cart"/>
+                    <span className={"button-text" + (isAdded2 ? " d-none" : "")}>Shop now</span>
                   </button>
                 </div>
               </div>
@@ -77,10 +86,11 @@ function Home({API, getData, defaultGoods, addToCart}) {
                   <h2 className="slide-title">Sweater Choker Neck</h2>
                   <p className="slide-description">Women's pearl basic knit sweater with a round neck. Available
                     in several colours. Free shipping to stores.</p>
-                  <button className="button add-to-cart" data-id="5" onClick={() => addToCart(5)}>
-                    <span className="button-price">$319</span>
-                    <img src={cart} className="cart-icon" alt="cart"/>
-                    <span className="button-text">Shop now</span>
+                  <button className={"button add-to-cart" + (isAdded3 ? " purple-button w-144" : "")}
+                    onClick={() => { addToCart(5); setAdded3(true) }}>
+                    <span className={"button-price" + (isAdded3 ? " d-none" : "")}>$319</span>
+                    <img src={cart} className={"cart-icon" + (isAdded3 ? " visible-icon pl-0" : "")} alt="cart"/>
+                    <span className={"button-text" + (isAdded3 ? " d-none" : "")}>Shop now</span>
                   </button>
                 </div>
               </div>
@@ -131,10 +141,11 @@ function Home({API, getData, defaultGoods, addToCart}) {
               <span className="label">Bestseller</span>
               <h3 className="card-title large">Poplin Top {'\n'}With Sleeve Bow</h3>
               <p className="card-text large">Poplin top with roll neckline, long sleeves</p>
-              <button className="button add-to-cart" data-id="2" onClick={() => addToCart(2)}>
-                <span className="button-price">$129</span>
-                <img src={cart} className="cart-icon" alt="cart"/>
-                <span className="button-text">Shop now</span>
+              <button className={"button add-to-cart" + (isAdded4 ? " purple-button w-144" : "")}
+                onClick={() => { addToCart(2); setAdded4(true) }}>
+                <span className={"button-price" + (isAdded4 ? " d-none" : "")}>$129</span>
+                <img src={cart} className={"cart-icon" + (isAdded4 ? " visible-icon pl-0" : "")} alt="cart"/>
+                <span className={"button-text" + (isAdded4 ? " d-none" : "")}>Shop now</span>
               </button>
             </div>
           </div>
@@ -142,10 +153,11 @@ function Home({API, getData, defaultGoods, addToCart}) {
             <div className="card card-4">
               <h3 className="card-title text-light mw-160">Printed Shirt with a Bow</h3>
               <p className="card-text text-light">Pink/Sky Blue/Yellow</p>
-              <button className="button add-to-cart button-four" data-id="9" onClick={() => addToCart(9)}>
-                <span className="button-price">$119</span>
-                <img src={cart} className="cart-icon" alt="cart"/>
-                <span className="button-text">Shop now</span>
+              <button className={"button add-to-cart" + (isAdded5 ? " purple-button w-144" : "")}
+                onClick={() => { addToCart(9); setAdded5(true) }}>
+                <span className={"button-price" + (isAdded5 ? " d-none" : "")}>$119</span>
+                <img src={cart} className={"cart-icon" + (isAdded5 ? " visible-icon pl-0" : "")} alt="cart"/>
+                <span className={"button-text" + (isAdded5 ? " d-none" : "")}>Shop now</span>
               </button>
             </div>
           </div>
@@ -164,7 +176,7 @@ function Home({API, getData, defaultGoods, addToCart}) {
               <GoodItem 
                 key={good.id} id={good.id} name={good.name} 
                 description={good.description} price={good.price} 
-                img={good.img} label={good.label} API={API}
+                img={good.img} label={good.label} API={API} addToCart={addToCart}
               />)
             : <div className="empty-goods-wrapper green">
                 <div className="goods-empty small">Looks like these items have been sold for now. Expect a new delivery!</div>
@@ -185,7 +197,7 @@ function Home({API, getData, defaultGoods, addToCart}) {
               <GoodItem 
                 key={good.id} id={good.id} name={good.name} 
                 description={good.description} price={good.price} 
-                img={good.img} label={good.label} API={API}
+                img={good.img} label={good.label} API={API} addToCart={addToCart}
               />)
             : <div className="empty-goods-wrapper green">
                 <div className="goods-empty small">Looks like these items have been sold for now. Expect a new delivery!</div>

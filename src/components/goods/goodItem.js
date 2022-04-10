@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import cart from '../../img/cart.svg';
 
 function GoodItem({API, id, name, description, price, img, label, addToCart}) {
+  const [isAdded, setAdded] = useState(false);
   return (
     <div className="col-lg-3 col-sm-6">
       <div className="goods-card">
@@ -12,9 +13,10 @@ function GoodItem({API, id, name, description, price, img, label, addToCart}) {
             <h3 className="goods-title">{name}</h3>
             <p className="goods-description">{description}</p>
         </a>
-        <button className="button goods-card-btn add-to-cart" onClick={() => addToCart(id)}>
-            <span id="button-price">${price}</span>
-            <img src={cart} className="cart-icon" alt="cart"/>
+        <button className={"button goods-card-btn add-to-cart" 
+          + (isAdded ? " purple-button" : "")} onClick={() => { addToCart(id); setAdded(true); }}>
+            <span id="button-price" className={isAdded ? "d-none" : ""}>${price}</span>
+            <img src={cart} className={"cart-icon" + (isAdded ? " visible-icon" : "")} alt="cart"/>
         </button>
       </div>   
     </div>  
