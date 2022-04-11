@@ -25,25 +25,7 @@ function CartModal({API, getCookie, createFormData}) {
   }, [cart]);
 
   const submitOrder = function() {
-    // const cartModal = document.querySelector('#modal-cart');
-    // const nameField = document.querySelector('.modal-input[name="nameCustomer"]');
-    // const phoneField = document.querySelector('.modal-input[name="phoneCustomer"]');
-    // const emailField = document.querySelector('.modal-input[name="emailCustomer"]');
-
-    // const formData = new FormData();
-
-    // formData.append(cart);
-    // formData.append(nameField.value);
-    // formData.append(phoneField.value);
-    // formData.append(emailField.value);
-
-    // fetch(`${API}/orders`, {
-    //   method: 'POST',
-    //   body: formData,
-    // }).then(() => {
-    //   cartModal.classList.remove('show');
-    //   this.setState({cart: []})
-    // })
+    
   }
 
   return (

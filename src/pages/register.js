@@ -72,9 +72,8 @@ function Register({API, createFormData}) {
 
   const registerUser = async function(e) {
     e.preventDefault();   
-    if(isFormValid === false) {
-      return false;
-    }
+    
+    if(isFormValid === false) return false;
     else {
       dispatch(setError('')); dispatch(setWarning('')); dispatch(setSuccess(''));
     }

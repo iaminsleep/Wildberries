@@ -4,12 +4,12 @@ import Cookies from 'universal-cookie';
 import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
 
+import setUserInfo from './.store/actions/setUserInfo';
 import { setError, setSuccess, setWarning } from './.store/actions/setMessages';
 
 import setGoods from './.store/actions/setGoods';
 import setLoggedInStatus from './.store/actions/setLoggedInStatus';
 import setModalVisibility from './.store/actions/setModalVisibility';
-import setUserInfo from './.store/actions/setUserInfo';
 import setCartItems from './.store/actions/setCartItems';
 
 import Header from './components/header.js'; 
@@ -47,6 +47,7 @@ function App() {
     if(!isLoaded) {
       getData();
       getCartData();
+      getUserInfo();
       setLoaded(true);
     }
   }, [isLoaded, isLoggedIn]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -99,6 +100,24 @@ function App() {
           checkAuth();
         }    
       });
+    }
+  };
+
+  const getUserInfo = async() => {
+    const accessToken = getCookie('accessToken');
+    if(!accessToken) return false;
+    else {
+      await axios.get(`${API}/users`, { 
+        headers: { 'Authorization': 'Bearer ' + accessToken }
+      }).then((response) => {
+        let status = response.status;
+        if(status === 200) {
+          return dispatch(setUserInfo(response.data));
+        }
+        else if(status === 401) {
+          removeCookie('accessToken');
+          checkAuth();
+      }});
     }
   };
 
@@ -208,7 +227,9 @@ function App() {
               : <Login API={API} setCookie={setCookie} createFormData={createFormData} 
                   checkAuth={checkAuth}/>}
             />
-            <Route path='/account' element={<Account API={API}/>}
+            <Route path='/account' element={!isLoggedIn 
+              ? <Navigate to="/"/>
+              : <Account API={API} createFormData={createFormData}/>}
             />
             <Route path='/about' element={<About/>}/>
             <Route path='/careers' element={<Careers/>}/>
