@@ -214,6 +214,7 @@ function App() {
         <Header API={API} getCookie={getCookie} getData={getData}
           removeCookie={removeCookie} searchData={searchData} checkAuth={checkAuth}/>
           <Routes>
+            <Route path='/Willberries' element={<Navigate to='/'/>}/>
             <Route exact path='/' element={<Home getData={getData} 
               API={API} defaultGoods={defaultGoods} addToCart={addToCart}/>}/>
             <Route path='/goods' element={<Goods API={API} category={category}
@@ -227,10 +228,11 @@ function App() {
               : <Login API={API} setCookie={setCookie} createFormData={createFormData} 
                   checkAuth={checkAuth}/>}
             />
-            <Route path='/account' element={!isLoggedIn 
+            {/* <Route path='/account' element={!isLoggedIn 
               ? <Navigate to="/"/>
-              : <Account API={API} createFormData={createFormData}/>}
-            />
+              : <Account API={API} createFormData={createFormData} getCookie={getCookie} getUserInfo={getUserInfo}/>}
+            /> */}
+            <Route path='/account' element={<Account API={API} createFormData={createFormData} getCookie={getCookie} getUserInfo={getUserInfo}/>}/>
             <Route path='/about' element={<About/>}/>
             <Route path='/careers' element={<Careers/>}/>
             <Route path='/faq' element={<Faq/>}/>
