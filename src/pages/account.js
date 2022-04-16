@@ -67,7 +67,7 @@ function Account({API, createFormData, getCookie, getUserInfo}) {
             }, { validateStatus: function() { return true; } })
             .then((res) => {
                 let status = res.status;
-                if(status === 200) {
+                if(status === 204) {
                     getUserInfo();
                     setAvatarFile('');
                     setAvatar('');

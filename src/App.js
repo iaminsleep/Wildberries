@@ -144,7 +144,7 @@ function App() {
     cookies.remove(name, { path: '/' });
   }
 
-  const checkAuth = () => {
+  const checkAuth = async() => {
     let loggedStatus;
     const cookieValue = getCookie('accessToken');
     if(cookieValue && cookieValue !== '') loggedStatus = true;
@@ -228,11 +228,10 @@ function App() {
               : <Login API={API} setCookie={setCookie} createFormData={createFormData} 
                   checkAuth={checkAuth}/>}
             />
-            {/* <Route path='/account' element={!isLoggedIn 
+            <Route path='/account' element={!isLoggedIn 
               ? <Navigate to="/"/>
               : <Account API={API} createFormData={createFormData} getCookie={getCookie} getUserInfo={getUserInfo}/>}
-            /> */}
-            <Route path='/account' element={<Account API={API} createFormData={createFormData} getCookie={getCookie} getUserInfo={getUserInfo}/>}/>
+            />
             <Route path='/about' element={<About/>}/>
             <Route path='/careers' element={<Careers/>}/>
             <Route path='/faq' element={<Faq/>}/>
@@ -241,7 +240,7 @@ function App() {
           </Routes>
         <Footer/>
         { isModalVisible ? <CartModal API={API} getCookie={getCookie} 
-        createFormData={createFormData}/> : '' }
+        createFormData={createFormData} getCartData={getCartData}/> : '' }
       </Router>
     </React.Fragment>
   );
