@@ -67,7 +67,7 @@ button {
 
 #manager-btn {
   position: fixed;
-  top: 850px;
+  top: 89%;
   left: 1700px;
   border-radius: 5px;
   background: #3dc47e;
@@ -493,10 +493,6 @@ button {
 
 .empty-goods-wrapper.green {
   border: 1px solid #3dc47e !important;
-}
-
-.empty-goods-wrapper.purple {
-  border: 1px solid #c300ff !important;
 }
 
 .align-center {

@@ -3,12 +3,41 @@
   background-color: #ffffff;
   width: 1000px;
   padding: 50px;
-  overflow: auto;
-  position: relative;
+  margin: 50px auto;
 }
 
 #orders-empty {
   font-size: 24px;
-  color: #c300ff;
+  color: #0064ff;
   padding: 350px;
+}
+
+.empty {
+  color: red;
+}
+
+.w-8 {
+  width: 6%;
+}
+
+.order-title {
+  margin: 0;
+}
+
+#order-total {
+  margin: 0 0 0 750px;
+}
+
+#order-table {
+  border-spacing: 0 20px;
+}
+
+.orders {
+  background: rgb(154, 219, 234);;
+  padding: 10px;
+}
+
+.order-number {
+  margin: 0;
+  text-align: center;
 }
