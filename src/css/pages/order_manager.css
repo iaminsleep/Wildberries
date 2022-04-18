@@ -1,0 +1,14 @@
+.order {
+  border-radius: 20px;
+  background-color: #ffffff;
+  width: 1000px;
+  padding: 50px;
+  overflow: auto;
+  position: relative;
+}
+
+#orders-empty {
+  font-size: 24px;
+  color: #c300ff;
+  padding: 350px;
+}

@@ -7,7 +7,7 @@ import { setError, setWarning, setSuccess } from '../.store/actions/setMessages'
 
 import '../css/pages/auth.css';
 
-function Login({API, setCookie, createFormData, checkAuth}) {
+function Login({API, setCookie, createFormData, checkAuth, getUserInfo}) {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -38,7 +38,7 @@ function Login({API, setCookie, createFormData, checkAuth}) {
         setEmail(''); setPassword('');
         if(status === 200) {
           setCookie('accessToken', res.data.token);
-          navigate('/'); checkAuth();
+          navigate('/'); checkAuth(); getUserInfo();
           return dispatch(setSuccess("You've been successfully logged in."));
         }
         else return dispatch(setError(res.data.message));

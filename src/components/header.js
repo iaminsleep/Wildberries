@@ -17,6 +17,7 @@ import logoutIcon from '../img/sign-out.png';
 const Header = ({ API, getData, searchData, getCookie, removeCookie, checkAuth }) => {
 	const cart = useSelector(state => state.cart);
 	const isAuth = useSelector(state => state.isLoggedIn);
+	const userInfo = useSelector(state => state.userInfo);
 
 	let error = useSelector(state => state.errorMessage);
 	let warning = useSelector(state => state.warningMessage);
@@ -138,6 +139,9 @@ const Header = ({ API, getData, searchData, getCookie, removeCookie, checkAuth }
 			{error !== '' ? <Alert message={error} type={'error'} /> : ''}
 			{warning !== '' ? <Alert message={warning} type={'warning'} /> : ''}
 			{success !== '' ? <Alert message={success} type={'success'} /> : ''}
+			{ userInfo.role === 1 && window.location.pathname !== '/orders' &&
+				<button className="button" id="manager-btn" onClick={() => navigate('/orders')}>Manage Orders</button>
+			}
 		</React.Fragment>
 	);
 }

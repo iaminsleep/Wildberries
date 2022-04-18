@@ -65,6 +65,19 @@ button {
   text-decoration: none;
 }
 
+#manager-btn {
+  position: fixed;
+  top: 850px;
+  left: 1700px;
+  border-radius: 5px;
+  background: #3dc47e;
+  padding: 15px 25px;
+}
+
+#manager-btn:hover {
+  background: #09bb5f;
+}
+
 .button-icon,
 .button-price {
   margin-right: 10px;
@@ -480,6 +493,10 @@ button {
 
 .empty-goods-wrapper.green {
   border: 1px solid #3dc47e !important;
+}
+
+.empty-goods-wrapper.purple {
+  border: 1px solid #c300ff !important;
 }
 
 .align-center {

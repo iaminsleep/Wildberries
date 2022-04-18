@@ -18,9 +18,10 @@ import CartModal from './components/cart/cartModal.js';
 
 import Home from './pages/home.js'; import Goods from './pages/goods.js';
 import Register from './pages/register.js'; import Login from './pages/login.js';
-import Account from './pages/account.js'; import About from './pages/info/about.js'; 
-import Blog from './pages/info/blog.js'; import Careers from './pages/info/careers.js'; 
-import Faq from './pages/info/faq.js'; import Contacts from './pages/info/contacts.js';
+import Account from './pages/account.js'; import OrderManager from './pages/orderManager.js';
+import About from './pages/info/about.js'; import Blog from './pages/info/blog.js'; 
+import Careers from './pages/info/careers.js'; import Faq from './pages/info/faq.js'; 
+import Contacts from './pages/info/contacts.js';
 
 function App() {
   /* Links */
@@ -36,6 +37,7 @@ function App() {
   const cartItems = useSelector(state => state.cart);
   const isModalVisible = useSelector(state => state.isModalVisible);
   const isLoggedIn = useSelector(state => state.isLoggedIn);
+  const userInfo = useSelector(state => state.userInfo);
 
   const dispatch = useDispatch();
 
@@ -43,11 +45,11 @@ function App() {
   const cookies = new Cookies();
 
   useEffect(() => {
-    checkAuth();
     if(!isLoaded) {
       getData();
       getCartData();
       getUserInfo();
+      checkAuth();
       setLoaded(true);
     }
   }, [isLoaded, isLoggedIn]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -112,7 +114,7 @@ function App() {
       }).then((response) => {
         let status = response.status;
         if(status === 200) {
-          return dispatch(setUserInfo(response.data));
+          dispatch(setUserInfo(response.data));
         }
         else if(status === 401) {
           removeCookie('accessToken');
@@ -210,38 +212,44 @@ function App() {
 
   return (
     <React.Fragment>
-      <Router>
-        <Header API={API} getCookie={getCookie} getData={getData}
-          removeCookie={removeCookie} searchData={searchData} checkAuth={checkAuth}/>
-          <Routes>
-            <Route path='/Willberries' element={<Navigate to='/'/>}/>
-            <Route exact path='/' element={<Home getData={getData} 
-              API={API} defaultGoods={defaultGoods} addToCart={addToCart}/>}/>
-            <Route path='/goods' element={<Goods API={API} category={category}
-              addToCart={addToCart}/>}/>
-            <Route path='/register' element={isLoggedIn 
-              ? <Navigate to='/'/>
-              : <Register API={API} createFormData={createFormData}/>}
-            />
-            <Route path='/login' element={isLoggedIn 
-              ? <Navigate to='/'/>
-              : <Login API={API} setCookie={setCookie} createFormData={createFormData} 
-                  checkAuth={checkAuth}/>}
-            />
-            <Route path='/account' element={!isLoggedIn 
-              ? <Navigate to="/"/>
-              : <Account API={API} createFormData={createFormData} getCookie={getCookie} getUserInfo={getUserInfo}/>}
-            />
-            <Route path='/about' element={<About/>}/>
-            <Route path='/careers' element={<Careers/>}/>
-            <Route path='/faq' element={<Faq/>}/>
-            <Route path='/blog' element={<Blog/>}/>
-            <Route path='/contacts' element={<Contacts/>}/>
-          </Routes>
-        <Footer/>
-        { isModalVisible ? <CartModal API={API} getCookie={getCookie} 
-        createFormData={createFormData} getCartData={getCartData}/> : '' }
-      </Router>
+     { isLoaded &&
+        <Router>
+          <Header API={API} getCookie={getCookie} getData={getData}
+            removeCookie={removeCookie} searchData={searchData} checkAuth={checkAuth}/>
+            <Routes>
+              <Route path='/Willberries' element={<Navigate to='/'/>}/>
+              <Route exact path='/' element={<Home getData={getData} 
+                API={API} defaultGoods={defaultGoods} addToCart={addToCart}/>}/>
+              <Route path='/goods' element={<Goods API={API} category={category}
+                addToCart={addToCart}/>}/>
+              <Route path='/register' element={isLoggedIn 
+                ? <Navigate to='/'/>
+                : <Register API={API} createFormData={createFormData}/>}
+              />
+              <Route path='/login' element={isLoggedIn 
+                ? <Navigate to='/'/>
+                : <Login API={API} setCookie={setCookie} createFormData={createFormData} 
+                    checkAuth={checkAuth} getUserInfo={getUserInfo}/>}
+              />
+              <Route path='/account' element={isLoggedIn 
+                ? <Account API={API} createFormData={createFormData} getCookie={getCookie} getUserInfo={getUserInfo}/>
+                : <Navigate to="/"/>}
+              />
+              <Route path='/orders' element={isLoggedIn || userInfo.role === 1
+                ? <OrderManager API={API} createFormData={createFormData} getCookie={getCookie} getUserInfo={getUserInfo}/>
+                : <Navigate to="/"/>}
+              />
+              <Route path='/about' element={<About/>}/>
+              <Route path='/careers' element={<Careers/>}/>
+              <Route path='/faq' element={<Faq/>}/>
+              <Route path='/blog' element={<Blog/>}/>
+              <Route path='/contacts' element={<Contacts/>}/>
+            </Routes>
+          <Footer/>
+          { isModalVisible ? <CartModal API={API} getCookie={getCookie} 
+          createFormData={createFormData} getCartData={getCartData}/> : '' }
+        </Router>
+      }
     </React.Fragment>
   );
 }
