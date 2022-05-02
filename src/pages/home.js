@@ -7,6 +7,7 @@ import arrowNext from'../img/arrow-next.svg';
 import viewAllArrow from'../img/arrow.svg';
 import cart from '../img/cart.svg';
 
+import ScrollToTop from '../components/ScrollToTop';
 import GoodItem from '../components/goods/goodItem';
 
 function Home({API, getData, defaultGoods, addToCart}) {
@@ -42,6 +43,7 @@ function Home({API, getData, defaultGoods, addToCart}) {
 
   return (
     <React.Fragment>
+      <ScrollToTop/>
       <section className="slider swiper-container">
         <div className="swiper-wrapper">
           <section className="slide slide-1 swiper-slide">

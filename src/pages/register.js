@@ -89,11 +89,11 @@ function Register({API, createFormData}) {
       await axios.post(`${API}/users`, formData, 
       { validateStatus: function() { return true; } })
       .then((res) => {
+        console.log(res.data);
         let status = res.status; 
         setEmail(''); setPassword(''); setConfirmPassword('');
         if(status === 201) {
-          navigate('/login');
-          return dispatch(setSuccess('Congratulations! You can log in now.'));
+          navigate('/thankyou');
         }
         else return dispatch(setError(res.data.message));
       }).catch((err) => {

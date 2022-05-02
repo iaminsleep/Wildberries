@@ -86,7 +86,7 @@ function Account({API, createFormData, getCookie, getUserInfo}) {
         const validateEmail = () => {
             const emailTemplate = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-            if(email.match(emailTemplate)) {
+            if(email.match(emailTemplate) || email === '') {
                 setValidForm(true);
             } else {
                 setValidForm(false);
@@ -97,7 +97,9 @@ function Account({API, createFormData, getCookie, getUserInfo}) {
 
     useEffect(() => {
         const validatePhone = () => {
-            if(phone.match(/\d/g) && phone.length === 11) {
+            //eslint-disable-next-line
+            if(phone.match(/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im) || phone === '') {
+                console.log(phone);
                 setValidForm(true);
             } else {
                 setValidForm(false);
@@ -135,9 +137,11 @@ function Account({API, createFormData, getCookie, getUserInfo}) {
                             <div className="info-part">
                                 <p>Email:</p><b>{email}</b>
                             </div>
-                            <div className="info-part">
-                                <p>Phone:</p><b>{phone}</b>
-                            </div>
+                            { phone.length > 5 ? 
+                                <div className="info-part">
+                                    <p>Phone:</p><b>{phone}</b>
+                                </div> : ''
+                            }
                             <div className="info-part">
                                 <p>Status:</p><b className="online-status"><div id="circle"></div> online</b>
                             </div>
@@ -176,7 +180,7 @@ function Account({API, createFormData, getCookie, getUserInfo}) {
                                     name="phone" value={phone} onChange={(e) => setPhone(e.target.value)}/> 
                             </div>
                         </div>
-                        <div class="edit-btns">
+                        <div className="edit-btns">
                             <button className="button" style={{ marginTop: '1.5rem' }} 
                                 onClick={() => setEdit(false)}>Cancel</button>
                             <div className="input"> 

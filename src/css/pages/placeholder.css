@@ -27,11 +27,12 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
 }
 
 .firstHalf img {
   display: flex;
-  border-radius: 9050px;
+  width: 400px;
 }
 
 .text-big {
@@ -45,4 +46,9 @@
   font-family: "Sansita Swashed", cursive;
   font-size: 18px;
   text-align: center;
+}
+
+.more-margin {
+  padding-top: 50px;
+  padding-bottom: 50px;
 }

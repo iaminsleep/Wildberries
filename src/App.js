@@ -21,7 +21,7 @@ import Register from './pages/register.js'; import Login from './pages/login.js'
 import Account from './pages/account.js'; import OrderManager from './pages/orderManager.js';
 import About from './pages/info/about.js'; import Blog from './pages/info/blog.js'; 
 import Careers from './pages/info/careers.js'; import Faq from './pages/info/faq.js'; 
-import Contacts from './pages/info/contacts.js';
+import Contacts from './pages/info/contacts.js'; import ThankYou from './pages/info/thankyou.js';
 
 function App() {
   /* Links */
@@ -183,9 +183,10 @@ function App() {
             headers: { 'Authorization': 'Bearer ' + accessToken }
           }, { validateStatus: function() { return true; } })
           .then((res) => {
+            console.log(res.data);
             let status = res.status;
             if(status === 201) {
-              dispatch(setSuccess('The item was added to cart.'));
+              dispatch(setSuccess('The product was added to cart.'));
               return getCartData();
             } else return dispatch(setError(res.data.message));
           }).catch((err) => { 
@@ -197,7 +198,7 @@ function App() {
         }
       }
       else {
-        return dispatch(setSuccess('The item was added to cart. Log-in to save it.'));
+        return dispatch(setSuccess('The product was added to cart. Login to save it.'));
       }
     }
   }
@@ -229,7 +230,8 @@ function App() {
               <Route path='/login' element={isLoggedIn 
                 ? <Navigate to='/'/>
                 : <Login API={API} setCookie={setCookie} createFormData={createFormData} 
-                    checkAuth={checkAuth} getUserInfo={getUserInfo}/>}
+                    checkAuth={checkAuth} getUserInfo={getUserInfo} getCookie={getCookie} 
+                  />}
               />
               <Route path='/account' element={isLoggedIn 
                 ? <Account API={API} createFormData={createFormData} getCookie={getCookie} getUserInfo={getUserInfo}/>
@@ -239,6 +241,7 @@ function App() {
                 ? <OrderManager API={API} createFormData={createFormData} getCookie={getCookie} getUserInfo={getUserInfo}/>
                 : <Navigate to="/"/>}
               />
+              <Route path='/thankyou' element={<ThankYou/>}/>
               <Route path='/about' element={<About/>}/>
               <Route path='/careers' element={<Careers/>}/>
               <Route path='/faq' element={<Faq/>}/>
