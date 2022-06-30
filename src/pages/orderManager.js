@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
-
 import { setError } from '../.store/actions/setMessages';
-
 import OrderItem from '../components/goods/orderItem';
-
 import '../css/pages/order_manager.css';
 
 function OrderManager({API, getCookie}) {
