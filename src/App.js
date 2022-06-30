@@ -25,7 +25,8 @@ import Contacts from './pages/info/contacts.js'; import ThankYou from './pages/i
 
 function App() {
   /* Links */
-  const API = "http://willberries-api";
+  const API = "https://willberries-api.herokuapp.com/";
+  // const API = "http://willberries-api";
 
   /* React Hooks */
   const [defaultGoods, setDefaultGoods] = useState([]);
