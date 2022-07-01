@@ -184,7 +184,6 @@ function App() {
             headers: { 'Authorization': 'Bearer ' + accessToken }
           }, { validateStatus: function() { return true; } })
           .then((res) => {
-            console.log(res.data);
             let status = res.status;
             if(status === 201) {
               dispatch(setSuccess('The product was added to cart.'));

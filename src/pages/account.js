@@ -99,7 +99,6 @@ function Account({API, createFormData, getCookie, getUserInfo}) {
         const validatePhone = () => {
             //eslint-disable-next-line
             if(phone.match(/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im) || phone === '') {
-                console.log(phone);
                 setValidForm(true);
             } else {
                 setValidForm(false);

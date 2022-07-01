@@ -89,7 +89,6 @@ function Register({API, createFormData}) {
       await axios.post(`${API}/users`, formData, 
       { validateStatus: function() { return true; } })
       .then((res) => {
-        console.log(res.data);
         let status = res.status; 
         setEmail(''); setPassword(''); setConfirmPassword('');
         if(status === 201) {
