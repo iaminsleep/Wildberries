@@ -14,3 +14,7 @@ RESTful приложение "Willberries". Фронтенд реализова�
 
 - Bootstrap v5
 - Swiper Slider JS
+
+### Хостинг
+Приложение размещено на хостинге от Heroku </br>
+https://willberries.herokuapp.com/
