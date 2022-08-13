@@ -1,20 +1,20 @@
-# Интернет-магазин Willberries
+## Willberries Online Store Client
 
-RESTful приложение "Willberries". Фронтенд реализован с помощью React JS, а API для сайта написан на PHP.
-Ссылка на проект с API: https://github.com/iaminsleep/Willberries-API.
+RESTful application "Willberries". The frontend is implemented using React JS, and the API for the site is written in PHP.
+Link to the project with the API: https://github.com/iaminsleep/Willberries-API
 
-### Технологии:
+### Technologies:
 
-- reactjs
+- ReactJs
 - css
-- javascript
-- rest api
+- Native Javascript
 
-### Библиотеки:
+### Libraries:
 
 - Bootstrap v5
 - Swiper Slider JS
 
-### Хостинг
-Приложение размещено на хостинге от Heroku </br>
+### Hosting
+
+The application is hosted by Heroku </br>
 https://willberries.herokuapp.com/
